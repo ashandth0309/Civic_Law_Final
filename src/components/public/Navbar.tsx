@@ -19,23 +19,50 @@ export default function Navbar() {
   const [active, setActive] = useState('');
   const location = useLocation();
 
+  // scroll to hash section
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace('#', '');
+
+      setTimeout(() => {
+        const el = document.getElementById(id);
+
+        if (el) {
+          el.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+          });
+        }
+      }, 100);
+    }
+  }, [location]);
+
+  // active section
   useEffect(() => {
     const onScroll = () => {
-      const scrollPos = window.scrollY + 120;
+      const scrollPos = window.scrollY + 150;
       let current = '';
+
       NAV_LINKS.forEach(({ to }) => {
         if (to.startsWith('/#')) {
           const id = to.substring(2);
           const el = document.getElementById(id);
-          if (el && el.offsetTop <= scrollPos) current = id;
+
+          if (el && el.offsetTop <= scrollPos) {
+            current = id;
+          }
         }
       });
+
       setActive(current);
     };
-    window.addEventListener('scroll', onScroll, { passive: true });
+
+    window.addEventListener('scroll', onScroll);
+
     onScroll();
+
     return () => window.removeEventListener('scroll', onScroll);
-  }, [location]);
+  }, []);
 
   return (
     <nav
@@ -53,6 +80,7 @@ export default function Navbar() {
         const id = to.startsWith('/#') ? to.substring(2) : '';
         const isActive = id && active === id;
         const isApply = to === '/apply';
+
         return (
           <Link
             key={to}
@@ -62,11 +90,19 @@ export default function Navbar() {
               fontFamily: "'IBM Plex Mono', monospace",
               fontSize: '0.58rem',
               letterSpacing: '0.1em',
-              color: isApply ? 'var(--red)' : isActive ? 'var(--red)' : 'var(--ink)',
-              fontWeight: isActive ? 500 : isApply ? 500 : 400,
+              color:
+                isApply || isActive
+                  ? 'var(--red)'
+                  : 'var(--ink)',
+              fontWeight:
+                isApply || isActive
+                  ? 500
+                  : 400,
               textTransform: 'uppercase',
               padding: isApply ? '0.25rem 0.6rem' : '0',
-              border: isApply ? '1px solid var(--red)' : 'none',
+              border: isApply
+                ? '1px solid var(--red)'
+                : 'none',
             }}
           >
             {label}
