@@ -1,4 +1,4 @@
-import { Outlet, NavLink, useNavigate } from 'react-router-dom';
+import { Outlet, NavLink, Navigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { LayoutDashboard, Users, Calendar, UserCog, Camera, FileBarChart, LogOut } from 'lucide-react';
 
@@ -14,7 +14,6 @@ const NAV = [
 
 export default function AdminLayout() {
   const { isAdmin, signOut, loading } = useAuth();
-  const navigate = useNavigate();
 
   if (loading) {
     return (
@@ -27,8 +26,7 @@ export default function AdminLayout() {
   }
 
   if (!isAdmin) {
-    navigate('/admin/login');
-    return null;
+    return <Navigate to="/admin/login" replace />;
   }
 
   return (
