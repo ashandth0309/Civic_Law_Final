@@ -77,6 +77,8 @@ export interface TeamMember {
   name: string;
   position: string;
   department: string;
+  committee: string;
+  sort_order: number;
   photo_url: string;
   created_at: string;
 }

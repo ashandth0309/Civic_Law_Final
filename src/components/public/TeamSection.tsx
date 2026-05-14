@@ -6,21 +6,26 @@ import SectionHeader from '../ui/SectionHeader';
 import { supabase } from '../../lib/supabase';
 import type { TeamMember } from '../../types/database';
 
-const DEPARTMENTS = ['Leadership Team', 'Academic Team', 'Operations Team', 'Media Team', 'Volunteer Team'];
+const COMMITTEES = ['Leadership', 'Finance', 'Logistics', 'PR'];
 
 export default function TeamSection() {
-  const [open, setOpen] = useState<string | null>('Leadership Team');
+  const [open, setOpen] = useState<string | null>('Leadership');
   const [members, setMembers] = useState<TeamMember[]>([]);
 
   useEffect(() => {
-    supabase.from('team_members').select('*').order('department').then(({ data }) => {
-      if (data) setMembers(data as TeamMember[]);
-    });
+    supabase
+      .from('team_members')
+      .select('*')
+      .order('committee')
+      .order('sort_order')
+      .then(({ data }) => {
+        if (data) setMembers(data as TeamMember[]);
+      });
   }, []);
 
-  const grouped = DEPARTMENTS.map(dept => ({
-    category: dept,
-    members: members.filter(m => m.department === dept),
+  const grouped = COMMITTEES.map(committee => ({
+    category: committee,
+    members: members.filter(m => (m.committee || m.department) === committee),
   }));
 
   return (
@@ -41,7 +46,7 @@ export default function TeamSection() {
                 </span>
                 <div className="flex items-center gap-3">
                   <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.48rem', letterSpacing: '0.12em', color: 'var(--muted)', textTransform: 'uppercase' }}>
-                    {cat.members.length} members
+                    {cat.members.length} {cat.members.length === 1 ? 'member' : 'members'}
                   </span>
                   <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.25 }}>
                     <ChevronDown size={16} color="var(--muted)" />
@@ -61,11 +66,11 @@ export default function TeamSection() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-[var(--line)] border-t border-[var(--line)]">
                       {cat.members.map((member) => (
                         <div key={member.id} className="flex items-center gap-4 px-6 py-5 bg-[var(--paper)] hover:bg-[var(--accent)] transition-colors duration-200">
-                          <div className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: 'var(--accent)', border: '1px solid var(--line)' }}>
+                          <div className="w-11 h-11 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden" style={{ background: 'var(--accent)', border: '1px solid var(--line)' }}>
                             {member.photo_url ? (
-                              <img src={member.photo_url} alt={member.name} className="w-full h-full object-cover rounded-full" />
+                              <img src={member.photo_url} alt={member.name} className="w-full h-full object-cover" />
                             ) : (
-                              <User size={15} color="var(--muted)" />
+                              <User size={16} color="var(--muted)" />
                             )}
                           </div>
                           <div>
