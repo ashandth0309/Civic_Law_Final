@@ -15,39 +15,55 @@ export default function TimelineSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: i * 0.08 }}
-            className="relative overflow-hidden border-r border-[var(--ink)] last:border-r-0 p-6"
-            style={{ minHeight: 180 }}
+            className="relative overflow-hidden border-b border-[var(--ink)] sm:border-b-0 sm:border-r border-[var(--ink)] last:border-r-0 last:border-b-0 p-7 md:p-8"
+            style={{ minHeight: 220 }}
           >
+            {/* Month */}
             <span
               className="block mb-4"
               style={{
                 fontFamily: "'Bebas Neue', sans-serif",
-                fontSize: '0.75rem',
-                letterSpacing: '0.08em',
+                fontSize: 'clamp(0.85rem, 1.5vw, 1rem)',
+                letterSpacing: '0.1em',
                 color: 'var(--red)',
               }}
             >
               {item.month}
             </span>
+
+            {/* City */}
             <h4
               style={{
                 fontFamily: "'Cormorant Garamond', Georgia, serif",
-                fontSize: '1.1rem',
+                fontSize: 'clamp(1.2rem, 2.2vw, 1.55rem)',
                 fontWeight: 600,
                 color: 'var(--ink)',
-                marginBottom: '0.5rem',
+                marginBottom: '0.6rem',
+                lineHeight: 1.2,
               }}
             >
               {item.city}
             </h4>
-            <p style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: '0.82rem', fontWeight: 300, color: '#3a3530', lineHeight: 1.6 }}>
+
+            {/* Detail */}
+            <p
+              style={{
+                fontFamily: "'Cormorant Garamond', Georgia, serif",
+                fontSize: 'clamp(0.95rem, 1.6vw, 1.1rem)',
+                fontWeight: 300,
+                color: '#3a3530',
+                lineHeight: 1.7,
+              }}
+            >
               {item.detail}
             </p>
+
+            {/* Background number */}
             <span
               className="absolute bottom-3 right-4 opacity-60"
               style={{
                 fontFamily: "'Bebas Neue', sans-serif",
-                fontSize: '4rem',
+                fontSize: 'clamp(4rem, 7vw, 5.5rem)',
                 lineHeight: 1,
                 color: 'var(--accent)',
               }}

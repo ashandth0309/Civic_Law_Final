@@ -4,24 +4,41 @@ export default function Topbar() {
   return (
     <div
       className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-4 sm:px-6 border-b-2 border-[var(--ink)] bg-[var(--paper)]"
-      style={{ height: 44 }}
+      style={{ height: 52 }}
     >
+      {/* Left — hidden on mobile */}
       <span
         className="hidden sm:block text-[var(--muted)] uppercase tracking-widest"
-        style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.5rem' }}
+        style={{
+          fontFamily: "'IBM Plex Mono', monospace",
+          fontSize: 'clamp(0.62rem, 1.1vw, 0.74rem)',
+          letterSpacing: '0.18em',
+        }}
       >
         SUSI Rule of Law Alumni · Sri Lanka
       </span>
+
+      {/* Centre — brand */}
       <Link
         to="/"
         className="font-bold tracking-wider text-[var(--ink)] whitespace-nowrap no-underline"
-        style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '1rem', letterSpacing: '0.08em' }}
+        style={{
+          fontFamily: "'Bebas Neue', sans-serif",
+          fontSize: 'clamp(1.1rem, 2.2vw, 1.4rem)',
+          letterSpacing: '0.08em',
+        }}
       >
         Civic Law Initiative
       </Link>
+
+      {/* Right */}
       <span
-        className="text-[var(--muted)] uppercase tracking-widest"
-        style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.5rem' }}
+        className="text-[var(--muted)] uppercase"
+        style={{
+          fontFamily: "'IBM Plex Mono', monospace",
+          fontSize: 'clamp(0.62rem, 1.1vw, 0.74rem)',
+          letterSpacing: '0.18em',
+        }}
       >
         Sri Lanka · 2026
       </span>
