@@ -6,7 +6,13 @@ import SectionHeader from '../ui/SectionHeader';
 import { supabase } from '../../lib/supabase';
 import type { TeamMember } from '../../types/database';
 
-const COMMITTEES = ['Leadership', 'Finance', 'Logistics', 'PR'];
+const COMMITTEES = [
+  'Chairperson',
+  'Secretary',
+  'Finance',
+  'Logistics',
+  'PR',
+];
 
 export default function TeamSection() {
   const [open, setOpen] = useState<string | null>('Leadership');

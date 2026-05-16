@@ -3,13 +3,19 @@ import { supabase } from '../../lib/supabase';
 import type { TeamMember } from '../../types/database';
 import { Upload, X, Image as ImageIcon } from 'lucide-react';
 
-const COMMITTEES = ['Leadership', 'Finance', 'Logistics', 'PR'];
+const COMMITTEES = [
+  'Chairperson',
+  'Secretary',
+  'Finance',
+  'Logistics',
+  'PR',
+];
 
 const defaultForm = {
   name: '',
   position: '',
-  department: 'Leadership',
-  committee: 'Leadership',
+  department: 'Chairperson',
+  committee: 'Chairperson',
   sort_order: 0,
   photo_url: '',
 };
