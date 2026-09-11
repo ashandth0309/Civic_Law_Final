@@ -3,11 +3,11 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import './Hero.css';
 
-import hero01 from '../../assets/hero/hero-01-workshop-discussion.png';
-import hero02 from '../../assets/hero/hero-02-batticaloa-group.png';
-import hero03 from '../../assets/hero/hero-03-regional-group.png';
-import hero04 from '../../assets/hero/hero-04-colombo-group.png';
-import hero05 from '../../assets/hero/hero-05-jaffna-speaker.png';
+import hero01 from '../../assets/hero/hero-01-workshop-discussion.webp';
+import hero02 from '../../assets/hero/hero-02-batticaloa-group.webp';
+import hero03 from '../../assets/hero/hero-03-regional-group.webp';
+import hero04 from '../../assets/hero/hero-04-colombo-group.webp';
+import hero05 from '../../assets/hero/hero-05-jaffna-speaker.webp';
 
 const heroImages = [
   hero01,
