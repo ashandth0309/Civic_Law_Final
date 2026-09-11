@@ -1,380 +1,450 @@
 import {
+  PointerEvent as ReactPointerEvent,
+  useCallback,
   useEffect,
-  useMemo,
   useRef,
   useState,
 } from 'react';
-import { gsap } from 'gsap';
-import { User } from 'lucide-react';
+
+import {
+  ArrowLeft,
+  ArrowRight,
+  X,
+} from 'lucide-react';
 
 import SectionWrapper from '../ui/SectionWrapper';
 import SectionHeader from '../ui/SectionHeader';
-import AccordionGallery, {
-  AccordionGalleryItem,
-} from '../ui/AccordionGallery';
 
-import { supabase } from '../../lib/supabase';
-import type { TeamMember } from '../../types/database';
+import {
+  teamMembers,
+  type TeamMember,
+} from '../../data/team';
 
-const COMMITTEE_ORDER = [
-  'Chairperson',
-  'Secretary',
-  'Finance',
-  'Logistics',
-  'PR',
-];
+import './TeamSection.css';
 
 export default function TeamSection() {
-  const sectionContentRef = useRef<HTMLDivElement | null>(
-    null,
-  );
+  const trackRef = useRef<HTMLDivElement | null>(null);
 
-  const [members, setMembers] = useState<TeamMember[]>([]);
-  const [loading, setLoading] = useState(true);
+  const pointerStartX = useRef(0);
+  const initialScrollLeft = useRef(0);
+  const dragging = useRef(false);
+  const dragged = useRef(false);
 
-  useEffect(() => {
-    let mounted = true;
+  const [selectedMember, setSelectedMember] =
+    useState<TeamMember | null>(null);
 
-    const loadTeam = async () => {
-      setLoading(true);
+  const [canScrollLeft, setCanScrollLeft] =
+    useState(false);
 
-      const { data, error } = await supabase
-        .from('team_members')
-        .select('*')
-        .order('sort_order', { ascending: true });
+  const [canScrollRight, setCanScrollRight] =
+    useState(true);
 
-      if (!mounted) return;
+  const updateScrollControls = useCallback(() => {
+    const track = trackRef.current;
 
-      if (error) {
-        console.error(
-          'Unable to load team members:',
-          error,
-        );
-        setMembers([]);
-      } else {
-        setMembers((data ?? []) as TeamMember[]);
-      }
+    if (!track) return;
 
-      setLoading(false);
-    };
+    const maximumScroll =
+      track.scrollWidth - track.clientWidth;
 
-    void loadTeam();
+    setCanScrollLeft(track.scrollLeft > 8);
 
-    return () => {
-      mounted = false;
-    };
+    setCanScrollRight(
+      track.scrollLeft < maximumScroll - 8,
+    );
   }, []);
 
-  const groups = useMemo(() => {
-    const knownCommittees = COMMITTEE_ORDER.map(
-      (committee) => ({
-        name: committee,
-        members: members.filter(
-          (member) =>
-            (member.committee || member.department) ===
-            committee,
-        ),
-      }),
-    ).filter((group) => group.members.length > 0);
-
-    const knownNames = new Set(COMMITTEE_ORDER);
-
-    const otherNames = Array.from(
-      new Set(
-        members
-          .map(
-            (member) =>
-              member.committee ||
-              member.department ||
-              'Team',
-          )
-          .filter(
-            (name) => !knownNames.has(name),
-          ),
-      ),
-    );
-
-    const others = otherNames
-      .map((name) => ({
-        name,
-        members: members.filter(
-          (member) =>
-            (member.committee ||
-              member.department ||
-              'Team') === name,
-        ),
-      }))
-      .filter((group) => group.members.length > 0);
-
-    return [...knownCommittees, ...others];
-  }, [members]);
-
   useEffect(() => {
-    if (
-      loading ||
-      !sectionContentRef.current ||
-      !groups.length
-    ) {
-      return;
-    }
+    const track = trackRef.current;
 
-    const root = sectionContentRef.current;
+    if (!track) return;
 
-    const prefersReducedMotion =
-      window.matchMedia(
-        '(prefers-reduced-motion: reduce)',
-      ).matches;
+    updateScrollControls();
 
-    if (prefersReducedMotion) {
-      gsap.set(
-        root.querySelectorAll(
-          '.team-committee-block',
-        ),
-        {
-          opacity: 1,
-          y: 0,
-        },
-      );
-
-      return;
-    }
-
-    const blocks = root.querySelectorAll(
-      '.team-committee-block',
+    track.addEventListener(
+      'scroll',
+      updateScrollControls,
+      { passive: true },
     );
 
-    gsap.set(blocks, {
-      opacity: 0,
-      y: 42,
-    });
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) return;
-
-        gsap.to(blocks, {
-          opacity: 1,
-          y: 0,
-          duration: 0.85,
-          stagger: 0.14,
-          ease: 'power3.out',
-          clearProps: 'transform',
-        });
-
-        observer.disconnect();
-      },
-      {
-        threshold: 0.12,
-      },
+    window.addEventListener(
+      'resize',
+      updateScrollControls,
     );
-
-    observer.observe(root);
 
     return () => {
-      observer.disconnect();
-      gsap.killTweensOf(blocks);
-    };
-  }, [loading, groups.length]);
+      track.removeEventListener(
+        'scroll',
+        updateScrollControls,
+      );
 
-  const makeGalleryItems = (
-    groupMembers: TeamMember[],
-    groupName: string,
-  ): AccordionGalleryItem[] =>
-    groupMembers.map((member) => ({
-      id: member.id,
-      image: member.photo_url || null,
-      name: member.name,
-      role: member.position,
-      group:
-        member.committee ||
-        member.department ||
-        groupName,
-      alt: `Portrait of ${member.name}`,
-    }));
+      window.removeEventListener(
+        'resize',
+        updateScrollControls,
+      );
+    };
+  }, [updateScrollControls]);
+
+  const scrollGallery = (direction: 'left' | 'right') => {
+    const track = trackRef.current;
+
+    if (!track) return;
+
+    const firstCard =
+      track.querySelector<HTMLElement>(
+        '.civic-team-card',
+      );
+
+    const amount = firstCard
+      ? firstCard.offsetWidth + 18
+      : 340;
+
+    track.scrollBy({
+      left:
+        direction === 'right'
+          ? amount * 2
+          : -amount * 2,
+      behavior: 'smooth',
+    });
+  };
+
+  const handlePointerDown = (
+    event: ReactPointerEvent<HTMLDivElement>,
+  ) => {
+    const track = trackRef.current;
+
+    if (!track) return;
+
+    dragging.current = true;
+    dragged.current = false;
+
+    pointerStartX.current = event.clientX;
+    initialScrollLeft.current = track.scrollLeft;
+
+    track.setPointerCapture(event.pointerId);
+    track.classList.add('is-dragging');
+  };
+
+  const handlePointerMove = (
+    event: ReactPointerEvent<HTMLDivElement>,
+  ) => {
+    const track = trackRef.current;
+
+    if (!track || !dragging.current) return;
+
+    const distance =
+      event.clientX - pointerStartX.current;
+
+    if (Math.abs(distance) > 5) {
+      dragged.current = true;
+    }
+
+    track.scrollLeft =
+      initialScrollLeft.current - distance;
+  };
+
+  const handlePointerEnd = (
+    event: ReactPointerEvent<HTMLDivElement>,
+  ) => {
+    const track = trackRef.current;
+
+    dragging.current = false;
+
+    if (track) {
+      track.classList.remove('is-dragging');
+
+      if (
+        track.hasPointerCapture(event.pointerId)
+      ) {
+        track.releasePointerCapture(
+          event.pointerId,
+        );
+      }
+    }
+  };
+
+  const openMember = (member: TeamMember) => {
+    if (dragged.current) {
+      dragged.current = false;
+      return;
+    }
+
+    setSelectedMember(member);
+  };
+
+  const closeMember = useCallback(() => {
+    setSelectedMember(null);
+  }, []);
+
+  useEffect(() => {
+    if (!selectedMember) return;
+
+    const previousOverflow =
+      document.body.style.overflow;
+
+    document.body.style.overflow = 'hidden';
+
+    const handleEscape = (
+      event: KeyboardEvent,
+    ) => {
+      if (event.key === 'Escape') {
+        closeMember();
+      }
+    };
+
+    window.addEventListener(
+      'keydown',
+      handleEscape,
+    );
+
+    return () => {
+      document.body.style.overflow =
+        previousOverflow;
+
+      window.removeEventListener(
+        'keydown',
+        handleEscape,
+      );
+    };
+  }, [selectedMember, closeMember]);
 
   return (
-    <SectionWrapper id="team">
-      <SectionHeader
-        num="08"
-        sub="Our People"
-        title="Team"
-      />
+    <>
+      <SectionWrapper id="team">
+        <div className="civic-team-section">
+          <SectionHeader
+            num="08"
+            sub="Our People"
+            title="Team"
+          />
 
-      <div
-        ref={sectionContentRef}
-        className="mt-8 md:mt-12"
-      >
-        {loading && (
-          <div
-            className="py-16 border-y border-[var(--line)]"
-            style={{
-              fontFamily:
-                "'IBM Plex Mono', monospace",
-              fontSize: '0.68rem',
-              letterSpacing: '0.14em',
-              textTransform: 'uppercase',
-              color: 'var(--muted)',
-            }}
-          >
-            Loading team...
+          <div className="civic-team-intro">
+            <div>
+              <p className="civic-team-kicker">
+                The people behind the initiative
+              </p>
+
+              <p className="civic-team-description">
+                A multidisciplinary team working
+                together to strengthen legal
+                literacy, civic participation and
+                community engagement.
+              </p>
+            </div>
+
+            <div className="civic-team-counter">
+              <strong>
+                {String(
+                  teamMembers.length,
+                ).padStart(2, '0')}
+              </strong>
+
+              <span>Team Members</span>
+            </div>
           </div>
-        )}
 
-        {!loading && groups.length === 0 && (
-          <div
-            className="py-16 border-y border-[var(--line)]"
-            style={{
-              fontFamily:
-                "'IBM Plex Mono', monospace",
-              color: 'var(--muted)',
-            }}
-          >
-            Team information will be available soon.
-          </div>
-        )}
+          <div className="civic-team-navigation">
+            <div className="civic-team-navigation-copy">
+              <span>Explore the team</span>
 
-        {!loading &&
-          groups.map((group, groupIndex) => {
-            const galleryItems = makeGalleryItems(
-              group.members,
-              group.name,
-            );
+              <span className="civic-team-navigation-line" />
 
-            const singleMember =
-              group.members.length === 1
-                ? group.members[0]
-                : null;
+              <span>
+                Drag · Swipe · Click
+              </span>
+            </div>
 
-            return (
-              <section
-                key={group.name}
-                className="team-committee-block border-t border-[var(--line)] py-10 md:py-14"
+            <div className="civic-team-arrows">
+              <button
+                type="button"
+                className="civic-team-arrow"
+                onClick={() =>
+                  scrollGallery('left')
+                }
+                disabled={!canScrollLeft}
+                aria-label="Previous team members"
               >
-                {/* Committee heading */}
+                <ArrowLeft size={18} />
+              </button>
 
-                <div className="flex items-end justify-between gap-6 mb-7 md:mb-9">
-                  <div className="flex items-start gap-4 md:gap-6">
-                    <span
-                      style={{
-                        fontFamily:
-                          "'IBM Plex Mono', monospace",
-                        fontSize: '0.62rem',
-                        letterSpacing: '0.14em',
-                        color: 'var(--red)',
-                        paddingTop: '0.55rem',
-                      }}
-                    >
+              <button
+                type="button"
+                className="civic-team-arrow"
+                onClick={() =>
+                  scrollGallery('right')
+                }
+                disabled={!canScrollRight}
+                aria-label="Next team members"
+              >
+                <ArrowRight size={18} />
+              </button>
+            </div>
+          </div>
+
+          <div
+            ref={trackRef}
+            className="civic-team-track"
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerEnd}
+            onPointerCancel={handlePointerEnd}
+          >
+            {teamMembers.map(
+              (member, index) => (
+                <button
+                  type="button"
+                  key={member.id}
+                  className="civic-team-card"
+                  onClick={() =>
+                    openMember(member)
+                  }
+                  aria-label={`View ${member.name}, ${member.position}`}
+                >
+                  <div className="civic-team-card-image">
+                    <img
+                      src={member.image}
+                      alt={`Portrait of ${member.name}`}
+                      draggable={false}
+                    />
+
+                    <div className="civic-team-image-overlay" />
+
+                    <span className="civic-team-card-index">
                       {String(
-                        groupIndex + 1,
+                        index + 1,
                       ).padStart(2, '0')}
                     </span>
 
-                    <div>
-                      <p
-                        className="mb-1"
-                        style={{
-                          fontFamily:
-                            "'IBM Plex Mono', monospace",
-                          fontSize:
-                            'clamp(0.57rem, 0.9vw, 0.68rem)',
-                          letterSpacing: '0.15em',
-                          textTransform: 'uppercase',
-                          color: 'var(--muted)',
-                        }}
-                      >
-                        Committee
-                      </p>
-
-                      <h3
-                        style={{
-                          margin: 0,
-                          fontFamily:
-                            "'Cormorant Garamond', Georgia, serif",
-                          fontSize:
-                            'clamp(1.8rem, 4vw, 3.4rem)',
-                          fontWeight: 600,
-                          lineHeight: 1,
-                          letterSpacing: '-0.02em',
-                          color: 'var(--ink)',
-                        }}
-                      >
-                        {group.name}
-                      </h3>
-                    </div>
+                    <span className="civic-team-view">
+                      View profile
+                      <ArrowRight
+                        size={14}
+                      />
+                    </span>
                   </div>
 
-                  <span
-                    className="hidden sm:block"
-                    style={{
-                      fontFamily:
-                        "'IBM Plex Mono', monospace",
-                      fontSize: '0.62rem',
-                      letterSpacing: '0.12em',
-                      textTransform: 'uppercase',
-                      color: 'var(--muted)',
-                    }}
-                  >
-                    {group.members.length}{' '}
-                    {group.members.length === 1
-                      ? 'Member'
-                      : 'Members'}
+                  <div className="civic-team-card-content">
+                    <div className="civic-team-committee">
+                      {member.committee}
+                    </div>
+
+                    <h3>
+                      {member.name}
+                    </h3>
+
+                    <p>
+                      {member.position}
+                    </p>
+                  </div>
+                </button>
+              ),
+            )}
+
+            <div
+              className="civic-team-track-end"
+              aria-hidden="true"
+            >
+              <span>
+                Civic Law
+              </span>
+
+              <strong>
+                One Team.
+                <br />
+                Shared Purpose.
+              </strong>
+            </div>
+          </div>
+
+          <div className="civic-team-bottom-rule">
+            <span>
+              {String(teamMembers.length).padStart(
+                2,
+                '0',
+              )}{' '}
+              people
+            </span>
+
+            <div />
+
+            <span>
+              Civic Law Initiative
+            </span>
+          </div>
+        </div>
+      </SectionWrapper>
+
+      {selectedMember && (
+        <div
+          className="civic-team-modal-backdrop"
+          role="presentation"
+          onMouseDown={(event) => {
+            if (
+              event.target ===
+              event.currentTarget
+            ) {
+              closeMember();
+            }
+          }}
+        >
+          <article
+            className="civic-team-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="team-member-name"
+          >
+            <button
+              type="button"
+              className="civic-team-modal-close"
+              onClick={closeMember}
+              aria-label="Close team member profile"
+            >
+              <X size={20} />
+            </button>
+
+            <div className="civic-team-modal-image">
+              <img
+                src={selectedMember.image}
+                alt={`Portrait of ${selectedMember.name}`}
+              />
+            </div>
+
+            <div className="civic-team-modal-content">
+              <div>
+                <span className="civic-team-modal-label">
+                  {selectedMember.committee}
+                </span>
+
+                <h2 id="team-member-name">
+                  {selectedMember.name}
+                </h2>
+
+                <p className="civic-team-modal-role">
+                  {selectedMember.position}
+                </p>
+              </div>
+
+              <div className="civic-team-modal-footer">
+                <div>
+                  <span>
+                    Civic Law
                   </span>
+
+                  <strong>
+                    Team Member
+                  </strong>
                 </div>
 
-                {/* One member */}
-
-                {singleMember ? (
-                  <div className="team-single-person">
-                    {singleMember.photo_url ? (
-                      <img
-                        src={singleMember.photo_url}
-                        alt={`Portrait of ${singleMember.name}`}
-                      />
-                    ) : (
-                      <div className="team-portrait-placeholder">
-                        <User
-                          size={52}
-                          strokeWidth={1.1}
-                        />
-                      </div>
-                    )}
-
-                    <div className="team-image-shade" />
-
-                    <div className="team-person-content">
-                      <span className="team-person-group">
-                        {singleMember.committee ||
-                          singleMember.department ||
-                          group.name}
-                      </span>
-
-                      <h4 className="team-person-name">
-                        {singleMember.name}
-                      </h4>
-
-                      <p className="team-person-role">
-                        {singleMember.position}
-                      </p>
-                    </div>
-                  </div>
-                ) : (
-                  <AccordionGallery
-                    items={galleryItems}
-                    defaultIndex={0}
-                    height={540}
-                    expandRatio={0.5}
-                    gap={10}
-                    radius={16}
-                    duration={0.6}
-                    ease="power3.out"
-                    parallax={0.5}
-                    tilt={3}
-                  />
-                )}
-              </section>
-            );
-          })}
-      </div>
-    </SectionWrapper>
+                <span className="civic-team-modal-number">
+                  {String(
+                    selectedMember.id,
+                  ).padStart(2, '0')}
+                </span>
+              </div>
+            </div>
+          </article>
+        </div>
+      )}
+    </>
   );
 }

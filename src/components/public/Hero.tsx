@@ -47,10 +47,43 @@ export default function Hero() {
               marginBottom: '1.75rem',
             }}
           >
-            Law,<br />
-            <span style={{ color: 'var(--red)' }}>Liberty</span><br />
-            &amp; Civic<br />
-            Responsibility
+            <span style={{ color: 'var(--ink)' }}>
+  Law,
+</span>
+<br />
+
+<span style={{ color: '#8C1639' }}>
+  Liberty
+</span>
+<br />
+
+<span style={{ color: '#06524F' }}>
+  &amp; Civic
+</span>
+<br />
+
+<span
+  style={{
+    color: 'var(--ink)',
+    position: 'relative',
+    display: 'inline-block',
+  }}
+>
+  Responsibility
+
+  <span
+    aria-hidden="true"
+    style={{
+      position: 'absolute',
+      left: 0,
+      bottom: '-0.08em',
+      width: '18%',
+      height: '0.06em',
+      minHeight: '4px',
+      background: '#FDBD28',
+    }}
+  />
+</span>
           </motion.h1>
 
           {/* Sub-copy */}
@@ -194,7 +227,10 @@ export default function Hero() {
             Five Regions · One Nation
           </div>
 
-          <div className="w-9 h-0.5 bg-[var(--red)] mb-5" />
+          <div
+  className="w-9 h-0.5 mb-5"
+  style={{ background: '#FDBD28' }}
+/>
 
           <p
             style={{

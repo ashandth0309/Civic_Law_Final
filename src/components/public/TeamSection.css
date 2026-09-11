@@ -1,0 +1,930 @@
+.civic-team-section {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* =========================
+   INTRO
+========================= */
+
+.civic-team-intro {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 3rem;
+
+  padding: 0 0 2rem;
+  margin-bottom: 1.5rem;
+
+  border-bottom: 1px solid var(--line);
+}
+
+.civic-team-kicker {
+  margin: 0 0 0.75rem;
+
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+
+  color: var(--red);
+}
+
+.civic-team-description {
+  max-width: 650px;
+  margin: 0;
+
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  font-weight: 300;
+  line-height: 1.55;
+
+  color: #3a3530;
+}
+
+.civic-team-counter {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.civic-team-counter strong {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 400;
+  line-height: 0.85;
+
+  color: var(--ink);
+}
+
+.civic-team-counter span {
+  margin-top: 0.5rem;
+
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.57rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+
+  color: var(--muted);
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.civic-team-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+
+  margin-bottom: 1.25rem;
+}
+
+.civic-team-navigation-copy {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.57rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+
+  color: var(--muted);
+}
+
+.civic-team-navigation-line {
+  display: block;
+  width: 38px;
+  height: 1px;
+  background: var(--line);
+}
+
+.civic-team-arrows {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.civic-team-arrow {
+  width: 44px;
+  height: 44px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--ink);
+  border-radius: 0;
+
+  color: var(--ink);
+  background: transparent;
+
+  cursor: pointer;
+
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease,
+    opacity 180ms ease;
+}
+
+.civic-team-arrow:hover:not(:disabled) {
+  color: var(--paper);
+  background: var(--ink);
+}
+
+.civic-team-arrow:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+/* =========================
+   HORIZONTAL GALLERY
+========================= */
+
+.civic-team-track {
+  display: flex;
+  align-items: stretch;
+  gap: 18px;
+
+  width: 100%;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  padding: 5px 2px 22px;
+
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: 2px;
+
+  scrollbar-width: none;
+
+  cursor: grab;
+  touch-action: pan-y;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+.civic-team-track::-webkit-scrollbar {
+  display: none;
+}
+
+.civic-team-track.is-dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+  user-select: none;
+}
+
+/* =========================
+   MEMBER CARD
+========================= */
+
+.civic-team-card {
+  position: relative;
+
+  flex: 0 0 clamp(245px, 23vw, 320px);
+
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+  padding: 0;
+
+  border: 0;
+  border-top: 1px solid var(--line);
+
+  background: transparent;
+
+  text-align: left;
+  color: inherit;
+
+  cursor: pointer;
+
+  scroll-snap-align: start;
+
+  transition:
+    transform 350ms cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    ),
+    opacity 350ms ease;
+}
+
+.civic-team-card-image {
+  position: relative;
+
+  width: 100%;
+  aspect-ratio: 4 / 5;
+
+  margin-top: 9px;
+
+  overflow: hidden;
+
+  background: var(--accent);
+}
+
+.civic-team-card-image img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: center top;
+
+  transform: scale(1.001);
+
+  filter:
+    saturate(0.82)
+    contrast(0.98);
+
+  transition:
+    transform 650ms cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    ),
+    filter 500ms ease;
+}
+
+.civic-team-image-overlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(14, 14, 14, 0) 52%,
+      rgba(14, 14, 14, 0.15) 72%,
+      rgba(14, 14, 14, 0.48) 100%
+    );
+
+  transition:
+    background 350ms ease;
+}
+
+.civic-team-card-index {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+
+  min-width: 30px;
+
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.57rem;
+  letter-spacing: 0.12em;
+
+  color: rgba(255, 255, 255, 0.82);
+
+  text-shadow:
+    0 1px 8px rgba(0, 0, 0, 0.25);
+}
+
+.civic-team-view {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  transform: translateY(8px);
+
+  opacity: 0;
+
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+  color: #fff;
+
+  transition:
+    opacity 250ms ease,
+    transform 350ms cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    );
+}
+
+/* =========================
+   CARD TEXT
+========================= */
+
+.civic-team-card-content {
+  position: relative;
+
+  padding: 19px 2px 8px;
+
+  border-bottom: 1px solid var(--line);
+}
+
+.civic-team-card-content::before {
+  content: '';
+
+  position: absolute;
+  top: -1px;
+  left: 0;
+
+  width: 0;
+  height: 2px;
+
+  background: var(--red);
+
+  transition:
+    width 450ms cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    );
+}
+
+.civic-team-committee {
+  margin-bottom: 0.55rem;
+
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.54rem;
+  line-height: 1.4;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+
+  color: var(--red);
+}
+
+.civic-team-card h3 {
+  margin: 0 0 0.35rem;
+
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.45rem, 2.2vw, 1.85rem);
+  font-weight: 600;
+  line-height: 1;
+
+  color: var(--ink);
+}
+
+.civic-team-card p {
+  min-height: 2.6em;
+  margin: 0;
+
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.58rem;
+  line-height: 1.55;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+
+  color: var(--muted);
+}
+
+/* =========================
+   HOVER EFFECT
+========================= */
+
+@media (hover: hover) {
+  .civic-team-track:hover
+    .civic-team-card:not(:hover) {
+    opacity: 0.64;
+  }
+
+  .civic-team-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .civic-team-card:hover
+    .civic-team-card-image
+    img {
+    transform: scale(1.045);
+    filter:
+      saturate(1)
+      contrast(1);
+  }
+
+  .civic-team-card:hover
+    .civic-team-card-content::before {
+    width: 54px;
+  }
+
+  .civic-team-card:hover
+    .civic-team-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.civic-team-card:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 4px;
+}
+
+/* =========================
+   FINAL SLIDE
+========================= */
+
+.civic-team-track-end {
+  flex: 0 0 clamp(245px, 23vw, 320px);
+
+  min-height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  padding: 2rem;
+
+  scroll-snap-align: start;
+
+  background: var(--blue);
+}
+
+.civic-team-track-end span {
+  margin-bottom: auto;
+
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.57rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.civic-team-track-end strong {
+  margin-top: 22rem;
+
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.3rem, 4vw, 3.7rem);
+  font-weight: 400;
+  line-height: 0.92;
+
+  color: #fff;
+}
+
+.civic-team-track-end strong::after {
+  content: '';
+
+  display: block;
+
+  width: 36px;
+  height: 3px;
+
+  margin-top: 1.25rem;
+
+  background: var(--red);
+}
+
+/* =========================
+   BOTTOM RULE
+========================= */
+
+.civic-team-bottom-rule {
+  display: grid;
+  grid-template-columns:
+    auto 1fr auto;
+  align-items: center;
+  gap: 1rem;
+
+  margin-top: 1rem;
+}
+
+.civic-team-bottom-rule span {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.52rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+
+  color: var(--muted);
+}
+
+.civic-team-bottom-rule div {
+  height: 1px;
+  background: var(--line);
+}
+
+/* =========================
+   MODAL BACKDROP
+========================= */
+
+.civic-team-modal-backdrop {
+  position: fixed;
+  inset: 0;
+
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: clamp(
+    16px,
+    4vw,
+    48px
+  );
+
+  background:
+    rgba(14, 14, 14, 0.78);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  animation:
+    civicTeamBackdropIn
+    220ms ease both;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.civic-team-modal {
+  position: relative;
+
+  width: min(100%, 1000px);
+  max-height: min(820px, 90vh);
+
+  display: grid;
+  grid-template-columns:
+    minmax(300px, 0.9fr)
+    minmax(350px, 1.1fr);
+
+  overflow: hidden;
+
+  background: var(--paper);
+
+  box-shadow:
+    0 30px 100px
+    rgba(0, 0, 0, 0.35);
+
+  animation:
+    civicTeamModalIn
+    450ms cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    )
+    both;
+}
+
+.civic-team-modal-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+
+  z-index: 4;
+
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid
+    rgba(14, 14, 14, 0.22);
+
+  color: var(--ink);
+  background: var(--paper);
+
+  cursor: pointer;
+
+  transition:
+    background 180ms ease,
+    color 180ms ease;
+}
+
+.civic-team-modal-close:hover {
+  color: var(--paper);
+  background: var(--ink);
+}
+
+.civic-team-modal-image {
+  min-height: 620px;
+
+  background: var(--accent);
+}
+
+.civic-team-modal-image img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: center top;
+}
+
+.civic-team-modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding:
+    clamp(3rem, 7vw, 6rem)
+    clamp(2rem, 5vw, 4.5rem)
+    clamp(2rem, 4vw, 3rem);
+
+  border-top: 5px solid var(--red);
+}
+
+.civic-team-modal-label {
+  display: block;
+
+  margin-bottom: 1.5rem;
+
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  line-height: 1.5;
+  text-transform: uppercase;
+
+  color: var(--red);
+}
+
+.civic-team-modal h2 {
+  max-width: 520px;
+
+  margin:
+    0 0 1rem;
+
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 6vw, 5.7rem);
+  font-weight: 400;
+  line-height: 0.88;
+  letter-spacing: -0.015em;
+
+  color: var(--ink);
+}
+
+.civic-team-modal-role {
+  max-width: 500px;
+
+  margin: 0;
+
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.25rem, 2vw, 1.7rem);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.45;
+
+  color: #4a443d;
+}
+
+/* =========================
+   MODAL FOOTER
+========================= */
+
+.civic-team-modal-footer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 2rem;
+
+  padding-top: 2rem;
+
+  border-top: 1px solid var(--line);
+}
+
+.civic-team-modal-footer > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.civic-team-modal-footer span {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.52rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+
+  color: var(--muted);
+}
+
+.civic-team-modal-footer strong {
+  margin-top: 0.35rem;
+
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.1rem;
+
+  color: var(--ink);
+}
+
+.civic-team-modal-number {
+  font-family: 'Bebas Neue', sans-serif !important;
+  font-size: 4rem !important;
+  line-height: 0.8;
+
+  color: var(--accent) !important;
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes civicTeamBackdropIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes civicTeamModalIn {
+  from {
+    opacity: 0;
+    transform:
+      translateY(24px)
+      scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+  .civic-team-intro {
+    align-items: flex-start;
+  }
+
+  .civic-team-card {
+    flex-basis: min(
+      42vw,
+      300px
+    );
+  }
+
+  .civic-team-track-end {
+    flex-basis: min(
+      42vw,
+      300px
+    );
+  }
+
+  .civic-team-modal {
+    grid-template-columns:
+      minmax(260px, 0.9fr)
+      1.1fr;
+  }
+
+  .civic-team-modal-image {
+    min-height: 560px;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+  .civic-team-intro {
+    display: block;
+  }
+
+  .civic-team-description {
+    max-width: none;
+  }
+
+  .civic-team-counter {
+    align-items: flex-start;
+
+    margin-top: 2rem;
+  }
+
+  .civic-team-navigation {
+    align-items: flex-end;
+  }
+
+  .civic-team-navigation-copy
+    span:last-child,
+  .civic-team-navigation-line {
+    display: none;
+  }
+
+  .civic-team-arrow {
+    width: 40px;
+    height: 40px;
+  }
+
+  .civic-team-track {
+    gap: 13px;
+
+    overflow-x: auto;
+
+    padding-right: 18vw;
+
+    touch-action: pan-x pan-y;
+  }
+
+  .civic-team-card {
+    flex-basis: 78vw;
+    max-width: 320px;
+  }
+
+  .civic-team-track-end {
+    flex-basis: 78vw;
+    max-width: 320px;
+  }
+
+  .civic-team-card h3 {
+    font-size: 1.65rem;
+  }
+
+  .civic-team-bottom-rule {
+    grid-template-columns:
+      auto 1fr;
+  }
+
+  .civic-team-bottom-rule
+    span:last-child {
+    display: none;
+  }
+
+  /* modal becomes vertical */
+
+  .civic-team-modal-backdrop {
+    align-items: flex-start;
+
+    padding: 14px;
+
+    overflow-y: auto;
+  }
+
+  .civic-team-modal {
+    width: 100%;
+    max-height: none;
+
+    grid-template-columns: 1fr;
+  }
+
+  .civic-team-modal-image {
+    min-height: 0;
+    height: min(
+      68vh,
+      530px
+    );
+  }
+
+  .civic-team-modal-content {
+    min-height: 360px;
+
+    padding:
+      2.7rem
+      1.5rem
+      1.6rem;
+  }
+
+  .civic-team-modal h2 {
+    font-size:
+      clamp(
+        3rem,
+        15vw,
+        4.5rem
+      );
+  }
+
+  .civic-team-modal-close {
+    position: fixed;
+
+    top: 28px;
+    right: 28px;
+  }
+}
+
+/* =========================
+   REDUCED MOTION
+========================= */
+
+@media (
+  prefers-reduced-motion: reduce
+) {
+  .civic-team-card,
+  .civic-team-card-image img,
+  .civic-team-view,
+  .civic-team-card-content::before,
+  .civic-team-modal,
+  .civic-team-modal-backdrop {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .civic-team-track {
+    scroll-behavior: auto;
+  }
+}

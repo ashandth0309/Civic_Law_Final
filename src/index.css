@@ -7,12 +7,20 @@
 :root {
   --ink: #0e0e0e;
   --paper: #f7f4ef;
+
+  --maroon: #8C1639;
+  --teal: #06524F;
+  --gold: #FDBD28;
+  --white: #FFFFFF;
+
+  /* temporary compatibility with existing code */
+  --blue: #8C1639;
+  --blue-dark: #65102A;
+
   --red: #c0392b;
-  --blue: #1a3a5c;
   --muted: #8a8278;
   --line: #d4cfc6;
   --accent: #e8e0d0;
-  --blue-dark: #142d47;
 }
 
 html {
