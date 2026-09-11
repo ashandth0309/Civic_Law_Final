@@ -1,0 +1,266 @@
+.team-accordion-gallery {
+  display: flex;
+  width: 100%;
+  gap: var(--ag-gap, 10px);
+  perspective: 1500px;
+  overflow: hidden;
+}
+
+.team-accordion-panel {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: var(--ag-radius, 16px);
+  overflow: hidden;
+  cursor: pointer;
+  display: block;
+  text-align: left;
+  background: var(--ink);
+  transform-style: preserve-3d;
+  transform-origin: center;
+  box-shadow:
+    0 20px 50px -32px rgba(0, 0, 0, 0.55);
+  will-change: flex-grow, transform;
+}
+
+.team-accordion-panel:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 3px;
+}
+
+.team-accordion-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  will-change: transform, filter;
+}
+
+.team-accordion-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center top;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.team-portrait-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  background:
+    linear-gradient(
+      145deg,
+      var(--accent),
+      var(--paper)
+    );
+}
+
+.team-image-shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.04) 20%,
+      rgba(0, 0, 0, 0.12) 48%,
+      rgba(0, 0, 0, 0.78) 100%
+    );
+}
+
+.team-person-content {
+  position: absolute;
+  left: clamp(18px, 2.2vw, 30px);
+  right: clamp(18px, 2.2vw, 30px);
+  bottom: clamp(20px, 3vw, 34px);
+  z-index: 3;
+  color: white;
+  pointer-events: none;
+}
+
+.team-person-group {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(0.55rem, 0.8vw, 0.68rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.team-person-group::before {
+  content: '';
+  width: 22px;
+  height: 1px;
+  margin-right: 9px;
+  background: var(--red);
+}
+
+.team-person-name {
+  margin: 0;
+  max-width: 500px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: clamp(1.45rem, 2.8vw, 2.65rem);
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+  color: #fff;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+}
+
+.team-person-role {
+  margin: 10px 0 0;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: clamp(0.58rem, 0.9vw, 0.75rem);
+  line-height: 1.5;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.team-panel-number {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 3;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.team-accordion-panel:not(
+    .team-accordion-panel--active
+  )
+  .team-person-name,
+.team-accordion-panel:not(
+    .team-accordion-panel--active
+  )
+  .team-person-role,
+.team-accordion-panel:not(
+    .team-accordion-panel--active
+  )
+  .team-person-group {
+  opacity: 0;
+}
+
+.team-single-person {
+  position: relative;
+  width: min(100%, 520px);
+  min-height: 540px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: var(--ink);
+  box-shadow:
+    0 20px 50px -32px rgba(0, 0, 0, 0.55);
+}
+
+.team-single-person img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.team-single-person .team-person-content {
+  opacity: 1 !important;
+}
+
+.team-single-person .team-image-shade {
+  z-index: 1;
+}
+
+.team-single-person .team-person-content {
+  z-index: 2;
+}
+
+/* Tablet / mobile */
+
+@media (max-width: 768px) {
+  .team-accordion-gallery {
+    flex-direction: column;
+    perspective: none;
+    overflow: visible;
+  }
+
+  .team-accordion-panel {
+    flex: none;
+    width: 100%;
+    min-height: 110px;
+    transform: none !important;
+  }
+
+  .team-accordion-panel--active {
+    min-height: 420px;
+  }
+
+  .team-accordion-image img {
+    object-position: center 20%;
+  }
+
+  .team-person-content {
+    left: 20px;
+    right: 20px;
+    bottom: 22px;
+  }
+
+  .team-person-name {
+    font-size: clamp(1.7rem, 8vw, 2.35rem);
+  }
+
+  .team-accordion-panel:not(
+      .team-accordion-panel--active
+    )
+    .team-person-name {
+    opacity: 1;
+    font-size: 1.35rem;
+  }
+
+  .team-accordion-panel:not(
+      .team-accordion-panel--active
+    )
+    .team-person-role,
+  .team-accordion-panel:not(
+      .team-accordion-panel--active
+    )
+    .team-person-group {
+    opacity: 0;
+  }
+
+  .team-single-person {
+    width: 100%;
+    min-height: 440px;
+  }
+}
+
+@media (max-width: 480px) {
+  .team-accordion-panel--active {
+    min-height: 390px;
+  }
+
+  .team-single-person {
+    min-height: 410px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .team-accordion-panel,
+  .team-accordion-image,
+  .team-person-content {
+    transition: none !important;
+    animation: none !important;
+    will-change: auto;
+  }
+}
