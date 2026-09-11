@@ -1,0 +1,1178 @@
+/* =========================
+   INTRO
+========================= */
+
+.workshop-story-intro {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 3rem;
+
+  margin-bottom: 2.5rem;
+}
+
+.workshop-story-intro > p {
+  max-width: 760px;
+  margin: 0;
+
+  font-family:
+    'Cormorant Garamond',
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(1.05rem, 2vw, 1.35rem);
+
+  line-height: 1.75;
+  font-weight: 300;
+
+  color: #332e29;
+}
+
+.workshop-story-summary {
+  flex-shrink: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.workshop-story-summary strong {
+  font-family:
+    'Bebas Neue',
+    sans-serif;
+
+  font-size:
+    clamp(3.2rem, 6vw, 5.3rem);
+
+  font-weight: 400;
+  line-height: 0.85;
+
+  color: var(--maroon, #8c1639);
+}
+
+.workshop-story-summary span {
+  margin-top: 0.5rem;
+
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+
+  color: var(--muted);
+}
+
+/* =========================
+   5 CARD GRID
+========================= */
+
+.workshop-card-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr));
+
+  border:
+    1px solid
+    var(--ink);
+
+  overflow: hidden;
+}
+
+.workshop-story-card {
+  position: relative;
+
+  min-height: 470px;
+
+  overflow: hidden;
+
+  border-right:
+    1px solid
+    var(--ink);
+
+  background:
+    var(--paper);
+
+  cursor: default;
+}
+
+.workshop-story-card:last-child {
+  border-right: 0;
+}
+
+/* =========================
+   BASE CARD
+========================= */
+
+.workshop-card-base {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  padding:
+    1.5rem
+    1.35rem;
+
+  background:
+    var(--paper);
+}
+
+.workshop-card-number {
+  position: absolute;
+
+  top: 16px;
+  right: 16px;
+
+  font-family:
+    'Bebas Neue',
+    sans-serif;
+
+  font-size:
+    clamp(3rem, 5vw, 4.8rem);
+
+  line-height: 1;
+
+  color:
+    rgba(
+      232,
+      224,
+      208,
+      0.95
+    );
+}
+
+.workshop-card-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  width: fit-content;
+
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size: 0.5rem;
+  letter-spacing: 0.13em;
+
+  text-transform: uppercase;
+
+  color:
+    var(--maroon, #8c1639);
+}
+
+.workshop-card-city {
+  margin-top: auto;
+  margin-bottom: 2rem;
+}
+
+.workshop-card-province {
+  display: block;
+
+  margin-bottom: 0.6rem;
+
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size: 0.55rem;
+  letter-spacing: 0.13em;
+
+  text-transform: uppercase;
+
+  color: var(--muted);
+}
+
+.workshop-card-city h3 {
+  margin: 0;
+
+  font-family:
+    'Bebas Neue',
+    sans-serif;
+
+  font-size:
+    clamp(2.7rem, 4vw, 4.5rem);
+
+  font-weight: 400;
+  line-height: 0.9;
+
+  color: var(--ink);
+}
+
+.workshop-card-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+
+  padding-top: 1rem;
+
+  border-top:
+    1px solid
+    var(--line);
+}
+
+.workshop-card-bottom > div {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.workshop-card-bottom span {
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size: 0.55rem;
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+
+  color: var(--muted);
+}
+
+/* =========================
+   HOVER SLIDE PANEL
+========================= */
+
+.workshop-card-reveal {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  z-index: 4;
+
+  display: flex;
+  flex-direction: column;
+
+  min-height: 58%;
+
+  padding:
+    1.5rem
+    1.35rem;
+
+  transform:
+    translateY(
+      calc(100% - 5px)
+    );
+
+  background:
+    var(--maroon, #8c1639);
+
+  transition:
+    transform
+    480ms
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    );
+}
+
+.workshop-story-card:hover
+  .workshop-card-reveal,
+.workshop-story-card:focus-within
+  .workshop-card-reveal {
+  transform:
+    translateY(0);
+}
+
+.workshop-reveal-label {
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size: 0.52rem;
+  letter-spacing: 0.15em;
+
+  text-transform: uppercase;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.6
+    );
+}
+
+.workshop-card-reveal h4 {
+  margin:
+    0.9rem 0 0.4rem;
+
+  font-family:
+    'Cormorant Garamond',
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(
+      1.35rem,
+      2.2vw,
+      1.8rem
+    );
+
+  line-height: 1.05;
+  font-weight: 600;
+
+  color: #fff;
+}
+
+.workshop-facilitator-role {
+  margin: 0;
+
+  font-family:
+    'Cormorant Garamond',
+    Georgia,
+    serif;
+
+  font-size:
+    1rem;
+
+  line-height: 1.4;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.72
+    );
+}
+
+.workshop-read-more {
+  margin-top: auto;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+
+  padding:
+    0.95rem 0;
+
+  border: 0;
+  border-top:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.25
+    );
+
+  background: transparent;
+
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size: 0.54rem;
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+
+  color: #fff;
+
+  cursor: pointer;
+}
+
+.workshop-read-more:hover {
+  color:
+    var(--gold, #fdbd28);
+}
+
+/* =========================
+   COMPLETION STRIP
+========================= */
+
+.workshop-completion-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 2rem;
+
+  margin-top: 1.5rem;
+
+  padding:
+    1rem 0;
+
+  border-top:
+    1px solid
+    var(--line);
+
+  border-bottom:
+    1px solid
+    var(--line);
+}
+
+.workshop-completion-strip > div {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+
+  color:
+    var(--maroon, #8c1639);
+}
+
+.workshop-completion-strip span {
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size: 0.56rem;
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+}
+
+.workshop-completion-strip > span {
+  color: var(--muted);
+}
+
+/* =========================
+   MODAL BACKDROP
+========================= */
+
+.workshop-modal-backdrop {
+  position: fixed;
+  inset: 0;
+
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    clamp(
+      16px,
+      3vw,
+      40px
+    );
+
+  background:
+    rgba(
+      14,
+      14,
+      14,
+      0.78
+    );
+
+  backdrop-filter:
+    blur(8px);
+
+  -webkit-backdrop-filter:
+    blur(8px);
+
+  animation:
+    workshopFadeIn
+    220ms ease both;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.workshop-modal {
+  position: relative;
+
+  width:
+    min(
+      1200px,
+      100%
+    );
+
+  max-height:
+    90vh;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(
+      280px,
+      0.38fr
+    )
+    minmax(
+      0,
+      0.62fr
+    );
+
+  overflow: hidden;
+
+  background:
+    var(--paper);
+
+  box-shadow:
+    0 30px 100px
+    rgba(
+      0,
+      0,
+      0,
+      0.35
+    );
+
+  animation:
+    workshopModalIn
+    420ms
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    )
+    both;
+}
+
+/* =========================
+   MODAL CLOSE
+========================= */
+
+.workshop-modal-close {
+  position: absolute;
+
+  top: 18px;
+  right: 18px;
+
+  z-index: 20;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 44px;
+  height: 44px;
+
+  border:
+    1px solid
+    var(--line);
+
+  background:
+    var(--paper);
+
+  color:
+    var(--ink);
+
+  cursor: pointer;
+
+  transition:
+    color 180ms ease,
+    background 180ms ease;
+}
+
+.workshop-modal-close:hover {
+  background:
+    var(--ink);
+
+  color:
+    #fff;
+}
+
+/* =========================
+   MODAL SIDE
+========================= */
+
+.workshop-modal-side {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  min-height: 720px;
+
+  padding:
+    2.5rem;
+
+  background:
+    var(--maroon, #8c1639);
+
+  color:
+    #fff;
+}
+
+.workshop-modal-index {
+  font-family:
+    'Bebas Neue',
+    sans-serif;
+
+  font-size:
+    clamp(
+      5rem,
+      8vw,
+      8rem
+    );
+
+  line-height: 0.85;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.16
+    );
+}
+
+.workshop-modal-side > div:nth-of-type(1) {
+  margin-top: auto;
+}
+
+.workshop-modal-side-label {
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size: 0.55rem;
+  letter-spacing: 0.15em;
+
+  text-transform: uppercase;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.6
+    );
+}
+
+.workshop-modal-side h3 {
+  margin:
+    0.7rem 0 0;
+
+  font-family:
+    'Bebas Neue',
+    sans-serif;
+
+  font-size:
+    clamp(
+      4rem,
+      7vw,
+      7rem
+    );
+
+  font-weight: 400;
+  line-height: 0.85;
+}
+
+.workshop-modal-side p {
+  margin:
+    0.8rem 0 0;
+
+  font-family:
+    'Cormorant Garamond',
+    Georgia,
+    serif;
+
+  font-size:
+    1.2rem;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.72
+    );
+}
+
+.workshop-modal-side-stats {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 1rem;
+
+  margin-top:
+    2.5rem;
+
+  padding-top:
+    1.5rem;
+
+  border-top:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.2
+    );
+}
+
+.workshop-modal-side-stats > div:first-child {
+  display: flex;
+  flex-direction: column;
+}
+
+.workshop-modal-side-stats strong {
+  font-family:
+    'Bebas Neue',
+    sans-serif;
+
+  font-size:
+    2.8rem;
+
+  font-weight: 400;
+  line-height: 1;
+}
+
+.workshop-modal-side-stats span {
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size:
+    0.5rem;
+
+  letter-spacing:
+    0.12em;
+
+  text-transform:
+    uppercase;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.7
+    );
+}
+
+.workshop-modal-side-stats
+  > div:last-child {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  color:
+    var(--gold, #fdbd28);
+}
+
+/* =========================
+   MODAL STORY AREA
+========================= */
+
+.workshop-modal-content {
+  overflow-y: auto;
+
+  padding:
+    clamp(
+      3rem,
+      5vw,
+      5rem
+    );
+
+  background:
+    var(--paper);
+}
+
+.workshop-modal-heading {
+  padding-right:
+    3rem;
+}
+
+.workshop-modal-heading > span {
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size:
+    0.58rem;
+
+  letter-spacing:
+    0.16em;
+
+  text-transform:
+    uppercase;
+
+  color:
+    var(--maroon, #8c1639);
+}
+
+.workshop-modal-heading h2 {
+  margin:
+    0.8rem 0
+    1.5rem;
+
+  font-family:
+    'Bebas Neue',
+    sans-serif;
+
+  font-size:
+    clamp(
+      3rem,
+      5vw,
+      5rem
+    );
+
+  line-height:
+    0.9;
+
+  font-weight:
+    400;
+
+  color:
+    var(--ink);
+}
+
+.workshop-modal-facilitator {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.25rem;
+
+  padding:
+    1rem 0;
+
+  border-top:
+    1px solid
+    var(--line);
+
+  border-bottom:
+    1px solid
+    var(--line);
+}
+
+.workshop-modal-facilitator strong {
+  font-family:
+    'Cormorant Garamond',
+    Georgia,
+    serif;
+
+  font-size:
+    1.25rem;
+
+  color:
+    var(--ink);
+}
+
+.workshop-modal-facilitator span {
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size:
+    0.55rem;
+
+  letter-spacing:
+    0.08em;
+
+  text-transform:
+    uppercase;
+
+  color:
+    var(--muted);
+}
+
+.workshop-modal-story {
+  margin-top:
+    2rem;
+}
+
+.workshop-modal-story p {
+  margin:
+    0 0
+    1.35rem;
+
+  font-family:
+    'Cormorant Garamond',
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(
+      1rem,
+      1.5vw,
+      1.15rem
+    );
+
+  line-height:
+    1.8;
+
+  color:
+    #342f2b;
+}
+
+.workshop-modal-story p:first-child::first-letter {
+  float: left;
+
+  margin-right:
+    0.08em;
+
+  margin-top:
+    0.04em;
+
+  font-family:
+    'Bebas Neue',
+    sans-serif;
+
+  font-size:
+    4.5rem;
+
+  line-height:
+    0.72;
+
+  color:
+    var(--maroon, #8c1639);
+}
+
+.workshop-modal-footer {
+  display: flex;
+  justify-content: space-between;
+
+  gap: 2rem;
+
+  margin-top:
+    2.5rem;
+
+  padding-top:
+    1rem;
+
+  border-top:
+    1px solid
+    var(--line);
+}
+
+.workshop-modal-footer span {
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size:
+    0.48rem;
+
+  letter-spacing:
+    0.12em;
+
+  text-transform:
+    uppercase;
+
+  color:
+    var(--muted);
+}
+
+/* =========================
+   ANIMATION
+========================= */
+
+@keyframes workshopFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes workshopModalIn {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(24px)
+      scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1050px) {
+  .workshop-card-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .workshop-story-card {
+    border-bottom:
+      1px solid
+      var(--ink);
+  }
+
+  .workshop-story-card:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .workshop-story-card:last-child {
+    border-bottom: 0;
+  }
+
+  .workshop-modal {
+    grid-template-columns:
+      minmax(240px, 0.34fr)
+      0.66fr;
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+  .workshop-story-intro {
+    display: block;
+  }
+
+  .workshop-story-summary {
+    align-items: flex-start;
+
+    margin-top: 2rem;
+  }
+
+  .workshop-card-grid {
+    display: flex;
+
+    gap: 14px;
+
+    overflow-x: auto;
+
+    padding:
+      0 18vw
+      18px 0;
+
+    border: 0;
+
+    scroll-snap-type:
+      x mandatory;
+
+    scrollbar-width:
+      none;
+
+    -webkit-overflow-scrolling:
+      touch;
+  }
+
+  .workshop-card-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .workshop-story-card {
+    flex:
+      0 0
+      min(
+        82vw,
+        330px
+      );
+
+    min-height:
+      470px;
+
+    border:
+      1px solid
+      var(--ink);
+
+    scroll-snap-align:
+      start;
+  }
+
+  .workshop-card-reveal {
+    min-height:
+      62%;
+  }
+
+  .workshop-completion-strip {
+    align-items:
+      flex-start;
+
+    flex-direction:
+      column;
+
+    gap:
+      0.8rem;
+  }
+
+  .workshop-modal-backdrop {
+    align-items:
+      flex-start;
+
+    overflow-y:
+      auto;
+
+    padding:
+      12px;
+  }
+
+  .workshop-modal {
+    display:
+      block;
+
+    max-height:
+      none;
+  }
+
+  .workshop-modal-side {
+    min-height:
+      410px;
+
+    padding:
+      2rem
+      1.5rem;
+  }
+
+  .workshop-modal-content {
+    overflow:
+      visible;
+
+    padding:
+      2.5rem
+      1.5rem;
+  }
+
+  .workshop-modal-close {
+    position:
+      fixed;
+
+    top:
+      24px;
+
+    right:
+      24px;
+  }
+
+  .workshop-modal-footer {
+    flex-direction:
+      column;
+
+    gap:
+      0.5rem;
+  }
+}
+
+/* =========================
+   REDUCED MOTION
+========================= */
+
+@media (
+  prefers-reduced-motion:
+    reduce
+) {
+  .workshop-card-reveal,
+  .workshop-modal,
+  .workshop-modal-backdrop {
+    animation:
+      none !important;
+
+    transition:
+      none !important;
+  }
+}

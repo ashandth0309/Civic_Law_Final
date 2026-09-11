@@ -7,7 +7,7 @@ import { MISSION, VISION } from '../../data/constants';
 export default function MissionVisionSection() {
   return (
     <SectionWrapper id="mission">
-      <SectionHeader num="07" sub="Purpose" title="Mission & Vision" />
+      <SectionHeader num="06" sub="Purpose" title="Mission & Vision" />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
         {/* Mission */}

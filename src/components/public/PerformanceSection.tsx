@@ -1,229 +1,408 @@
-import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
 import {
-  ClipboardList,
-  BarChart2,
-  MessageSquare,
-  FileText,
-  BookOpen,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
+
+import { motion } from 'framer-motion';
+import {
+  ArrowRight,
+  CheckCircle2,
+  MapPin,
+  Users,
+  X,
 } from 'lucide-react';
+
 import SectionWrapper from '../ui/SectionWrapper';
 import SectionHeader from '../ui/SectionHeader';
-import { MONITORING_TOOLS } from '../../data/constants';
-import { supabase } from '../../lib/supabase';
-import type { Kpi } from '../../types/database';
 
-const ICONS: Record<string, React.ElementType> = {
-  ClipboardList,
-  BarChart2,
-  MessageSquare,
-  FileText,
-  BookOpen,
-};
+import './PerformanceSection.css';
+
+interface WorkshopStory {
+  id: number;
+  city: string;
+  province: string;
+  participants: number;
+  facilitator: string;
+  facilitatorRole: string;
+  label: string;
+  story: string[];
+}
+
+const WORKSHOPS: WorkshopStory[] = [
+  {
+    id: 1,
+    city: 'Kandy',
+    province: 'Central Province',
+    participants: 30,
+    facilitator: 'Mr. Harsha Vidanapathirana',
+    facilitatorRole: 'Senior Lecturer in Law',
+    label: 'Regional Workshop',
+    story: [
+      'The Kandy Regional Workshop marked the beginning of the Law, Liberty and Civic Responsibility initiative, bringing together 30 young participants for an engaging conversation on law, civic awareness and responsible citizenship. As the first regional engagement of the initiative, the workshop established the foundation for a series of youth-focused dialogues to be conducted across Sri Lanka.',
+      'The session was conducted by Mr. Harsha Vidanapathirana, Senior Lecturer in Law, who guided participants through discussions on the relevance of legal knowledge in everyday life and the role of young citizens in a democratic society. Rather than approaching the law as a purely academic subject, the workshop encouraged participants to consider how legal principles, rights and responsibilities influence their daily lives and their communities.',
+      'Through interactive discussions and the exchange of perspectives, participants explored themes including the rule of law, civic responsibility, participation in public life and the importance of an informed citizenry. The workshop also provided an opportunity for participants to identify challenges faced by young people in understanding and engaging with legal and civic institutions.',
+      'The Kandy workshop set the tone for the regional consultations that followed, demonstrating the importance of creating spaces where young people can openly discuss the relationship between law, liberty and civic responsibility.',
+    ],
+  },
+
+  {
+    id: 2,
+    city: 'Matara',
+    province: 'Southern Province',
+    participants: 35,
+    facilitator: 'Ms. Hasini Ratnamalala',
+    facilitatorRole:
+      'Dean of the Faculty of Law, Kotelawala Defence University',
+    label: 'Regional Workshop',
+    story: [
+      'The Matara Regional Workshop brought together 35 participants for the second regional engagement of Law, Liberty and Civic Responsibility. Building on the discussions initiated in Kandy, the workshop continued the initiative’s effort to create meaningful spaces for young people to explore legal literacy, civic participation and responsible citizenship.',
+      'The session was conducted by Ms. Hasini Ratnamalala, Dean of the Faculty of Law, Kotelawala Defence University, whose experience in legal education provided participants with valuable perspectives on the importance of understanding the law beyond the classroom.',
+      'The workshop encouraged participants to reflect on the connection between individual rights and civic responsibilities, and on how informed citizens contribute to stronger democratic institutions. Discussions explored the practical relevance of legal knowledge, the importance of accountability, participation in public affairs and the role of young people in shaping their communities.',
+      'Particular emphasis was placed on making legal and civic concepts accessible and relevant to everyday experiences. Participants were encouraged to share their own perspectives, raise questions and identify issues affecting young people in their communities.',
+      'The Matara engagement further strengthened the initiative’s regional consultation process, demonstrating the value of bringing together young people from different backgrounds to exchange ideas and develop practical perspectives on the principles of law, liberty and responsible citizenship.',
+    ],
+  },
+
+  {
+    id: 3,
+    city: 'Colombo',
+    province: 'Western Province',
+    participants: 40,
+    facilitator: 'Mr. Prasantha Lal de Alwis',
+    facilitatorRole:
+      'President’s Counsel and Principal of Sri Lanka Law College',
+    label: 'Regional Workshop',
+    story: [
+      'The Colombo Regional Workshop brought together 40 participants, making it one of the largest regional engagements under Law, Liberty and Civic Responsibility. As the initiative moved to the commercial and administrative heart of the country, the workshop provided a broader platform for young people to engage with questions surrounding law, civic participation and democratic responsibility.',
+      'The session was conducted by Mr. Prasantha Lal de Alwis, President’s Counsel and Principal of Sri Lanka Law College, whose extensive experience in legal practice and legal education provided participants with an important perspective on the role of law in society.',
+      'The workshop explored the practical importance of legal literacy and the responsibilities that accompany the exercise of rights and freedoms. Participants engaged in discussions on the rule of law, accountability, civic participation and the importance of an informed and responsible citizenry.',
+      'The session also encouraged participants to move beyond viewing law as something confined to courts and legal professionals. Instead, discussions highlighted how legal awareness can empower individuals to make informed decisions, understand their rights and responsibilities, and participate more meaningfully in society.',
+      'With participants bringing diverse academic, professional and social perspectives to the discussion, the Colombo workshop contributed significantly to the initiative’s broader regional consultation process. The ideas and perspectives emerging from the session formed part of the collective body of recommendations carried forward towards the National Culminating Forum.',
+    ],
+  },
+
+  {
+    id: 4,
+    city: 'Jaffna',
+    province: 'Northern Province',
+    participants: 20,
+    facilitator: 'Mr. Pradinath Sivaneshan',
+    facilitatorRole: 'Senior Lecturer in Law',
+    label: 'Regional Workshop',
+    story: [
+      'The Jaffna Regional Workshop marked the initiative’s engagement in the Northern Province, bringing together 20 participants for a focused discussion on law, liberty and civic responsibility. The workshop formed an important part of the initiative’s commitment to ensuring that youth perspectives from different parts of Sri Lanka contribute to a broader national conversation.',
+      'The session was conducted by Mr. Pradinath Sivaneshan, Senior Lecturer in Law, who facilitated discussions on legal awareness, civic responsibility and the role of young people in a democratic society.',
+      'Participants were encouraged to reflect on the practical relevance of law in their everyday lives and to consider the relationship between individual rights, responsibilities and participation in public life. The interactive nature of the workshop allowed participants to raise questions, share experiences and discuss challenges relevant to their communities.',
+      'The Jaffna engagement also reinforced one of the central principles of Law, Liberty and Civic Responsibility: that meaningful civic dialogue must create space for voices from across the country. By bringing together young people in the Northern Province, the initiative sought to strengthen understanding of shared democratic principles while recognising the importance of diverse regional experiences and perspectives.',
+      'The discussions and recommendations emerging from Jaffna became part of the wider regional consultation process, contributing to the collective findings that would ultimately be presented and discussed at the National Culminating Forum.',
+    ],
+  },
+
+  {
+    id: 5,
+    city: 'Batticaloa',
+    province: 'Eastern Province',
+    participants: 25,
+    facilitator: 'Mr. Sabishanth Mohan',
+    facilitatorRole: 'State Counsel',
+    label: 'Regional Workshop',
+    story: [
+      'The Batticaloa Regional Workshop marked the final regional engagement of Law, Liberty and Civic Responsibility, bringing together 25 participants in the Eastern Province. The workshop represented an important milestone in the initiative, completing a series of regional consultations spanning Kandy, Matara, Colombo, Jaffna and Batticaloa.',
+      'The session was conducted by Mr. Sabishanth Mohan, State Counsel, who guided participants through discussions on legal literacy, civic responsibility, individual rights and meaningful participation in democratic society.',
+      'Participants were encouraged to examine the practical relationship between law and everyday life, while reflecting on how young citizens can contribute positively to their communities and wider society. The workshop provided a space for participants to share perspectives, raise concerns and discuss the challenges that can affect young people’s ability to understand and engage with legal and civic institutions.',
+      'As the final regional workshop, Batticaloa also served as a significant point of reflection on the conversations generated throughout the initiative. The perspectives and recommendations gathered from the Eastern Province complemented those emerging from the other four regional engagements, helping to build a broader picture of youth perspectives across Sri Lanka.',
+      'With the completion of the Batticaloa workshop, the regional phase of the initiative concluded, paving the way for the National Culminating Forum, where these diverse regional voices would come together as part of one national dialogue on law, liberty and civic responsibility.',
+    ],
+  },
+];
 
 export default function PerformanceSection() {
-  const [kpis, setKpis] = useState<Kpi[]>([]);
+  const [selectedWorkshop, setSelectedWorkshop] =
+    useState<WorkshopStory | null>(null);
 
-  useEffect(() => {
-    supabase.from('kpis').select('*').order('label').then(({ data }) => {
-      if (data) setKpis(data as Kpi[]);
-    });
+  const closeModal = useCallback(() => {
+    setSelectedWorkshop(null);
   }, []);
 
-  return (
-    <SectionWrapper id="performance">
-      <SectionHeader num="06" sub="Results Framework" title="Performance & Accountability" />
+  useEffect(() => {
+    if (!selectedWorkshop) return;
 
-      {/* ── KPIs ── */}
-      <div className="mb-12">
-        <span
-          className="block mb-5"
-          style={{
-            fontFamily: "'IBM Plex Mono', monospace",
-            fontSize: 'clamp(0.62rem, 1.1vw, 0.75rem)',
-            letterSpacing: '0.2em',
-            color: 'var(--muted)',
-            textTransform: 'uppercase',
-          }}
-        >
-          Performance Indicators
-        </span>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-          {kpis.map((kpi, i) => (
-            <motion.div
-              key={kpi.key}
-              initial={{ opacity: 0, scale: 0.92 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.07 }}
-              whileHover={{ y: -4, boxShadow: '0 8px 28px rgba(14,14,14,0.12)' }}
-              className="flex flex-col border border-[var(--line)] p-5 md:p-6 bg-[var(--paper)] cursor-default"
+    const oldOverflow =
+      document.body.style.overflow;
+
+    document.body.style.overflow = 'hidden';
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        closeModal();
+      }
+    };
+
+    window.addEventListener(
+      'keydown',
+      handleEscape,
+    );
+
+    return () => {
+      document.body.style.overflow = oldOverflow;
+
+      window.removeEventListener(
+        'keydown',
+        handleEscape,
+      );
+    };
+  }, [selectedWorkshop, closeModal]);
+
+  return (
+    <>
+      <SectionWrapper id="performance">
+        <SectionHeader
+          num="05"
+          sub="Regional Engagements"
+          title="Five Workshops. One National Conversation."
+        />
+
+        <div className="workshop-story-intro">
+          <p>
+            From Kandy to Batticaloa, five regional
+            workshops brought together 150 young
+            participants to explore legal literacy,
+            civic responsibility and meaningful
+            participation in democratic society.
+          </p>
+
+          <div className="workshop-story-summary">
+            <strong>150</strong>
+            <span>Participants</span>
+          </div>
+        </div>
+
+        <div className="workshop-card-grid">
+          {WORKSHOPS.map((workshop, index) => (
+            <motion.article
+              key={workshop.id}
+              initial={{
+                opacity: 0,
+                y: 26,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              viewport={{
+                once: true,
+                amount: 0.2,
+              }}
+              transition={{
+                duration: 0.5,
+                delay: index * 0.08,
+              }}
+              className="workshop-story-card"
             >
-              <span
-                style={{
-                  fontFamily: "'Bebas Neue', sans-serif",
-                  fontSize: 'clamp(2rem, 4vw, 2.8rem)',
-                  lineHeight: 1,
-                  color: 'var(--red)',
-                  marginBottom: '0.6rem',
-                }}
-              >
-                {kpi.value}
-              </span>
-              <span
-                style={{
-                  fontFamily: "'IBM Plex Mono', monospace",
-                  fontSize: 'clamp(0.58rem, 1vw, 0.68rem)',
-                  letterSpacing: '0.1em',
-                  color: 'var(--muted)',
-                  textTransform: 'uppercase',
-                  lineHeight: 1.6,
-                }}
-              >
-                {kpi.label}
-              </span>
-            </motion.div>
+              <div className="workshop-card-base">
+                <span className="workshop-card-number">
+                  {String(workshop.id).padStart(
+                    2,
+                    '0',
+                  )}
+                </span>
+
+                <div className="workshop-card-status">
+                  <CheckCircle2 size={13} />
+                  <span>Completed</span>
+                </div>
+
+                <div className="workshop-card-city">
+                  <span className="workshop-card-province">
+                    {workshop.province}
+                  </span>
+
+                  <h3>{workshop.city}</h3>
+                </div>
+
+                <div className="workshop-card-bottom">
+                  <div>
+                    <Users size={15} />
+                    <span>
+                      {workshop.participants}{' '}
+                      participants
+                    </span>
+                  </div>
+
+                  <div>
+                    <MapPin size={15} />
+                    <span>
+                      {workshop.label}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="workshop-card-reveal">
+                <span className="workshop-reveal-label">
+                  Facilitated by
+                </span>
+
+                <h4>
+                  {workshop.facilitator}
+                </h4>
+
+                <p className="workshop-facilitator-role">
+                  {workshop.facilitatorRole}
+                </p>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    setSelectedWorkshop(workshop)
+                  }
+                  className="workshop-read-more"
+                >
+                  Read Workshop Story
+                  <ArrowRight size={15} />
+                </button>
+              </div>
+            </motion.article>
           ))}
         </div>
-      </div>
 
-      {/* ── Monitoring Tools ── */}
-      <div className="mb-12">
-        <span
-          className="block mb-5"
-          style={{
-            fontFamily: "'IBM Plex Mono', monospace",
-            fontSize: 'clamp(0.62rem, 1.1vw, 0.75rem)',
-            letterSpacing: '0.2em',
-            color: 'var(--muted)',
-            textTransform: 'uppercase',
-          }}
-        >
-          Monitoring Tools
-        </span>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-          {MONITORING_TOOLS.map((tool, i) => {
-            const Icon = ICONS[tool.icon];
-            return (
-              <motion.div
-                key={tool.label}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.07 }}
-                whileHover={{ backgroundColor: 'var(--blue)', color: '#fff' }}
-                className="group flex flex-col items-center gap-3 border border-[var(--line)] p-5 md:p-6 cursor-default text-center"
-                style={{ transition: 'background-color 0.3s, color 0.3s' }}
-              >
-                <Icon size={26} className="text-[var(--blue)] group-hover:text-white transition-colors duration-300" />
-                <span
-                  className="group-hover:text-white transition-colors duration-300"
-                  style={{
-                    fontFamily: "'IBM Plex Mono', monospace",
-                    fontSize: 'clamp(0.62rem, 1.1vw, 0.72rem)',
-                    letterSpacing: '0.1em',
-                    color: 'var(--ink)',
-                    textTransform: 'uppercase',
-                    lineHeight: 1.5,
-                  }}
-                >
-                  {tool.label}
-                </span>
-              </motion.div>
-            );
-          })}
+        <div className="workshop-completion-strip">
+          <div>
+            <CheckCircle2 size={18} />
+
+            <span>
+              Regional phase completed
+            </span>
+          </div>
+
+          <span>
+            Kandy · Matara · Colombo · Jaffna ·
+            Batticaloa
+          </span>
         </div>
-      </div>
+      </SectionWrapper>
 
-      {/* ── Timeline ── */}
-      <div>
-        <span
-          className="block mb-6"
-          style={{
-            fontFamily: "'IBM Plex Mono', monospace",
-            fontSize: 'clamp(0.62rem, 1.1vw, 0.75rem)',
-            letterSpacing: '0.2em',
-            color: 'var(--muted)',
-            textTransform: 'uppercase',
+      {selectedWorkshop && (
+        <div
+          className="workshop-modal-backdrop"
+          role="presentation"
+          onMouseDown={(event) => {
+            if (
+              event.target ===
+              event.currentTarget
+            ) {
+              closeModal();
+            }
           }}
         >
-          Monitoring Timeline
-        </span>
-        <div className="relative">
-          <div className="absolute top-5 left-5 right-5 h-px hidden lg:block" style={{ background: 'var(--line)' }} />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-            {[
-              { month: 'May 2026',  city: 'Kandy',      detail: 'Inaugural workshop — Central Province.' },
-              { month: 'May 2026',  city: 'Matara',     detail: 'Southern Province workshop.' },
-              { month: 'June 2026', city: 'Jaffna',     detail: 'Northern region workshop.' },
-              { month: 'June 2026', city: 'Colombo',    detail: 'National Hub workshop.' },
-              { month: 'July 2026', city: 'Batticaloa', detail: 'Eastern Province workshop.' },
-            ].map((item, i) => (
-              <motion.div
-                key={item.city}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.45, delay: i * 0.08 }}
-                className="relative flex flex-col"
-              >
-                {/* Step circle */}
-                <div className="w-11 h-11 rounded-full border-2 border-[var(--ink)] bg-[var(--paper)] flex items-center justify-center mb-4 relative z-10">
-                  <span
-                    style={{
-                      fontFamily: "'Bebas Neue', sans-serif",
-                      fontSize: 'clamp(0.85rem, 1.4vw, 1rem)',
-                      color: 'var(--red)',
-                    }}
-                  >
-                    {String(i + 1).padStart(2, '0')}
+          <article
+            className="workshop-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="workshop-modal-title"
+          >
+            <button
+              type="button"
+              className="workshop-modal-close"
+              onClick={closeModal}
+              aria-label="Close workshop story"
+            >
+              <X size={20} />
+            </button>
+
+            <div className="workshop-modal-side">
+              <span className="workshop-modal-index">
+                {String(
+                  selectedWorkshop.id,
+                ).padStart(2, '0')}
+              </span>
+
+              <div>
+                <span className="workshop-modal-side-label">
+                  Regional Workshop
+                </span>
+
+                <h3>
+                  {selectedWorkshop.city}
+                </h3>
+
+                <p>
+                  {selectedWorkshop.province}
+                </p>
+              </div>
+
+              <div className="workshop-modal-side-stats">
+                <div>
+                  <strong>
+                    {
+                      selectedWorkshop.participants
+                    }
+                  </strong>
+
+                  <span>
+                    Participants
                   </span>
                 </div>
 
-                {/* Month */}
-                <span
-                  className="block mb-1"
-                  style={{
-                    fontFamily: "'IBM Plex Mono', monospace",
-                    fontSize: 'clamp(0.6rem, 1vw, 0.7rem)',
-                    letterSpacing: '0.12em',
-                    color: 'var(--red)',
-                    textTransform: 'uppercase',
-                  }}
-                >
-                  {item.month}
+                <div>
+                  <CheckCircle2 size={17} />
+                  <span>
+                    Completed
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div className="workshop-modal-content">
+              <div className="workshop-modal-heading">
+                <span>
+                  Facilitated by
                 </span>
 
-                {/* City */}
-                <span
-                  style={{
-                    fontFamily: "'Cormorant Garamond', Georgia, serif",
-                    fontSize: 'clamp(1.1rem, 2vw, 1.35rem)',
-                    fontWeight: 600,
-                    color: 'var(--ink)',
-                    marginBottom: '0.35rem',
-                  }}
-                >
-                  {item.city}
+                <h2 id="workshop-modal-title">
+                  {selectedWorkshop.city} Regional
+                  Workshop
+                </h2>
+
+                <div className="workshop-modal-facilitator">
+                  <strong>
+                    {
+                      selectedWorkshop.facilitator
+                    }
+                  </strong>
+
+                  <span>
+                    {
+                      selectedWorkshop.facilitatorRole
+                    }
+                  </span>
+                </div>
+              </div>
+
+              <div className="workshop-modal-story">
+                {selectedWorkshop.story.map(
+                  (paragraph, index) => (
+                    <p key={index}>
+                      {paragraph}
+                    </p>
+                  ),
+                )}
+              </div>
+
+              <div className="workshop-modal-footer">
+                <span>
+                  Law, Liberty & Civic Responsibility
                 </span>
 
-                {/* Detail */}
-                <span
-                  style={{
-                    fontFamily: "'Cormorant Garamond', Georgia, serif",
-                    fontSize: 'clamp(0.92rem, 1.6vw, 1.05rem)',
-                    fontWeight: 300,
-                    color: '#3a3530',
-                    lineHeight: 1.65,
-                  }}
-                >
-                  {item.detail}
+                <span>
+                  Civic Law Initiative · 2026
                 </span>
-              </motion.div>
-            ))}
-          </div>
+              </div>
+            </div>
+          </article>
         </div>
-      </div>
-    </SectionWrapper>
+      )}
+    </>
   );
 }

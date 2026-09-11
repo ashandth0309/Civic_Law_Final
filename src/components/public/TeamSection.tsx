@@ -213,7 +213,7 @@ export default function TeamSection() {
       <SectionWrapper id="team">
         <div className="civic-team-section">
           <SectionHeader
-            num="08"
+            num="07"
             sub="Our People"
             title="Team"
           />

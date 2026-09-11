@@ -120,37 +120,49 @@ export default function Footer() {
             </a>
 
             {/* Logos */}
-            <div className="mt-10">
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 md:gap-5">
-                {logos.map((logo, index) => (
-                  <div
-                    key={index}
-                    className="
-                      h-[88px]
-                      md:h-[100px]
-                      rounded-sm
-                      flex
-                      items-center
-                      justify-center
-                      p-3
-                      transition-all
-                      duration-300
-                      hover:scale-105
-                    "
-                    style={{
-                      background: 'rgba(255,255,255,0.05)',
-                      border: '1px solid rgba(255,255,255,0.12)',
-                    }}
-                  >
-                    <img
-                      src={logo}
-                      alt={`logo-${index}`}
-                      className="max-h-full max-w-full object-contain"
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
+<div className="mt-10">
+  <div
+    className="
+      flex
+      items-center
+      justify-between
+      gap-4
+      sm:gap-6
+      overflow-hidden
+      w-full
+    "
+  >
+    {logos.map((logo, index) => (
+      <div
+        key={index}
+        className="
+          flex
+          items-center
+          justify-center
+          flex-1
+          min-w-0
+          transition-transform
+          duration-300
+          hover:scale-105
+        "
+      >
+        <img
+          src={logo}
+          alt={`Partner logo ${index + 1}`}
+          className="
+            block
+            object-contain
+            max-w-full
+            h-auto
+            max-h-[54px]
+            sm:max-h-[62px]
+            md:max-h-[72px]
+          "
+        />
+      </div>
+    ))}
+  </div>
+</div>
           </div>
 
           <div

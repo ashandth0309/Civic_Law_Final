@@ -7,7 +7,7 @@ import { PARTNERS } from '../../data/constants';
 export default function PartnersSection() {
   return (
     <SectionWrapper id="partners">
-      <SectionHeader num="09" sub="Implementing Partners" title="Who We Are" />
+      <SectionHeader num="08" sub="Implementing Partners" title="Who We Are" />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {PARTNERS.map((p, i) => (
           <motion.div

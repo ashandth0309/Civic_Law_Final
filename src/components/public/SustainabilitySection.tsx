@@ -4,7 +4,7 @@ import SectionHeader from '../ui/SectionHeader';
 export default function SustainabilitySection() {
   return (
     <SectionWrapper id="sustainability">
-      <SectionHeader num="05" sub="Future Outlook" title="Sustainability & Amplification" />
+      <SectionHeader num="04" sub="Future Outlook" title="Sustainability & Amplification" />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14">
 
         {/* Sustainability */}

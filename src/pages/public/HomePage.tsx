@@ -2,7 +2,6 @@ import Hero from '../../components/public/Hero';
 import ProblemSection from '../../components/public/ProblemSection';
 import ObjectivesSection from '../../components/public/ObjectivesSection';
 import LocationsSection from '../../components/public/LocationsSection';
-import TimelineSection from '../../components/public/TimelineSection';
 import SustainabilitySection from '../../components/public/SustainabilitySection';
 import PerformanceSection from '../../components/public/PerformanceSection';
 import MissionVisionSection from '../../components/public/MissionVisionSection';
@@ -17,7 +16,6 @@ export default function HomePage() {
       <ProblemSection />
       <ObjectivesSection />
       <LocationsSection />
-      <TimelineSection />
       <SustainabilitySection />
       <PerformanceSection />
       <MissionVisionSection />
