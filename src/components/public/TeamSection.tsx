@@ -6,9 +6,13 @@ import {
   useState,
 } from 'react';
 
-import { motion } from 'framer-motion';
+import {
+  AnimatePresence,
+  motion,
+} from 'framer-motion';
 
 import {
+  ArrowDown,
   ArrowLeft,
   ArrowRight,
   Users,
@@ -40,7 +44,9 @@ const FILTERS: TeamFilter[] = [
   'PR, Media & Outreach',
 ];
 
-const getCommitteeClass = (committee: string) => {
+const getCommitteeClass = (
+  committee: string,
+) => {
   switch (committee) {
     case 'Leadership':
       return 'leadership';
@@ -60,72 +66,98 @@ const getCommitteeClass = (committee: string) => {
 };
 
 export default function TeamSection() {
-  const trackRef = useRef<HTMLDivElement | null>(null);
-
-
-  const [activeFilter, setActiveFilter] =
-    useState<TeamFilter>('All');
-
-  const [selectedMember, setSelectedMember] =
-    useState<TeamMember | null>(null);
-
-  const [canScrollLeft, setCanScrollLeft] =
-    useState(false);
-
-  const [canScrollRight, setCanScrollRight] =
-    useState(true);
-
-  const filteredMembers = useMemo(() => {
-    if (activeFilter === 'All') {
-      return teamMembers;
-    }
-
-    return teamMembers.filter(
-      (member) =>
-        member.committee === activeFilter,
-    );
-  }, [activeFilter]);
-
-  const updateScrollControls = useCallback(() => {
-    const track = trackRef.current;
-
-    if (!track) return;
-
-    const maximumScroll =
-      track.scrollWidth - track.clientWidth;
-
-    setCanScrollLeft(
-      track.scrollLeft > 8,
+  const trackRef =
+    useRef<HTMLDivElement | null>(
+      null,
     );
 
-    setCanScrollRight(
-      track.scrollLeft < maximumScroll - 8,
+  const [
+    activeFilter,
+    setActiveFilter,
+  ] = useState<TeamFilter>('All');
+
+  const [
+    selectedMember,
+    setSelectedMember,
+  ] =
+    useState<TeamMember | null>(
+      null,
     );
-  }, []);
+
+  const [
+    canScrollLeft,
+    setCanScrollLeft,
+  ] = useState(false);
+
+  const [
+    canScrollRight,
+    setCanScrollRight,
+  ] = useState(true);
+
+  const filteredMembers =
+    useMemo(() => {
+      if (activeFilter === 'All') {
+        return teamMembers;
+      }
+
+      return teamMembers.filter(
+        (member) =>
+          member.committee ===
+          activeFilter,
+      );
+    }, [activeFilter]);
+
+  const updateScrollControls =
+    useCallback(() => {
+      const track =
+        trackRef.current;
+
+      if (!track) return;
+
+      const maximumScroll =
+        track.scrollWidth -
+        track.clientWidth;
+
+      setCanScrollLeft(
+        track.scrollLeft > 8,
+      );
+
+      setCanScrollRight(
+        track.scrollLeft <
+          maximumScroll - 8,
+      );
+    }, []);
 
   useEffect(() => {
-    const track = trackRef.current;
+    const track =
+      trackRef.current;
 
     if (!track) return;
 
-    const frame = requestAnimationFrame(() => {
-      track.scrollTo({
-        left: 0,
-        behavior: 'auto',
-      });
+    const frame =
+      requestAnimationFrame(
+        () => {
+          track.scrollTo({
+            left: 0,
+            behavior: 'auto',
+          });
 
-      updateScrollControls();
-    });
+          updateScrollControls();
+        },
+      );
 
     return () =>
-      cancelAnimationFrame(frame);
+      cancelAnimationFrame(
+        frame,
+      );
   }, [
     activeFilter,
     updateScrollControls,
   ]);
 
   useEffect(() => {
-    const track = trackRef.current;
+    const track =
+      trackRef.current;
 
     if (!track) return;
 
@@ -160,7 +192,8 @@ export default function TeamSection() {
   const scrollGallery = (
     direction: 'left' | 'right',
   ) => {
-    const track = trackRef.current;
+    const track =
+      trackRef.current;
 
     if (!track) return;
 
@@ -169,25 +202,20 @@ export default function TeamSection() {
         '.civic-team-card',
       );
 
-    const amount = firstCard
-      ? firstCard.offsetWidth + 16
-      : 330;
-
-    const multiplier =
-      window.innerWidth <= 650 ? 1 : 2;
+    const amount =
+      firstCard
+        ? firstCard.offsetWidth +
+          16
+        : 330;
 
     track.scrollBy({
       left:
         direction === 'right'
-          ? amount * multiplier
-          : -amount * multiplier,
+          ? amount * 2
+          : -amount * 2,
 
       behavior: 'smooth',
     });
-  };
-
-  const openMember = (member: TeamMember) => {
-    setSelectedMember(member);
   };
 
   const closeMember =
@@ -196,10 +224,13 @@ export default function TeamSection() {
     }, []);
 
   useEffect(() => {
-    if (!selectedMember) return;
+    if (!selectedMember) {
+      return;
+    }
 
     const previousOverflow =
-      document.body.style.overflow;
+      document.body.style
+        .overflow;
 
     document.body.style.overflow =
       'hidden';
@@ -207,7 +238,9 @@ export default function TeamSection() {
     const handleEscape = (
       event: KeyboardEvent,
     ) => {
-      if (event.key === 'Escape') {
+      if (
+        event.key === 'Escape'
+      ) {
         closeMember();
       }
     };
@@ -268,15 +301,19 @@ export default function TeamSection() {
           >
             <div className="civic-team-intro-copy">
               <span>
-                The people behind the initiative
+                The people behind the
+                initiative
               </span>
 
               <p>
-                A multidisciplinary team united
-                by a shared commitment to legal
-                literacy, civic participation
-                and meaningful community
-                engagement across Sri Lanka.
+                A multidisciplinary
+                team united by a
+                shared commitment to
+                legal literacy, civic
+                participation and
+                meaningful community
+                engagement across
+                Sri Lanka.
               </p>
             </div>
 
@@ -312,7 +349,10 @@ export default function TeamSection() {
             <span className="civic-team-directory-count">
               {String(
                 filteredMembers.length,
-              ).padStart(2, '0')}{' '}
+              ).padStart(
+                2,
+                '0',
+              )}{' '}
               shown
             </span>
           </div>
@@ -321,44 +361,56 @@ export default function TeamSection() {
           <div className="civic-team-filter-wrap">
             <div className="civic-team-filters">
               {FILTERS.map(
-                (filter) => (
-                  <button
-                    key={filter}
-                    type="button"
-                    className={`civic-team-filter ${
-                      activeFilter ===
-                      filter
-                        ? 'is-active'
-                        : ''
-                    }`}
-                    onClick={() =>
-                      setActiveFilter(
-                        filter,
-                      )
-                    }
-                  >
-                    <span>
-                      {filter}
-                    </span>
+                (filter) => {
+                  const count =
+                    filter ===
+                    'All'
+                      ? teamMembers.length
+                      : teamMembers.filter(
+                          (
+                            member,
+                          ) =>
+                            member.committee ===
+                            filter,
+                        )
+                          .length;
 
-                    <small>
-                      {filter ===
-                      'All'
-                        ? teamMembers.length
-                        : teamMembers.filter(
-                            (
-                              member,
-                            ) =>
-                              member.committee ===
-                              filter,
-                          )
-                            .length}
-                    </small>
-                  </button>
-                ),
+                  return (
+                    <button
+                      key={
+                        filter
+                      }
+                      type="button"
+                      className={`civic-team-filter ${
+                        activeFilter ===
+                        filter
+                          ? 'is-active'
+                          : ''
+                      }`}
+                      onClick={() =>
+                        setActiveFilter(
+                          filter,
+                        )
+                      }
+                    >
+                      <span>
+                        {
+                          filter
+                        }
+                      </span>
+
+                      <small>
+                        {
+                          count
+                        }
+                      </small>
+                    </button>
+                  );
+                },
               )}
             </div>
 
+            {/* DESKTOP / LAPTOP ONLY */}
             <div className="civic-team-arrows">
               <button
                 type="button"
@@ -403,6 +455,7 @@ export default function TeamSection() {
             ref={trackRef}
             className="civic-team-track"
           >
+            <AnimatePresence>
               {filteredMembers.map(
                 (
                   member,
@@ -420,14 +473,16 @@ export default function TeamSection() {
                   return (
                     <motion.button
                       type="button"
-                      key={member.id}
+                      key={
+                        member.id
+                      }
                       className={`civic-team-card civic-team-card-${tone} ${
                         isLeader
                           ? 'is-lead'
                           : ''
                       }`}
                       onClick={() =>
-                        openMember(
+                        setSelectedMember(
                           member,
                         )
                       }
@@ -440,22 +495,32 @@ export default function TeamSection() {
                         opacity: 1,
                         y: 0,
                       }}
+                      exit={{
+                        opacity: 0,
+                        scale:
+                          0.96,
+                      }}
                       transition={{
-                        duration: 0.35,
+                        duration:
+                          0.35,
                         delay:
                           index *
                           0.035,
                       }}
                     >
                       <div className="civic-team-card-image">
-
-                        {/* Optimized team portrait */}
                         <img
-                          src={member.image}
-                          alt={member.name}
+                          src={
+                            member.image
+                          }
+                          alt={
+                            member.name
+                          }
                           loading="lazy"
                           decoding="async"
-                          draggable={false}
+                          draggable={
+                            false
+                          }
                         />
 
                         <div className="civic-team-image-shade" />
@@ -464,7 +529,7 @@ export default function TeamSection() {
                           <span>
                             {String(
                               index +
-                              1,
+                                1,
                             ).padStart(
                               2,
                               '0',
@@ -478,13 +543,17 @@ export default function TeamSection() {
                           )}
                         </div>
 
+                        {/* DESKTOP / LAPTOP ONLY */}
                         <div className="civic-team-card-view">
                           <span>
-                            View Profile
+                            View
+                            Profile
                           </span>
 
                           <ArrowRight
-                            size={15}
+                            size={
+                              15
+                            }
                           />
                         </div>
                       </div>
@@ -509,8 +578,20 @@ export default function TeamSection() {
                             }
                           </span>
 
+                          {/* DESKTOP */}
                           <ArrowRight
-                            size={14}
+                            className="team-role-arrow-desktop"
+                            size={
+                              14
+                            }
+                          />
+
+                          {/* TABLET + MOBILE */}
+                          <ArrowDown
+                            className="team-role-arrow-touch"
+                            size={
+                              16
+                            }
                           />
                         </div>
                       </div>
@@ -518,6 +599,7 @@ export default function TeamSection() {
                   );
                 },
               )}
+            </AnimatePresence>
 
             <div
               className="civic-team-end-card"
@@ -543,6 +625,7 @@ export default function TeamSection() {
           <div className="civic-team-legend">
             <div>
               <i className="legend-maroon" />
+
               <span>
                 Leadership
               </span>
@@ -550,6 +633,7 @@ export default function TeamSection() {
 
             <div>
               <i className="legend-gold" />
+
               <span>
                 Finance
               </span>
@@ -557,6 +641,7 @@ export default function TeamSection() {
 
             <div>
               <i className="legend-teal" />
+
               <span>
                 Logistics
               </span>
@@ -564,8 +649,10 @@ export default function TeamSection() {
 
             <div>
               <i className="legend-blue" />
+
               <span>
-                PR, Media & Outreach
+                PR, Media &
+                Outreach
               </span>
             </div>
           </div>
@@ -625,16 +712,15 @@ export default function TeamSection() {
             </button>
 
             <div className="civic-team-modal-image">
-
-              {/* Modal portrait — load immediately */}
               <img
                 src={
                   selectedMember.image
                 }
                 alt={`Portrait of ${selectedMember.name}`}
                 decoding="async"
-                draggable={false}
-                decoding="async"
+                draggable={
+                  false
+                }
               />
 
               <div className="civic-team-modal-image-overlay" />
@@ -667,19 +753,25 @@ export default function TeamSection() {
 
               <div className="civic-team-modal-statement">
                 <span>
-                  Law · Liberty · Civic Responsibility
+                  Law · Liberty ·
+                  Civic
+                  Responsibility
                 </span>
 
                 <p>
-                  Working together to strengthen
-                  civic awareness, legal literacy
-                  and meaningful participation.
+                  Working together
+                  to strengthen civic
+                  awareness, legal
+                  literacy and
+                  meaningful
+                  participation.
                 </p>
               </div>
 
               <div className="civic-team-modal-footer">
                 <span>
-                  Civic Law Initiative
+                  Civic Law
+                  Initiative
                 </span>
 
                 <span>

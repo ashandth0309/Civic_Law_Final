@@ -4,9 +4,8 @@
 
 .civic-team-section {
   position: relative;
-
   width: 100%;
-
+  min-width: 0;
   overflow: hidden;
 }
 
@@ -16,14 +15,17 @@
 
 .civic-team-intro {
   display: flex;
-
   align-items: flex-end;
   justify-content: space-between;
 
   gap: 3rem;
 
   margin-bottom:
-    clamp(2.8rem, 5vw, 4rem);
+    clamp(
+      2.8rem,
+      5vw,
+      4rem
+    );
 }
 
 .civic-team-intro-copy {
@@ -70,7 +72,9 @@
   color: #2c2723;
 }
 
-/* counter */
+/* =========================================
+   COUNTER
+========================================= */
 
 .civic-team-counter {
   display: flex;
@@ -125,12 +129,12 @@
   display: flex;
 
   align-items: center;
-  justify-content: space-between;
+  justify-content:
+    space-between;
 
   gap: 1.5rem;
 
-  padding:
-    0.9rem 0;
+  padding: 0.9rem 0;
 
   border-top:
     1px solid var(--ink);
@@ -174,7 +178,9 @@
   display: flex;
 
   align-items: center;
-  justify-content: space-between;
+
+  justify-content:
+    space-between;
 
   gap: 1.5rem;
 
@@ -188,9 +194,14 @@
 
   align-items: stretch;
 
+  min-width: 0;
+
   overflow-x: auto;
 
   scrollbar-width: none;
+
+  -webkit-overflow-scrolling:
+    touch;
 }
 
 .civic-team-filters::-webkit-scrollbar {
@@ -217,11 +228,9 @@
   border-right:
     1px solid var(--line);
 
-  background:
-    transparent;
+  background: transparent;
 
-  color:
-    var(--muted);
+  color: var(--muted);
 
   cursor: pointer;
 
@@ -253,6 +262,7 @@
   display: flex;
 
   align-items: center;
+
   justify-content: center;
 
   width: 20px;
@@ -276,14 +286,13 @@
 }
 
 .civic-team-filter.is-active {
-  background:
-    var(--ink);
+  background: var(--ink);
 
   color: #ffffff;
 }
 
 /* =========================================
-   ARROWS
+   DESKTOP ARROWS
 ========================================= */
 
 .civic-team-arrows {
@@ -308,11 +317,9 @@
 
   border-radius: 0;
 
-  background:
-    transparent;
+  background: transparent;
 
-  color:
-    var(--ink);
+  color: var(--ink);
 
   cursor: pointer;
 
@@ -323,11 +330,9 @@
 }
 
 .civic-team-arrow:hover:not(:disabled) {
-  background:
-    var(--ink);
+  background: var(--ink);
 
-  color:
-    #ffffff;
+  color: #ffffff;
 }
 
 .civic-team-arrow:disabled {
@@ -337,7 +342,7 @@
 }
 
 /* =========================================
-   TRACK
+   TEAM TRACK
 ========================================= */
 
 .civic-team-track {
@@ -349,6 +354,8 @@
 
   width: 100%;
 
+  min-width: 0;
+
   padding:
     4px 1px
     22px;
@@ -359,13 +366,12 @@
   scroll-snap-type:
     x proximity;
 
+  scroll-behavior: smooth;
+
   scrollbar-width: none;
 
-  cursor: auto;
-
-  touch-action: auto;
-
-  overscroll-behavior-x: contain;
+  overscroll-behavior-x:
+    contain;
 
   -webkit-overflow-scrolling:
     touch;
@@ -375,16 +381,8 @@
   display: none;
 }
 
-.civic-team-track.is-dragging {
-  cursor: grabbing;
-
-  scroll-snap-type: none;
-
-  user-select: none;
-}
-
 /* =========================================
-   TEAM CARD
+   CARD
 ========================================= */
 
 .civic-team-card {
@@ -407,8 +405,7 @@
 
   border: 0;
 
-  background:
-    transparent;
+  background: transparent;
 
   color: inherit;
 
@@ -418,9 +415,13 @@
 
   scroll-snap-align:
     start;
-}
 
-/* committee colours */
+  scroll-snap-stop:
+    normal;
+
+  -webkit-tap-highlight-color:
+    transparent;
+}
 
 .civic-team-card-leadership {
   --team-accent:
@@ -455,8 +456,7 @@
 
   overflow: hidden;
 
-  background:
-    #ded8cf;
+  background: #ded8cf;
 }
 
 .civic-team-card-image::before {
@@ -493,17 +493,21 @@
 }
 
 .civic-team-card img {
-  width: 100%;
-  pointer-events: none;
-  user-select: none;
-  -webkit-user-drag: none;
-  height: 100%;
-
   display: block;
 
+  width: 100%;
+  height: 100%;
+
   object-fit: cover;
+
   object-position:
     center top;
+
+  pointer-events: none;
+
+  user-select: none;
+
+  -webkit-user-drag: none;
 
   transform:
     scale(1.001);
@@ -528,6 +532,8 @@
   position: absolute;
 
   inset: 0;
+
+  pointer-events: none;
 
   background:
     linear-gradient(
@@ -572,7 +578,11 @@
   display: flex;
 
   align-items: center;
-  justify-content: space-between;
+
+  justify-content:
+    space-between;
+
+  pointer-events: none;
 }
 
 .civic-team-card-top > span {
@@ -594,7 +604,12 @@
 
   text-shadow:
     0 1px 8px
-    rgba(0,0,0,0.25);
+    rgba(
+      0,
+      0,
+      0,
+      0.25
+    );
 }
 
 .civic-team-card-top strong {
@@ -613,18 +628,15 @@
 
   font-weight: 500;
 
-  letter-spacing:
-    0.13em;
+  letter-spacing: 0.13em;
 
-  text-transform:
-    uppercase;
+  text-transform: uppercase;
 
-  color:
-    #ffffff;
+  color: #ffffff;
 }
 
 /* =========================================
-   VIEW PROFILE
+   VIEW PROFILE — DESKTOP ONLY
 ========================================= */
 
 .civic-team-card-view {
@@ -639,6 +651,7 @@
   display: flex;
 
   align-items: center;
+
   justify-content:
     space-between;
 
@@ -648,6 +661,8 @@
   opacity: 0;
 
   color: #ffffff;
+
+  pointer-events: none;
 
   transition:
     opacity 250ms ease,
@@ -668,11 +683,9 @@
 
   font-size: 0.47rem;
 
-  letter-spacing:
-    0.11em;
+  letter-spacing: 0.11em;
 
-  text-transform:
-    uppercase;
+  text-transform: uppercase;
 }
 
 /* =========================================
@@ -724,11 +737,9 @@
 
   line-height: 1.4;
 
-  letter-spacing:
-    0.12em;
+  letter-spacing: 0.12em;
 
-  text-transform:
-    uppercase;
+  text-transform: uppercase;
 
   color:
     var(--team-accent);
@@ -755,21 +766,20 @@
 
   font-weight: 600;
 
-  color:
-    var(--ink);
+  color: var(--ink);
 }
 
 .civic-team-card-role {
   display: flex;
 
   align-items: center;
+
   justify-content:
     space-between;
 
   gap: 1rem;
 
-  color:
-    var(--muted);
+  color: var(--muted);
 }
 
 .civic-team-card-role span {
@@ -781,11 +791,9 @@
 
   line-height: 1.45;
 
-  letter-spacing:
-    0.08em;
+  letter-spacing: 0.08em;
 
-  text-transform:
-    uppercase;
+  text-transform: uppercase;
 }
 
 .civic-team-card-role svg {
@@ -795,31 +803,33 @@
     var(--team-accent);
 
   transition:
-    transform 300ms ease;
+    transform
+    300ms ease;
 }
 
-/* leadership role emphasis */
+.team-role-arrow-touch {
+  display: none;
+}
 
 .civic-team-card.is-lead
-  .civic-team-card-role span {
-  color:
-    var(--ink);
+.civic-team-card-role span {
+  color: var(--ink);
 
   font-weight: 500;
 }
 
 /* =========================================
-   CARD HOVER
+   DESKTOP HOVER
 ========================================= */
 
-@media (hover: hover) {
+@media (hover: hover) and (min-width: 1025px) {
   .civic-team-track:hover
-    .civic-team-card:not(:hover) {
+  .civic-team-card:not(:hover) {
     opacity: 0.68;
   }
 
   .civic-team-card:hover
-    .civic-team-card-image::before {
+  .civic-team-card-image::before {
     transform:
       scaleX(1);
   }
@@ -834,7 +844,7 @@
   }
 
   .civic-team-card:hover
-    .civic-team-card-view {
+  .civic-team-card-view {
     opacity: 1;
 
     transform:
@@ -842,12 +852,12 @@
   }
 
   .civic-team-card:hover
-    .civic-team-card-content::before {
+  .civic-team-card-content::before {
     width: 100%;
   }
 
   .civic-team-card:hover
-    .civic-team-card-role svg {
+  .team-role-arrow-desktop {
     transform:
       translateX(4px);
   }
@@ -879,14 +889,13 @@
   display: flex;
 
   flex-direction: column;
+
   justify-content:
     space-between;
 
-  padding:
-    2rem;
+  padding: 2rem;
 
-  background:
-    #111111;
+  background: #111111;
 
   scroll-snap-align:
     start;
@@ -899,11 +908,9 @@
 
   font-size: 0.5rem;
 
-  letter-spacing:
-    0.15em;
+  letter-spacing: 0.15em;
 
-  text-transform:
-    uppercase;
+  text-transform: uppercase;
 
   color:
     rgba(
@@ -915,8 +922,7 @@
 }
 
 .civic-team-end-card > div {
-  margin-top:
-    auto;
+  margin-top: auto;
 }
 
 .civic-team-end-card strong {
@@ -944,8 +950,7 @@
   width: 70px;
   height: 4px;
 
-  margin-top:
-    1.4rem;
+  margin-top: 1.4rem;
 
   background:
     linear-gradient(
@@ -958,7 +963,7 @@
 }
 
 /* =========================================
-   COMMITTEE LEGEND
+   LEGEND
 ========================================= */
 
 .civic-team-legend {
@@ -972,11 +977,9 @@
     1rem
     2rem;
 
-  margin-top:
-    0.6rem;
+  margin-top: 0.6rem;
 
-  padding:
-    1rem 0;
+  padding: 1rem 0;
 
   border-top:
     1px solid var(--line);
@@ -996,23 +999,19 @@
 }
 
 .legend-maroon {
-  background:
-    #8c1639;
+  background: #8c1639;
 }
 
 .legend-gold {
-  background:
-    #c58a12;
+  background: #c58a12;
 }
 
 .legend-teal {
-  background:
-    #06524f;
+  background: #06524f;
 }
 
 .legend-blue {
-  background:
-    #1e4f7a;
+  background: #1e4f7a;
 }
 
 .civic-team-legend span {
@@ -1022,14 +1021,11 @@
 
   font-size: 0.44rem;
 
-  letter-spacing:
-    0.1em;
+  letter-spacing: 0.1em;
 
-  text-transform:
-    uppercase;
+  text-transform: uppercase;
 
-  color:
-    var(--muted);
+  color: var(--muted);
 }
 
 /* =========================================
@@ -1046,8 +1042,7 @@
 
   gap: 1rem;
 
-  padding-top:
-    0.5rem;
+  padding-top: 0.5rem;
 }
 
 .civic-team-bottom-rule span {
@@ -1057,25 +1052,21 @@
 
   font-size: 0.48rem;
 
-  letter-spacing:
-    0.13em;
+  letter-spacing: 0.13em;
 
-  text-transform:
-    uppercase;
+  text-transform: uppercase;
 
-  color:
-    var(--muted);
+  color: var(--muted);
 }
 
 .civic-team-bottom-rule i {
   height: 1px;
 
-  background:
-    var(--line);
+  background: var(--line);
 }
 
 /* =========================================
-   MODAL BACKDROP
+   MODAL
 ========================================= */
 
 .civic-team-modal-backdrop {
@@ -1115,10 +1106,6 @@
     civicTeamBackdropIn
     220ms ease both;
 }
-
-/* =========================================
-   MODAL
-========================================= */
 
 .civic-team-modal {
   --modal-accent:
@@ -1176,8 +1163,6 @@
     both;
 }
 
-/* committee modal colours */
-
 .civic-team-modal-leadership {
   --modal-accent:
     #8c1639;
@@ -1209,8 +1194,7 @@
 
   overflow: hidden;
 
-  background:
-    #ded8cf;
+  background: #ded8cf;
 }
 
 .civic-team-modal-image::after {
@@ -1229,20 +1213,27 @@
 }
 
 .civic-team-modal-image img {
+  display: block;
+
   width: 100%;
   height: 100%;
 
-  display: block;
-
   object-fit: cover;
+
   object-position:
     center top;
+
+  user-select: none;
+
+  -webkit-user-drag: none;
 }
 
 .civic-team-modal-image-overlay {
   position: absolute;
 
   inset: 0;
+
+  pointer-events: none;
 
   background:
     linear-gradient(
@@ -1276,11 +1267,9 @@
 
   font-size: 0.52rem;
 
-  letter-spacing:
-    0.15em;
+  letter-spacing: 0.15em;
 
-  text-transform:
-    uppercase;
+  text-transform: uppercase;
 
   color:
     rgba(
@@ -1299,6 +1288,7 @@
   display: flex;
 
   flex-direction: column;
+
   justify-content:
     space-between;
 
@@ -1321,8 +1311,7 @@
 .civic-team-modal-committee {
   display: block;
 
-  margin-bottom:
-    1.3rem;
+  margin-bottom: 1.3rem;
 
   font-family:
     'IBM Plex Mono',
@@ -1332,11 +1321,9 @@
 
   line-height: 1.5;
 
-  letter-spacing:
-    0.16em;
+  letter-spacing: 0.16em;
 
-  text-transform:
-    uppercase;
+  text-transform: uppercase;
 
   color:
     var(--modal-accent);
@@ -1362,8 +1349,7 @@
 
   font-weight: 400;
 
-  color:
-    var(--ink);
+  color: var(--ink);
 }
 
 .civic-team-modal-role {
@@ -1396,8 +1382,7 @@
     auto 0
     3rem;
 
-  padding:
-    1.4rem 0;
+  padding: 1.4rem 0;
 
   border-top:
     1px solid var(--line);
@@ -1409,8 +1394,7 @@
 .civic-team-modal-statement span {
   display: block;
 
-  margin-bottom:
-    0.7rem;
+  margin-bottom: 0.7rem;
 
   font-family:
     'IBM Plex Mono',
@@ -1418,11 +1402,9 @@
 
   font-size: 0.45rem;
 
-  letter-spacing:
-    0.12em;
+  letter-spacing: 0.12em;
 
-  text-transform:
-    uppercase;
+  text-transform: uppercase;
 
   color:
     var(--modal-accent);
@@ -1438,13 +1420,11 @@
     Georgia,
     serif;
 
-  font-size:
-    1.08rem;
+  font-size: 1.08rem;
 
   line-height: 1.6;
 
-  color:
-    #3a3530;
+  color: #3a3530;
 }
 
 /* =========================================
@@ -1455,6 +1435,7 @@
   display: flex;
 
   align-items: center;
+
   justify-content:
     space-between;
 
@@ -1468,14 +1449,11 @@
 
   font-size: 0.45rem;
 
-  letter-spacing:
-    0.12em;
+  letter-spacing: 0.12em;
 
-  text-transform:
-    uppercase;
+  text-transform: uppercase;
 
-  color:
-    var(--muted);
+  color: var(--muted);
 }
 
 /* =========================================
@@ -1504,8 +1482,7 @@
   background:
     var(--paper);
 
-  color:
-    var(--ink);
+  color: var(--ink);
 
   cursor: pointer;
 
@@ -1522,8 +1499,7 @@
   border-color:
     var(--modal-accent);
 
-  color:
-    #ffffff;
+  color: #ffffff;
 }
 
 /* =========================================
@@ -1559,21 +1535,136 @@
 }
 
 /* =========================================
+   TABLET + MOBILE / TOUCH EXPERIENCE
+   Everything below laptop size
+========================================= */
+
+@media (max-width: 1024px) {
+  /*
+   * Remove the two large navigation buttons.
+   * Tablet/mobile users swipe natively.
+   */
+  .civic-team-arrows {
+    display: none;
+  }
+
+  /*
+   * Remove VIEW PROFILE + arrow
+   * from the portrait.
+   */
+  .civic-team-card-view {
+    display: none;
+  }
+
+  /*
+   * Replace desktop right arrow
+   * with a simple down arrow.
+   */
+  .team-role-arrow-desktop {
+    display: none;
+  }
+
+  .team-role-arrow-touch {
+    display: block;
+  }
+
+  /*
+   * Native touch scrolling.
+   * No custom pointer capture.
+   */
+  .civic-team-track {
+    cursor: auto;
+
+    scroll-snap-type:
+      x proximity;
+
+    touch-action: pan-x pan-y;
+
+    -webkit-overflow-scrolling:
+      touch;
+  }
+
+  .civic-team-card-image::before {
+    transform:
+      scaleX(1);
+  }
+
+  /*
+   * Do not dim other cards
+   * or use desktop-only effects.
+   */
+  .civic-team-card {
+    opacity: 1;
+  }
+
+  .civic-team-card-role
+  .team-role-arrow-touch {
+    color:
+      var(--team-accent);
+  }
+
+  .civic-team-filter-wrap {
+    display: block;
+  }
+
+  /*
+   * No sideways filter row on
+   * tablets/phones.
+   */
+  .civic-team-filters {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    overflow: visible;
+
+    width: 100%;
+
+    gap: 6px;
+
+    margin-bottom:
+      1rem;
+  }
+
+  .civic-team-filter {
+    border:
+      1px solid
+      var(--line);
+
+    padding:
+      0.7rem
+      0.8rem;
+  }
+
+  .civic-team-filter:first-child {
+    border:
+      1px solid
+      var(--line);
+  }
+
+  .civic-team-filter.is-active {
+    border-color:
+      var(--ink);
+  }
+}
+
+/* =========================================
    TABLET
 ========================================= */
 
 @media (
-  max-width: 900px
+  min-width: 651px
+)
+and (
+  max-width: 1024px
 ) {
-  .civic-team-filter-wrap {
-    align-items:
-      flex-end;
-  }
-
-  .civic-team-filters {
-    max-width:
-      calc(
-        100% - 110px
+  .civic-team-card,
+  .civic-team-end-card {
+    flex:
+      0 0
+      min(
+        46vw,
+        330px
       );
   }
 }
@@ -1582,9 +1673,7 @@
    MOBILE
 ========================================= */
 
-@media (
-  max-width: 650px
-) {
+@media (max-width: 650px) {
   .civic-team-intro {
     display: block;
   }
@@ -1602,48 +1691,41 @@
   }
 
   .civic-team-filter-wrap {
-    display: block;
+    margin-bottom:
+      1.2rem;
   }
 
   .civic-team-filters {
-    max-width: none;
-    width: 100%;
-    margin-bottom: 1rem;
-    overflow: visible;
-    flex-wrap: wrap;
-    gap: 8px;
+    gap: 5px;
   }
 
   .civic-team-filter {
-    border: 1px solid var(--line);
+    padding:
+      0.62rem
+      0.7rem;
   }
 
-  .civic-team-filter:first-child {
-    border-left: 1px solid var(--line);
+  .civic-team-filter span {
+    font-size:
+      0.43rem;
   }
 
-  .civic-team-arrows {
-    justify-content:
-      flex-end;
+  .civic-team-filter small {
+    width: 18px;
+    height: 18px;
+
+    font-size:
+      0.38rem;
   }
 
   .civic-team-track {
     gap: 12px;
-    padding: 4px 0 20px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x proximity;
-    scroll-padding-left: 0;
-    touch-action: auto;
-    cursor: auto;
-    overscroll-behavior-x: contain;
-    -webkit-overflow-scrolling: touch;
-  }
 
-  .civic-team-card,
-  .civic-team-end-card {
-    scroll-snap-align: start;
-    scroll-snap-stop: normal;
+    padding:
+      4px
+      14vw
+      20px
+      0;
   }
 
   .civic-team-card,
@@ -1657,8 +1739,16 @@
   }
 
   .civic-team-card-content {
-    min-height:
-      145px;
+    min-height: 145px;
+  }
+
+  .civic-team-card-role {
+    align-items: center;
+  }
+
+  .team-role-arrow-touch {
+    width: 18px;
+    height: 18px;
   }
 
   .civic-team-legend {
@@ -1676,6 +1766,7 @@
     width: 100%;
   }
 
+  /* MODAL */
   .civic-team-modal-backdrop {
     align-items:
       flex-start;
@@ -1692,8 +1783,7 @@
   }
 
   .civic-team-modal-image {
-    min-height:
-      440px;
+    min-height: 440px;
   }
 
   .civic-team-modal-image::after {
@@ -1708,8 +1798,7 @@
   }
 
   .civic-team-modal-content {
-    min-height:
-      470px;
+    min-height: 470px;
 
     padding:
       2.8rem
@@ -1726,20 +1815,32 @@
 }
 
 /* =========================================
-   TOUCH
+   SMALL MOBILE
 ========================================= */
 
-@media (hover: none) {
-  .civic-team-card-image::before {
-    transform:
-      scaleX(1);
+@media (max-width: 380px) {
+  .civic-team-track {
+    padding-right:
+      10vw;
   }
 
-  .civic-team-card-view {
-    opacity: 1;
+  .civic-team-card,
+  .civic-team-end-card {
+    flex-basis:
+      min(
+        84vw,
+        300px
+      );
+  }
 
-    transform:
-      translateY(0);
+  .civic-team-card h3 {
+    font-size:
+      1.4rem;
+  }
+
+  .civic-team-modal-image {
+    min-height:
+      390px;
   }
 }
 
@@ -1758,8 +1859,14 @@
   .civic-team-card-role svg,
   .civic-team-modal,
   .civic-team-modal-backdrop {
-    animation: none !important;
+    animation:
+      none !important;
 
-    transition: none !important;
+    transition:
+      none !important;
+  }
+
+  .civic-team-track {
+    scroll-behavior: auto;
   }
 }
