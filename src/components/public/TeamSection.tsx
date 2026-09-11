@@ -61,36 +61,25 @@ const getCommitteeClass = (committee: string) => {
 };
 
 export default function TeamSection() {
-  const trackRef =
-    useRef<HTMLDivElement | null>(null);
+  const trackRef = useRef<HTMLDivElement | null>(null);
 
   const pointerStartX = useRef(0);
-
-  const initialScrollLeft =
-    useRef(0);
+  const initialScrollLeft = useRef(0);
 
   const dragging = useRef(false);
   const dragged = useRef(false);
 
-  const [
-    activeFilter,
-    setActiveFilter,
-  ] = useState<TeamFilter>('All');
+  const [activeFilter, setActiveFilter] =
+    useState<TeamFilter>('All');
 
-  const [
-    selectedMember,
-    setSelectedMember,
-  ] = useState<TeamMember | null>(null);
+  const [selectedMember, setSelectedMember] =
+    useState<TeamMember | null>(null);
 
-  const [
-    canScrollLeft,
-    setCanScrollLeft,
-  ] = useState(false);
+  const [canScrollLeft, setCanScrollLeft] =
+    useState(false);
 
-  const [
-    canScrollRight,
-    setCanScrollRight,
-  ] = useState(true);
+  const [canScrollRight, setCanScrollRight] =
+    useState(true);
 
   const filteredMembers = useMemo(() => {
     if (activeFilter === 'All') {
@@ -103,40 +92,36 @@ export default function TeamSection() {
     );
   }, [activeFilter]);
 
-  const updateScrollControls =
-    useCallback(() => {
-      const track = trackRef.current;
+  const updateScrollControls = useCallback(() => {
+    const track = trackRef.current;
 
-      if (!track) return;
+    if (!track) return;
 
-      const maximumScroll =
-        track.scrollWidth -
-        track.clientWidth;
+    const maximumScroll =
+      track.scrollWidth - track.clientWidth;
 
-      setCanScrollLeft(
-        track.scrollLeft > 8,
-      );
+    setCanScrollLeft(
+      track.scrollLeft > 8,
+    );
 
-      setCanScrollRight(
-        track.scrollLeft <
-          maximumScroll - 8,
-      );
-    }, []);
+    setCanScrollRight(
+      track.scrollLeft < maximumScroll - 8,
+    );
+  }, []);
 
   useEffect(() => {
     const track = trackRef.current;
 
     if (!track) return;
 
-    const frame =
-      requestAnimationFrame(() => {
-        track.scrollTo({
-          left: 0,
-          behavior: 'auto',
-        });
-
-        updateScrollControls();
+    const frame = requestAnimationFrame(() => {
+      track.scrollTo({
+        left: 0,
+        behavior: 'auto',
       });
+
+      updateScrollControls();
+    });
 
     return () =>
       cancelAnimationFrame(frame);
@@ -245,9 +230,7 @@ export default function TeamSection() {
       event.clientX -
       pointerStartX.current;
 
-    if (
-      Math.abs(distance) > 5
-    ) {
+    if (Math.abs(distance) > 5) {
       dragged.current = true;
     }
 
@@ -567,12 +550,14 @@ export default function TeamSection() {
                       }}
                     >
                       <div className="civic-team-card-image">
+
+                        {/* Optimized team portrait */}
                         <img
-  src={member.image}
-  alt={member.name}
-  loading="lazy"
-  decoding="async"
-/>
+                          src={member.image}
+                          alt={member.name}
+                          loading="lazy"
+                          decoding="async"
+                        />
 
                         <div className="civic-team-image-shade" />
 
@@ -580,7 +565,7 @@ export default function TeamSection() {
                           <span>
                             {String(
                               index +
-                                1,
+                              1,
                             ).padStart(
                               2,
                               '0',
@@ -742,11 +727,14 @@ export default function TeamSection() {
             </button>
 
             <div className="civic-team-modal-image">
+
+              {/* Modal portrait — load immediately */}
               <img
                 src={
                   selectedMember.image
                 }
                 alt={`Portrait of ${selectedMember.name}`}
+                decoding="async"
               />
 
               <div className="civic-team-modal-image-overlay" />
