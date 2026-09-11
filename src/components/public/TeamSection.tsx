@@ -568,14 +568,11 @@ export default function TeamSection() {
                     >
                       <div className="civic-team-card-image">
                         <img
-                          src={
-                            member.image
-                          }
-                          alt={`Portrait of ${member.name}`}
-                          draggable={
-                            false
-                          }
-                        />
+  src={member.image}
+  alt={member.name}
+  loading="lazy"
+  decoding="async"
+/>
 
                         <div className="civic-team-image-shade" />
 
