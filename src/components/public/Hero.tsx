@@ -348,7 +348,7 @@ export default function Hero() {
               className="flex flex-wrap gap-4 mb-8"
             >
               <Link
-                to="/apply"
+                to="/#contact"
                 className="
                   no-underline
                   inline-flex
@@ -399,7 +399,7 @@ export default function Hero() {
                     '#FDBD28';
                 }}
               >
-                Apply Now
+                CONTACT US
               </Link>
 
               <a

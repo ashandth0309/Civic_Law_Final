@@ -281,27 +281,20 @@ export default function Navbar() {
         ================================= */}
 
         <div className="civic-navbar-actions">
-          <Link
-            to="/#contact"
-            className="civic-navbar-contact"
-          >
-            Contact
-          </Link>
+  <Link
+    to="/#contact"
+    className="civic-navbar-apply"
+  >
+    <span>
+      Contact
+    </span>
 
-          <Link
-            to="/apply"
-            className="civic-navbar-apply"
-          >
-            <span>
-              Apply
-            </span>
-
-            <ArrowRight
-              size={15}
-              strokeWidth={1.7}
-            />
-          </Link>
-        </div>
+    <ArrowRight
+      size={15}
+      strokeWidth={1.7}
+    />
+  </Link>
+</div>
 
         {/* =================================
             MOBILE MENU BUTTON
