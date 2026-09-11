@@ -705,6 +705,12 @@
   }
 }
 
+
+@media (max-width: 700px) {
+  .partners-grid { width: 100%; min-width: 0; }
+  .partner-panel { width: 100%; min-width: 0; }
+}
+
 /* =========================================
    TOUCH
 ========================================= */

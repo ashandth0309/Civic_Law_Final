@@ -839,130 +839,55 @@
   .problem-year {
     right: -0.05em;
     top: 1rem;
-
     font-size: 9rem;
   }
 
-  .problem-story-kicker {
-    align-items:
-      flex-start;
-  }
-
-  .problem-story-kicker > span {
-    margin-top:
-      0.45rem;
-  }
-
-  .problem-lead {
-    display: block;
-  }
-
-  .problem-dropcap {
-    float: left;
-  }
+  .problem-story-kicker { align-items: flex-start; }
+  .problem-story-kicker > span { margin-top: 0.45rem; }
+  .problem-lead { display: block; }
+  .problem-dropcap { float: left; }
 
   .problem-statement-panel {
-    min-height: 500px;
-
-    padding:
-      1.7rem;
+    min-height: auto;
+    padding: 1.7rem;
   }
 
-  .problem-challenges-heading {
-    display: block;
-  }
-
+  .problem-challenges-heading { display: block; }
   .problem-challenges-heading p {
-    margin-top:
-      0.7rem;
-
-    text-align:
-      left;
+    margin-top: 0.7rem;
+    text-align: left;
   }
 
-  /* swipe cards */
-
+  /* Mobile: deliberately STACK cards. No horizontal carousel/table. */
   .problem-challenge-grid {
-    display: flex;
-
+    display: grid;
+    grid-template-columns: 1fr;
     gap: 14px;
-
-    overflow-x: auto;
-
-    margin-right:
-      calc(-1 * 1.5rem);
-
-    padding-right:
-      18vw;
-
-    padding-bottom:
-      1rem;
-
+    overflow: visible;
+    margin-right: 0;
+    padding: 0;
     border: 0;
-
-    scroll-snap-type:
-      x mandatory;
-
-    scrollbar-width:
-      none;
-
-    -webkit-overflow-scrolling:
-      touch;
-  }
-
-  .problem-challenge-grid::-webkit-scrollbar {
-    display: none;
+    scroll-snap-type: none;
   }
 
   .problem-challenge-card {
-    flex:
-      0 0
-      min(82vw, 340px);
-
-    min-height:
-      360px;
-
+    width: 100%;
+    min-width: 0;
+    min-height: 340px;
     display: grid;
-
-    grid-template-rows:
-      78px
-      68px
-      135px
-      1fr;
-
-    border:
-      1px solid
-      var(--ink);
-
-    scroll-snap-align:
-      start;
+    grid-template-rows: 72px 62px auto 1fr;
+    border: 1px solid var(--ink);
+    scroll-snap-align: none;
   }
 
   .problem-challenge-card:last-child {
-    border:
-      1px solid
-      var(--ink);
+    border: 1px solid var(--ink);
   }
 
-  .problem-challenge-content p {
-    margin-top:
-      1rem;
-  }
-
-  .problem-next {
-    align-items:
-      flex-start;
-  }
-
-  .problem-next div {
-    margin-top:
-      0.45rem;
-  }
-
-  .problem-next span:last-child {
-    max-width:
-      210px;
-  }
+  .problem-challenge-content p { margin-top: 1rem; }
+  .problem-next { align-items: flex-start; }
+  .problem-next div { margin-top: 0.45rem; }
+  .problem-next span:last-child { max-width: 210px; }
 }
 
 /* =========================================

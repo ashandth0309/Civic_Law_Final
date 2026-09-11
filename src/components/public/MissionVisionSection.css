@@ -649,41 +649,48 @@
    MOBILE
 ========================================= */
 
+/* =========================================
+   MOBILE VISION — STRONG CONTRAST FIX
+========================================= */
+
 @media (max-width: 600px) {
-  .mission-vision-intro {
-    margin-bottom: 2.5rem;
+  .purpose-panel-vision {
+    background: #8c1639;
+    color: #ffffff;
+    border-top: 4px solid #fdbd28;
   }
 
-  .purpose-panel {
-    min-height: 560px;
-
-    grid-template-rows:
-      75px
-      1fr
-      55px;
-
-    padding:
-      1.6rem 1.4rem;
+  .purpose-panel-vision .purpose-index,
+  .purpose-panel-vision .purpose-kicker {
+    color: #fdbd28;
   }
 
-  .purpose-panel-content h3 {
-    font-size:
-      clamp(3.7rem, 17vw, 5rem);
+  .purpose-panel-vision .purpose-panel-content h3 {
+    color: #ffffff;
   }
 
-  .purpose-panel-content p {
-    font-size: 1.03rem;
+  .purpose-panel-vision .purpose-panel-content p {
+    color: rgba(255, 255, 255, 0.84);
   }
 
-  .purpose-background-word {
-    font-size:
-      clamp(7rem, 34vw, 10rem);
+  .purpose-panel-vision .purpose-icon {
+    background: #fdbd28;
+    color: #111111;
   }
 
-  .mission-vision-bridge {
-    padding:
-      2rem 0;
+  .purpose-panel-vision .purpose-line {
+    background: #fdbd28;
   }
+
+  .purpose-panel-vision .purpose-background-word {
+    color: rgba(255, 255, 255, 0.05);
+  }
+}
+
+
+@media (max-width: 700px) {
+  .mission-vision-grid { width: 100%; min-width: 0; }
+  .purpose-panel { width: 100%; min-width: 0; }
 }
 
 /* =========================================

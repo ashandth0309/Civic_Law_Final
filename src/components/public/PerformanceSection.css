@@ -1210,129 +1210,80 @@
 ========================================= */
 
 @media (max-width: 700px) {
-  .performance-intro {
-    display: block;
-  }
+  .performance-intro { display: block; }
 
   .performance-total {
-    align-items:
-      flex-start;
-
+    align-items: flex-start;
     margin-top: 2rem;
   }
 
-  /* horizontal swipe */
-
+  /* Mobile: no five-card horizontal strip. */
   .performance-card-grid {
-    display: flex;
-
+    display: grid;
+    grid-template-columns: 1fr;
     gap: 14px;
-
-    overflow-x: auto;
-
-    padding:
-      0 18vw
-      20px 0;
-
+    overflow: visible;
+    padding: 0;
     border: 0;
-
-    scroll-snap-type:
-      x mandatory;
-
-    scrollbar-width:
-      none;
-
-    -webkit-overflow-scrolling:
-      touch;
-  }
-
-  .performance-card-grid::-webkit-scrollbar {
-    display: none;
+    scroll-snap-type: none;
   }
 
   .performance-card {
-    flex:
-      0 0
-      min(82vw, 345px);
-
-    min-height: 525px;
-
-    border:
-      1px solid var(--ink);
-
-    scroll-snap-align:
-      start;
+    width: 100%;
+    min-width: 0;
+    min-height: 505px;
+    border: 1px solid var(--ink);
+    scroll-snap-align: none;
   }
 
   .performance-card:last-child {
-    border:
-      1px solid var(--ink);
+    border: 1px solid var(--ink);
   }
 
   .performance-card-inner {
-    grid-template-rows:
-      55px
-      145px
-      88px
-      155px
-      1fr;
+    grid-template-rows: 55px 135px 88px 145px 1fr;
   }
 
   .performance-completion {
     align-items: flex-start;
-
     flex-direction: column;
   }
 
   .performance-completion i {
     width: 100%;
-
     flex: none;
   }
 
   .performance-modal-backdrop {
     align-items: flex-start;
-
     overflow-y: auto;
-
     padding: 10px;
   }
 
   .performance-modal {
     display: block;
-
     max-height: none;
   }
 
   .performance-modal-side {
     min-height: 390px;
-
-    padding:
-      2rem
-      1.5rem;
+    padding: 2rem 1.5rem;
   }
 
   .performance-modal-content {
     overflow: visible;
-
-    padding:
-      2.5rem
-      1.5rem;
+    padding: 2.5rem 1.5rem;
   }
 
-  .performance-modal-heading {
-    padding-right: 0;
-  }
+  .performance-modal-heading { padding-right: 0; }
 
   .performance-modal-footer {
     flex-direction: column;
-
     gap: 0.5rem;
   }
 
   .performance-modal-close {
     position: fixed;
-
     top: 22px;
     right: 22px;
   }

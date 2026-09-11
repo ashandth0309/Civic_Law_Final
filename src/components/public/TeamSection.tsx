@@ -1,5 +1,4 @@
 import {
-  PointerEvent as ReactPointerEvent,
   useCallback,
   useEffect,
   useMemo,
@@ -7,7 +6,7 @@ import {
   useState,
 } from 'react';
 
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 import {
   ArrowLeft,
@@ -63,11 +62,6 @@ const getCommitteeClass = (committee: string) => {
 export default function TeamSection() {
   const trackRef = useRef<HTMLDivElement | null>(null);
 
-  const pointerStartX = useRef(0);
-  const initialScrollLeft = useRef(0);
-
-  const dragging = useRef(false);
-  const dragged = useRef(false);
 
   const [activeFilter, setActiveFilter] =
     useState<TeamFilter>('All');
@@ -179,98 +173,20 @@ export default function TeamSection() {
       ? firstCard.offsetWidth + 16
       : 330;
 
+    const multiplier =
+      window.innerWidth <= 650 ? 1 : 2;
+
     track.scrollBy({
       left:
         direction === 'right'
-          ? amount * 2
-          : -amount * 2,
+          ? amount * multiplier
+          : -amount * multiplier,
 
       behavior: 'smooth',
     });
   };
 
-  const handlePointerDown = (
-    event: ReactPointerEvent<HTMLDivElement>,
-  ) => {
-    const track = trackRef.current;
-
-    if (!track) return;
-
-    dragging.current = true;
-    dragged.current = false;
-
-    pointerStartX.current =
-      event.clientX;
-
-    initialScrollLeft.current =
-      track.scrollLeft;
-
-    track.setPointerCapture(
-      event.pointerId,
-    );
-
-    track.classList.add(
-      'is-dragging',
-    );
-  };
-
-  const handlePointerMove = (
-    event: ReactPointerEvent<HTMLDivElement>,
-  ) => {
-    const track = trackRef.current;
-
-    if (
-      !track ||
-      !dragging.current
-    ) {
-      return;
-    }
-
-    const distance =
-      event.clientX -
-      pointerStartX.current;
-
-    if (Math.abs(distance) > 5) {
-      dragged.current = true;
-    }
-
-    track.scrollLeft =
-      initialScrollLeft.current -
-      distance;
-  };
-
-  const handlePointerEnd = (
-    event: ReactPointerEvent<HTMLDivElement>,
-  ) => {
-    const track = trackRef.current;
-
-    dragging.current = false;
-
-    if (!track) return;
-
-    track.classList.remove(
-      'is-dragging',
-    );
-
-    if (
-      track.hasPointerCapture(
-        event.pointerId,
-      )
-    ) {
-      track.releasePointerCapture(
-        event.pointerId,
-      );
-    }
-  };
-
-  const openMember = (
-    member: TeamMember,
-  ) => {
-    if (dragged.current) {
-      dragged.current = false;
-      return;
-    }
-
+  const openMember = (member: TeamMember) => {
     setSelectedMember(member);
   };
 
@@ -486,20 +402,7 @@ export default function TeamSection() {
           <div
             ref={trackRef}
             className="civic-team-track"
-            onPointerDown={
-              handlePointerDown
-            }
-            onPointerMove={
-              handlePointerMove
-            }
-            onPointerUp={
-              handlePointerEnd
-            }
-            onPointerCancel={
-              handlePointerEnd
-            }
           >
-            <AnimatePresence mode="popLayout">
               {filteredMembers.map(
                 (
                   member,
@@ -516,7 +419,6 @@ export default function TeamSection() {
 
                   return (
                     <motion.button
-                      layout
                       type="button"
                       key={member.id}
                       className={`civic-team-card civic-team-card-${tone} ${
@@ -538,10 +440,6 @@ export default function TeamSection() {
                         opacity: 1,
                         y: 0,
                       }}
-                      exit={{
-                        opacity: 0,
-                        scale: 0.96,
-                      }}
                       transition={{
                         duration: 0.35,
                         delay:
@@ -557,6 +455,7 @@ export default function TeamSection() {
                           alt={member.name}
                           loading="lazy"
                           decoding="async"
+                          draggable={false}
                         />
 
                         <div className="civic-team-image-shade" />
@@ -619,7 +518,6 @@ export default function TeamSection() {
                   );
                 },
               )}
-            </AnimatePresence>
 
             <div
               className="civic-team-end-card"
@@ -734,6 +632,8 @@ export default function TeamSection() {
                   selectedMember.image
                 }
                 alt={`Portrait of ${selectedMember.name}`}
+                decoding="async"
+                draggable={false}
                 decoding="async"
               />
 

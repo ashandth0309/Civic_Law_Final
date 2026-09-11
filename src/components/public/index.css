@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=IBM+Plex+Mono:wght@300;400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #0e0e0e;
+  --paper: #f7f4ef;
+
+  --maroon: #8C1639;
+  --teal: #06524F;
+  --gold: #FDBD28;
+  --white: #FFFFFF;
+
+  /* temporary compatibility with existing code */
+  --blue: #8C1639;
+  --blue-dark: #65102A;
+
+  --red: #c0392b;
+  --muted: #8a8278;
+  --line: #d4cfc6;
+  --accent: #e8e0d0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  width: 100%;
+  max-width: 100%;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  background: var(--paper);
+  color: var(--ink);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--paper); }
+::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+
+@media print {
+  body { font-size: 12pt; }
+}
+
+
+/* Mobile safety: never let a section create page-level horizontal scrolling. */
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+img, svg, video, canvas {
+  max-width: 100%;
+}
+
+@media (max-width: 700px) {
+  html, body, #root {
+    overflow-x: hidden;
+  }
+}

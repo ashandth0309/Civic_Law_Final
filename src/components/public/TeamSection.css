@@ -357,13 +357,15 @@
   overflow-y: hidden;
 
   scroll-snap-type:
-    x mandatory;
+    x proximity;
 
   scrollbar-width: none;
 
-  cursor: grab;
+  cursor: auto;
 
-  touch-action: pan-y;
+  touch-action: auto;
+
+  overscroll-behavior-x: contain;
 
   -webkit-overflow-scrolling:
     touch;
@@ -492,6 +494,9 @@
 
 .civic-team-card img {
   width: 100%;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
   height: 100%;
 
   display: block;
@@ -1602,16 +1607,43 @@
 
   .civic-team-filters {
     max-width: none;
-
     width: 100%;
+    margin-bottom: 1rem;
+    overflow: visible;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
 
-    margin-bottom:
-      1rem;
+  .civic-team-filter {
+    border: 1px solid var(--line);
+  }
+
+  .civic-team-filter:first-child {
+    border-left: 1px solid var(--line);
   }
 
   .civic-team-arrows {
     justify-content:
       flex-end;
+  }
+
+  .civic-team-track {
+    gap: 12px;
+    padding: 4px 0 20px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x proximity;
+    scroll-padding-left: 0;
+    touch-action: auto;
+    cursor: auto;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .civic-team-card,
+  .civic-team-end-card {
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
   }
 
   .civic-team-card,

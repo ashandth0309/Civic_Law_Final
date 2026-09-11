@@ -311,21 +311,22 @@
   }
 
   .locations-route {
+    position: relative;
     padding-top: 1rem;
   }
 
-  .locations-route-line {
+  .locations-route::before {
+    content: '';
+    position: absolute;
     left: 15px;
-    right: auto;
-
     top: 20px;
     bottom: 20px;
-
     width: 2px;
-    height: auto;
+    background: linear-gradient(180deg, #8c1639 0%, #fdbd28 48%, #06524f 100%);
+  }
 
-    transform-origin:
-      center top;
+  .locations-route-line {
+    display: none;
   }
 
   .locations-route-grid {

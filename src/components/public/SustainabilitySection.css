@@ -721,83 +721,49 @@
 ========================================= */
 
 @media (max-width: 700px) {
-  .sustainability-intro {
-    display: block;
-  }
+  .sustainability-intro { display: block; }
 
   .sustainability-mark {
     align-items: flex-start;
-
     margin-top: 2rem;
   }
 
   .sustainability-panel {
-    min-height: 540px;
-
-    padding:
-      1.8rem;
+    min-height: auto;
+    padding: 1.8rem;
   }
 
   .sustainability-panel h3 {
-    font-size:
-      clamp(2.8rem, 12vw, 4.4rem);
+    font-size: clamp(2.8rem, 12vw, 4.4rem);
   }
 
-  .sustainability-path-heading {
-    display: block;
-  }
-
+  .sustainability-path-heading { display: block; }
   .sustainability-path-heading p {
     margin-top: 0.8rem;
-
     text-align: left;
   }
 
-  /* mobile swipe */
+  /* Mobile: no horizontal path-card strip. */
   .sustainability-path-grid {
-    display: flex;
-
+    display: grid;
+    grid-template-columns: 1fr;
     gap: 14px;
-
-    overflow-x: auto;
-
-    padding:
-      0 18vw
-      16px 0;
-
+    overflow: visible;
+    padding: 0;
     border: 0;
-
-    scroll-snap-type:
-      x mandatory;
-
-    scrollbar-width:
-      none;
-
-    -webkit-overflow-scrolling:
-      touch;
-  }
-
-  .sustainability-path-grid::-webkit-scrollbar {
-    display: none;
+    scroll-snap-type: none;
   }
 
   .sustainability-path-card {
-    flex:
-      0 0
-      min(82vw, 340px);
-
-    min-height: 330px;
-
-    border:
-      1px solid var(--ink);
-
-    scroll-snap-align:
-      start;
+    width: 100%;
+    min-width: 0;
+    min-height: 290px;
+    border: 1px solid var(--ink);
+    scroll-snap-align: none;
   }
 
   .sustainability-closing {
     align-items: flex-start;
-
     flex-direction: column;
   }
 
@@ -806,9 +772,7 @@
     flex: none;
   }
 
-  .sustainability-closing > span {
-    white-space: normal;
-  }
+  .sustainability-closing > span { white-space: normal; }
 }
 
 /* =========================================

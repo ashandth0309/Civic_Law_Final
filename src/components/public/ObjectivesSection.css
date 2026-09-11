@@ -476,84 +476,49 @@
 ========================================= */
 
 @media (max-width: 700px) {
-  .objectives-intro {
-    display: block;
-  }
+  .objectives-intro { display: block; }
 
   .objectives-intro-mark {
     align-items: flex-start;
-
     margin-top: 2rem;
   }
 
+  /* Mobile: one full-width card after another. */
   .objectives-grid {
-    display: flex;
-
+    display: grid;
+    grid-template-columns: 1fr;
     gap: 14px;
-
-    overflow-x: auto;
-
-    padding:
-      0 18vw
-      16px 0;
-
+    overflow: visible;
+    padding: 0;
     border: 0;
-
-    scroll-snap-type:
-      x mandatory;
-
-    scrollbar-width: none;
-
-    -webkit-overflow-scrolling:
-      touch;
-  }
-
-  .objectives-grid::-webkit-scrollbar {
-    display: none;
+    scroll-snap-type: none;
   }
 
   .objective-card {
-    flex:
-      0 0
-      min(82vw, 350px);
-
-    min-height: 470px;
-
+    width: 100%;
+    min-width: 0;
+    min-height: 450px;
     display: grid;
-
-    grid-template-rows:
-      90px
-      30px
-      145px
-      115px
-      1fr;
-
-    border:
-      1px solid var(--ink);
-
-    scroll-snap-align:
-      start;
+    grid-template-rows: 82px 30px auto auto 1fr;
+    border: 1px solid var(--ink);
+    scroll-snap-align: none;
   }
 
   .objective-card:last-child {
-    border:
-      1px solid var(--ink);
+    border: 1px solid var(--ink);
   }
 
   .objective-card h3 {
-    font-size:
-      clamp(2.5rem, 12vw, 3.7rem);
+    font-size: clamp(2.5rem, 12vw, 3.7rem);
+    margin-bottom: 1rem;
   }
 
   .objectives-footer {
     flex-wrap: wrap;
-
     row-gap: 0.7rem;
   }
 
-  .objectives-footer i {
-    min-width: 28px;
-  }
+  .objectives-footer i { min-width: 28px; }
 }
 
 /* =========================================
