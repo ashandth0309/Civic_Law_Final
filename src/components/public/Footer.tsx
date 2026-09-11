@@ -1,190 +1,213 @@
-import { Mail } from 'lucide-react';
+import {
+  ArrowUp,
+  Mail,
+} from 'lucide-react';
 
-// logos
 import firstImage from '../../assets/first-image.png';
 import secondImage from '../../assets/second-image.jpeg';
 import thirdImage from '../../assets/third-image.png';
 import fourthImage from '../../assets/fourth-image.png';
 
+import './Footer.css';
+
 const logos = [
-  firstImage,
-  secondImage,
-  thirdImage,
-  fourthImage,
+  {
+    image: firstImage,
+    alt: 'Sri Lanka',
+  },
+  {
+    image: secondImage,
+    alt: 'Civic Law Initiative',
+  },
+  {
+    image: thirdImage,
+    alt: 'United States',
+  },
+  {
+    image: fourthImage,
+    alt: 'Freedom 250',
+  },
 ];
 
 export default function Footer() {
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
   return (
     <footer
       id="contact"
-      style={{
-        background: 'var(--blue)',
-        color: '#fff',
-      }}
+      className="civic-footer"
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 px-6 md:px-10 lg:px-16 py-16 md:py-24">
+      {/* LARGE BACKGROUND WORD */}
+      <span
+        className="civic-footer-background-word"
+        aria-hidden="true"
+      >
+        CIVIC
+      </span>
 
-        {/* Left */}
-        <div>
-          <h2
-            style={{
-              fontFamily: "'Bebas Neue', sans-serif",
-              fontSize: 'clamp(2.8rem, 7vw, 4.5rem)',
-              letterSpacing: '0.04em',
-              lineHeight: 1,
-              color: '#fff',
-              marginBottom: '1.75rem',
-            }}
-          >
-            Law,<br />
-            Liberty &amp;<br />
-            Civic<br />
-            Responsibility
-          </h2>
-
-          <p
-            style={{
-              fontFamily: "'Cormorant Garamond', Georgia, serif",
-              fontSize: 'clamp(1rem, 2vw, 1.2rem)',
-              fontWeight: 300,
-              color: 'rgba(255,255,255,0.6)',
-              lineHeight: 1.8,
-              maxWidth: 380,
-            }}
-          >
-            An independent civic initiative strengthening
-            rule-of-law awareness and democratic
-            participation across Sri Lanka.
-          </p>
-
-          <div
-            className="mt-6 pt-6"
-            style={{
-              borderTop: '1px solid rgba(255,255,255,0.12)',
-            }}
-          >
-            <span
-              style={{
-                fontFamily: "'IBM Plex Mono', monospace",
-                fontSize: 'clamp(0.6rem, 1.2vw, 0.72rem)',
-                letterSpacing: '0.16em',
-                color: 'rgba(255,255,255,0.35)',
-                textTransform: 'uppercase',
-              }}
-            >
-              SUSI Rule of Law Alumni · Sri Lanka · 2026
+      <div className="civic-footer-inner">
+        {/* TOP */}
+        <div className="civic-footer-main">
+          {/* LEFT */}
+          <div className="civic-footer-identity">
+            <span className="civic-footer-kicker">
+              Law · Liberty · Civic Responsibility
             </span>
+
+            <h2>
+              LAW,
+              <br />
+              LIBERTY
+              <span> &amp;</span>
+              <br />
+              CIVIC
+              <br />
+              RESPONSIBILITY
+            </h2>
+
+            <p>
+              An independent civic initiative
+              strengthening rule-of-law awareness,
+              legal literacy and meaningful
+              democratic participation across
+              Sri Lanka.
+            </p>
+
+            <div className="civic-footer-origin">
+              <span>
+                SUSI Rule of Law Alumni
+              </span>
+
+              <i />
+
+              <span>
+                Sri Lanka · 2026
+              </span>
+            </div>
+          </div>
+
+          {/* RIGHT */}
+          <div className="civic-footer-right">
+            {/* CONTACT */}
+            <div className="civic-footer-contact">
+              <span className="civic-footer-label">
+                Contact
+              </span>
+
+              <a
+                href="mailto:civiclawinitiative@gmail.com"
+                className="civic-footer-email"
+              >
+                <div className="civic-footer-email-icon">
+                  <Mail
+                    size={19}
+                    strokeWidth={1.5}
+                  />
+                </div>
+
+                <div>
+                  <span>
+                    Get in touch
+                  </span>
+
+                  <strong>
+                    civiclawinitiative@gmail.com
+                  </strong>
+                </div>
+              </a>
+            </div>
+
+            {/* LOGOS */}
+            <div className="civic-footer-partners">
+              <span className="civic-footer-label">
+                Partners &amp; Support
+              </span>
+
+              <div className="civic-footer-logos">
+                {logos.map(
+                  (logo, index) => (
+                    <div
+                      className="civic-footer-logo"
+                      key={index}
+                    >
+                      <img
+                        src={logo.image}
+                        alt={logo.alt}
+                      />
+                    </div>
+                  ),
+                )}
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Right */}
-        <div className="flex flex-col justify-between">
-          <div>
-            <span
-              className="block mb-6"
-              style={{
-                fontFamily: "'IBM Plex Mono', monospace",
-                fontSize: 'clamp(0.65rem, 1.3vw, 0.8rem)',
-                letterSpacing: '0.2em',
-                color: 'rgba(255,255,255,0.4)',
-                textTransform: 'uppercase',
-              }}
-            >
-              Contact
+        {/* VALUES */}
+        <div className="civic-footer-values">
+          <span>
+            Rule of Law
+          </span>
+
+          <i />
+
+          <span>
+            Civic Participation
+          </span>
+
+          <i />
+
+          <span>
+            Legal Literacy
+          </span>
+
+          <i />
+
+          <span>
+            Responsible Citizenship
+          </span>
+        </div>
+
+        {/* BOTTOM */}
+        <div className="civic-footer-bottom">
+          <div className="civic-footer-bottom-left">
+            <span>
+              © 2026 Civic Law Initiative
             </span>
 
-            <a
-              href="mailto:civiclawinitiative@gmail.com"
-              className="inline-flex items-center gap-3 group no-underline"
-            >
-              <div
-                className="w-11 h-11 flex items-center justify-center flex-shrink-0 group-hover:bg-[var(--red)] transition-colors duration-200"
-                style={{
-                  background: 'rgba(255,255,255,0.1)',
-                  border: '1px solid rgba(255,255,255,0.15)',
-                }}
-              >
-                <Mail size={18} color="#fff" />
-              </div>
-
-              <span
-                style={{
-                  fontFamily: "'Cormorant Garamond', Georgia, serif",
-                  fontSize: 'clamp(1rem, 2.2vw, 1.3rem)',
-                  color: '#fff',
-                  wordBreak: 'break-all',
-                }}
-              >
-                civiclawinitiative@gmail.com
-              </span>
-            </a>
-
-            {/* Logos */}
-<div className="mt-10">
-  <div
-    className="
-      flex
-      items-center
-      justify-between
-      gap-4
-      sm:gap-6
-      overflow-hidden
-      w-full
-    "
-  >
-    {logos.map((logo, index) => (
-      <div
-        key={index}
-        className="
-          flex
-          items-center
-          justify-center
-          flex-1
-          min-w-0
-          transition-transform
-          duration-300
-          hover:scale-105
-        "
-      >
-        <img
-          src={logo}
-          alt={`Partner logo ${index + 1}`}
-          className="
-            block
-            object-contain
-            max-w-full
-            h-auto
-            max-h-[54px]
-            sm:max-h-[62px]
-            md:max-h-[72px]
-          "
-        />
-      </div>
-    ))}
-  </div>
-</div>
+            <span>
+              Independent · Non-partisan ·
+              Non-governmental
+            </span>
           </div>
 
-          <div
-            className="mt-12 pt-6"
-            style={{
-              borderTop: '1px solid rgba(255,255,255,0.12)',
-            }}
-          >
-            <span
-              style={{
-                fontFamily: "'IBM Plex Mono', monospace",
-                fontSize: 'clamp(0.58rem, 1.1vw, 0.68rem)',
-                letterSpacing: '0.14em',
-                color: 'rgba(255,255,255,0.3)',
-                textTransform: 'uppercase',
-                lineHeight: 1.8,
-                display: 'block',
-              }}
-            >
-              Civic Law Initiative · Independent ·
-              Non-partisan · Non-governmental
+          <div className="civic-footer-bottom-right">
+            <span className="civic-footer-credit">
+              Website designed &amp; developed by{' '}
+              <strong>
+                Ashandth Uthayashankar
+              </strong>
             </span>
+
+            <button
+              type="button"
+              className="civic-footer-top-button"
+              onClick={scrollToTop}
+              aria-label="Back to top"
+            >
+              <span>
+                Back to top
+              </span>
+
+              <ArrowUp
+                size={16}
+                strokeWidth={1.5}
+              />
+            </button>
           </div>
         </div>
       </div>

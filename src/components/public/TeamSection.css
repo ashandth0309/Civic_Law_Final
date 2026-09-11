@@ -1,171 +1,372 @@
+/* =========================================
+   07 — OUR PEOPLE / TEAM
+========================================= */
+
 .civic-team-section {
   position: relative;
+
   width: 100%;
+
   overflow: hidden;
 }
 
-/* =========================
+/* =========================================
    INTRO
-========================= */
+========================================= */
 
 .civic-team-intro {
   display: flex;
-  justify-content: space-between;
+
   align-items: flex-end;
+  justify-content: space-between;
+
   gap: 3rem;
 
-  padding: 0 0 2rem;
-  margin-bottom: 1.5rem;
-
-  border-bottom: 1px solid var(--line);
+  margin-bottom:
+    clamp(2.8rem, 5vw, 4rem);
 }
 
-.civic-team-kicker {
-  margin: 0 0 0.75rem;
+.civic-team-intro-copy {
+  max-width: 790px;
+}
 
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.18em;
+.civic-team-intro-copy > span {
+  display: block;
+
+  margin-bottom: 0.8rem;
+
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size: 0.52rem;
+
+  letter-spacing: 0.16em;
+
   text-transform: uppercase;
 
-  color: var(--red);
+  color: #8c1639;
 }
 
-.civic-team-description {
-  max-width: 650px;
+.civic-team-intro-copy p {
   margin: 0;
 
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(1.15rem, 2vw, 1.45rem);
-  font-weight: 300;
-  line-height: 1.55;
+  font-family:
+    'Cormorant Garamond',
+    Georgia,
+    serif;
 
-  color: #3a3530;
+  font-size:
+    clamp(
+      1.15rem,
+      2vw,
+      1.5rem
+    );
+
+  line-height: 1.7;
+
+  font-weight: 300;
+
+  color: #2c2723;
 }
+
+/* counter */
 
 .civic-team-counter {
   display: flex;
+
   flex-direction: column;
+
   align-items: flex-end;
+
   flex-shrink: 0;
 }
 
 .civic-team-counter strong {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(3rem, 6vw, 5rem);
-  font-weight: 400;
-  line-height: 0.85;
+  font-family:
+    'Bebas Neue',
+    sans-serif;
 
-  color: var(--ink);
+  font-size:
+    clamp(
+      4.5rem,
+      8vw,
+      7rem
+    );
+
+  line-height: 0.82;
+
+  font-weight: 400;
+
+  color: #06524f;
 }
 
 .civic-team-counter span {
-  margin-top: 0.5rem;
+  margin-top: 0.55rem;
 
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.57rem;
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size: 0.5rem;
+
   letter-spacing: 0.16em;
+
   text-transform: uppercase;
 
   color: var(--muted);
 }
 
-/* =========================
-   NAVIGATION
-========================= */
+/* =========================================
+   DIRECTORY HEADER
+========================================= */
 
-.civic-team-navigation {
+.civic-team-directory-header {
   display: flex;
+
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
 
-  margin-bottom: 1.25rem;
+  gap: 1.5rem;
+
+  padding:
+    0.9rem 0;
+
+  border-top:
+    1px solid var(--ink);
+
+  border-bottom:
+    1px solid var(--line);
 }
 
-.civic-team-navigation-copy {
+.civic-team-directory-title {
   display: flex;
+
   align-items: center;
-  gap: 0.8rem;
 
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.57rem;
-  letter-spacing: 0.13em;
+  gap: 0.65rem;
+
+  color: #06524f;
+}
+
+.civic-team-directory-title span,
+.civic-team-directory-count {
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size: 0.5rem;
+
+  letter-spacing: 0.14em;
+
   text-transform: uppercase;
+}
 
+.civic-team-directory-count {
   color: var(--muted);
 }
 
-.civic-team-navigation-line {
-  display: block;
-  width: 38px;
-  height: 1px;
-  background: var(--line);
+/* =========================================
+   FILTER AREA
+========================================= */
+
+.civic-team-filter-wrap {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 1.5rem;
+
+  margin:
+    1.25rem 0
+    1.5rem;
 }
+
+.civic-team-filters {
+  display: flex;
+
+  align-items: stretch;
+
+  overflow-x: auto;
+
+  scrollbar-width: none;
+}
+
+.civic-team-filters::-webkit-scrollbar {
+  display: none;
+}
+
+.civic-team-filter {
+  position: relative;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 0.7rem;
+
+  flex: 0 0 auto;
+
+  padding:
+    0.8rem
+    1rem;
+
+  border: 0;
+
+  border-right:
+    1px solid var(--line);
+
+  background:
+    transparent;
+
+  color:
+    var(--muted);
+
+  cursor: pointer;
+
+  transition:
+    color 200ms ease,
+    background 200ms ease;
+}
+
+.civic-team-filter:first-child {
+  border-left:
+    1px solid var(--line);
+}
+
+.civic-team-filter span {
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size: 0.48rem;
+
+  letter-spacing: 0.1em;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+}
+
+.civic-team-filter small {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 20px;
+  height: 20px;
+
+  border:
+    1px solid
+    currentColor;
+
+  border-radius: 50%;
+
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size: 0.42rem;
+}
+
+.civic-team-filter:hover {
+  color: var(--ink);
+}
+
+.civic-team-filter.is-active {
+  background:
+    var(--ink);
+
+  color: #ffffff;
+}
+
+/* =========================================
+   ARROWS
+========================================= */
 
 .civic-team-arrows {
   display: flex;
-  gap: 0.5rem;
+
+  gap: 0.45rem;
+
+  flex-shrink: 0;
 }
 
 .civic-team-arrow {
   width: 44px;
   height: 44px;
 
-  display: inline-flex;
+  display: flex;
+
   align-items: center;
   justify-content: center;
 
-  border: 1px solid var(--ink);
+  border:
+    1px solid var(--ink);
+
   border-radius: 0;
 
-  color: var(--ink);
-  background: transparent;
+  background:
+    transparent;
+
+  color:
+    var(--ink);
 
   cursor: pointer;
 
   transition:
-    background-color 180ms ease,
-    color 180ms ease,
-    border-color 180ms ease,
-    opacity 180ms ease;
+    color 200ms ease,
+    background 200ms ease,
+    opacity 200ms ease;
 }
 
 .civic-team-arrow:hover:not(:disabled) {
-  color: var(--paper);
-  background: var(--ink);
+  background:
+    var(--ink);
+
+  color:
+    #ffffff;
 }
 
 .civic-team-arrow:disabled {
-  opacity: 0.25;
+  opacity: 0.22;
+
   cursor: default;
 }
 
-/* =========================
-   HORIZONTAL GALLERY
-========================= */
+/* =========================================
+   TRACK
+========================================= */
 
 .civic-team-track {
   display: flex;
+
   align-items: stretch;
-  gap: 18px;
+
+  gap: 16px;
 
   width: 100%;
+
+  padding:
+    4px 1px
+    22px;
 
   overflow-x: auto;
   overflow-y: hidden;
 
-  padding: 5px 2px 22px;
-
-  scroll-snap-type: x mandatory;
-  scroll-padding-left: 2px;
+  scroll-snap-type:
+    x mandatory;
 
   scrollbar-width: none;
 
   cursor: grab;
+
   touch-action: pan-y;
 
-  -webkit-overflow-scrolling: touch;
+  -webkit-overflow-scrolling:
+    touch;
 }
 
 .civic-team-track::-webkit-scrollbar {
@@ -174,397 +375,794 @@
 
 .civic-team-track.is-dragging {
   cursor: grabbing;
+
   scroll-snap-type: none;
+
   user-select: none;
 }
 
-/* =========================
-   MEMBER CARD
-========================= */
+/* =========================================
+   TEAM CARD
+========================================= */
 
 .civic-team-card {
+  --team-accent:
+    #8c1639;
+
   position: relative;
 
-  flex: 0 0 clamp(245px, 23vw, 320px);
-
-  display: flex;
-  flex-direction: column;
+  flex:
+    0 0
+    clamp(
+      250px,
+      22vw,
+      315px
+    );
 
   min-width: 0;
+
   padding: 0;
 
   border: 0;
-  border-top: 1px solid var(--line);
 
-  background: transparent;
+  background:
+    transparent;
+
+  color: inherit;
 
   text-align: left;
-  color: inherit;
 
   cursor: pointer;
 
-  scroll-snap-align: start;
-
-  transition:
-    transform 350ms cubic-bezier(
-      0.22,
-      1,
-      0.36,
-      1
-    ),
-    opacity 350ms ease;
+  scroll-snap-align:
+    start;
 }
+
+/* committee colours */
+
+.civic-team-card-leadership {
+  --team-accent:
+    #8c1639;
+}
+
+.civic-team-card-finance {
+  --team-accent:
+    #c58a12;
+}
+
+.civic-team-card-logistics {
+  --team-accent:
+    #06524f;
+}
+
+.civic-team-card-media {
+  --team-accent:
+    #1e4f7a;
+}
+
+/* =========================================
+   PORTRAIT
+========================================= */
 
 .civic-team-card-image {
   position: relative;
 
   width: 100%;
-  aspect-ratio: 4 / 5;
 
-  margin-top: 9px;
+  aspect-ratio: 4 / 5;
 
   overflow: hidden;
 
-  background: var(--accent);
+  background:
+    #ded8cf;
 }
 
-.civic-team-card-image img {
+.civic-team-card-image::before {
+  content: '';
+
+  position: absolute;
+
+  z-index: 3;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 4px;
+
+  transform:
+    scaleX(0.18);
+
+  transform-origin:
+    left center;
+
+  background:
+    var(--team-accent);
+
+  transition:
+    transform
+    450ms
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    );
+}
+
+.civic-team-card img {
   width: 100%;
   height: 100%;
 
   display: block;
 
   object-fit: cover;
-  object-position: center top;
+  object-position:
+    center top;
 
-  transform: scale(1.001);
+  transform:
+    scale(1.001);
 
   filter:
     saturate(0.82)
     contrast(0.98);
 
   transition:
-    transform 650ms cubic-bezier(
-      0.22,
-      1,
-      0.36,
-      1
-    ),
+    transform
+      700ms
+      cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+      ),
     filter 500ms ease;
 }
 
-.civic-team-image-overlay {
+.civic-team-image-shade {
   position: absolute;
+
   inset: 0;
 
   background:
     linear-gradient(
       180deg,
-      rgba(14, 14, 14, 0) 52%,
-      rgba(14, 14, 14, 0.15) 72%,
-      rgba(14, 14, 14, 0.48) 100%
+      rgba(
+        10,
+        10,
+        10,
+        0
+      )
+        50%,
+      rgba(
+        10,
+        10,
+        10,
+        0.05
+      )
+        62%,
+      rgba(
+        10,
+        10,
+        10,
+        0.62
+      )
+        100%
     );
-
-  transition:
-    background 350ms ease;
 }
 
-.civic-team-card-index {
+/* =========================================
+   IMAGE TOP
+========================================= */
+
+.civic-team-card-top {
   position: absolute;
-  top: 16px;
+
+  top: 17px;
   left: 16px;
-
-  min-width: 30px;
-
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.57rem;
-  letter-spacing: 0.12em;
-
-  color: rgba(255, 255, 255, 0.82);
-
-  text-shadow:
-    0 1px 8px rgba(0, 0, 0, 0.25);
-}
-
-.civic-team-view {
-  position: absolute;
   right: 16px;
-  bottom: 16px;
+
+  z-index: 4;
 
   display: flex;
-  align-items: center;
-  gap: 6px;
 
-  transform: translateY(8px);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.civic-team-card-top > span {
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size: 0.52rem;
+
+  letter-spacing: 0.12em;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.88
+    );
+
+  text-shadow:
+    0 1px 8px
+    rgba(0,0,0,0.25);
+}
+
+.civic-team-card-top strong {
+  padding:
+    0.4rem
+    0.55rem;
+
+  background:
+    var(--team-accent);
+
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size: 0.42rem;
+
+  font-weight: 500;
+
+  letter-spacing:
+    0.13em;
+
+  text-transform:
+    uppercase;
+
+  color:
+    #ffffff;
+}
+
+/* =========================================
+   VIEW PROFILE
+========================================= */
+
+.civic-team-card-view {
+  position: absolute;
+
+  z-index: 4;
+
+  left: 16px;
+  right: 16px;
+  bottom: 17px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content:
+    space-between;
+
+  transform:
+    translateY(8px);
 
   opacity: 0;
 
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.55rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-
-  color: #fff;
+  color: #ffffff;
 
   transition:
     opacity 250ms ease,
-    transform 350ms cubic-bezier(
-      0.22,
-      1,
-      0.36,
-      1
-    );
+    transform
+      350ms
+      cubic-bezier(
+        0.22,
+        1,
+        0.36,
+        1
+      );
 }
 
-/* =========================
-   CARD TEXT
-========================= */
+.civic-team-card-view span {
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size: 0.47rem;
+
+  letter-spacing:
+    0.11em;
+
+  text-transform:
+    uppercase;
+}
+
+/* =========================================
+   CARD CONTENT
+========================================= */
 
 .civic-team-card-content {
   position: relative;
 
-  padding: 19px 2px 8px;
+  min-height: 150px;
 
-  border-bottom: 1px solid var(--line);
+  padding:
+    1.25rem
+    0.15rem
+    1rem;
+
+  border-bottom:
+    1px solid var(--line);
 }
 
 .civic-team-card-content::before {
   content: '';
 
   position: absolute;
-  top: -1px;
+
+  top: 0;
   left: 0;
 
-  width: 0;
-  height: 2px;
+  width: 35px;
+  height: 3px;
 
-  background: var(--red);
+  background:
+    var(--team-accent);
 
   transition:
-    width 450ms cubic-bezier(
-      0.22,
-      1,
-      0.36,
-      1
-    );
+    width 400ms ease;
 }
 
-.civic-team-committee {
-  margin-bottom: 0.55rem;
+.civic-team-card-committee {
+  display: block;
 
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.54rem;
+  margin-bottom: 0.7rem;
+
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size: 0.47rem;
+
   line-height: 1.4;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
 
-  color: var(--red);
+  letter-spacing:
+    0.12em;
+
+  text-transform:
+    uppercase;
+
+  color:
+    var(--team-accent);
 }
 
 .civic-team-card h3 {
-  margin: 0 0 0.35rem;
+  margin:
+    0 0
+    0.7rem;
 
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(1.45rem, 2.2vw, 1.85rem);
-  font-weight: 600;
+  font-family:
+    'Cormorant Garamond',
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(
+      1.45rem,
+      2.2vw,
+      1.85rem
+    );
+
   line-height: 1;
 
-  color: var(--ink);
+  font-weight: 600;
+
+  color:
+    var(--ink);
 }
 
-.civic-team-card p {
-  min-height: 2.6em;
-  margin: 0;
+.civic-team-card-role {
+  display: flex;
 
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.58rem;
-  line-height: 1.55;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
+  align-items: center;
+  justify-content:
+    space-between;
 
-  color: var(--muted);
+  gap: 1rem;
+
+  color:
+    var(--muted);
 }
 
-/* =========================
-   HOVER EFFECT
-========================= */
+.civic-team-card-role span {
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size: 0.5rem;
+
+  line-height: 1.45;
+
+  letter-spacing:
+    0.08em;
+
+  text-transform:
+    uppercase;
+}
+
+.civic-team-card-role svg {
+  flex-shrink: 0;
+
+  color:
+    var(--team-accent);
+
+  transition:
+    transform 300ms ease;
+}
+
+/* leadership role emphasis */
+
+.civic-team-card.is-lead
+  .civic-team-card-role span {
+  color:
+    var(--ink);
+
+  font-weight: 500;
+}
+
+/* =========================================
+   CARD HOVER
+========================================= */
 
 @media (hover: hover) {
   .civic-team-track:hover
     .civic-team-card:not(:hover) {
-    opacity: 0.64;
-  }
-
-  .civic-team-card:hover {
-    transform: translateY(-5px);
+    opacity: 0.68;
   }
 
   .civic-team-card:hover
-    .civic-team-card-image
-    img {
-    transform: scale(1.045);
+    .civic-team-card-image::before {
+    transform:
+      scaleX(1);
+  }
+
+  .civic-team-card:hover img {
+    transform:
+      scale(1.045);
+
     filter:
       saturate(1)
       contrast(1);
   }
 
   .civic-team-card:hover
-    .civic-team-card-content::before {
-    width: 54px;
+    .civic-team-card-view {
+    opacity: 1;
+
+    transform:
+      translateY(0);
   }
 
   .civic-team-card:hover
-    .civic-team-view {
-    opacity: 1;
-    transform: translateY(0);
+    .civic-team-card-content::before {
+    width: 100%;
+  }
+
+  .civic-team-card:hover
+    .civic-team-card-role svg {
+    transform:
+      translateX(4px);
   }
 }
 
 .civic-team-card:focus-visible {
-  outline: 2px solid var(--red);
+  outline:
+    2px solid
+    var(--team-accent);
+
   outline-offset: 4px;
 }
 
-/* =========================
-   FINAL SLIDE
-========================= */
+/* =========================================
+   END CARD
+========================================= */
 
-.civic-team-track-end {
-  flex: 0 0 clamp(245px, 23vw, 320px);
+.civic-team-end-card {
+  flex:
+    0 0
+    clamp(
+      250px,
+      22vw,
+      315px
+    );
 
   min-height: 100%;
 
   display: flex;
+
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content:
+    space-between;
 
-  padding: 2rem;
+  padding:
+    2rem;
 
-  scroll-snap-align: start;
+  background:
+    #111111;
 
-  background: var(--blue);
+  scroll-snap-align:
+    start;
 }
 
-.civic-team-track-end span {
-  margin-bottom: auto;
+.civic-team-end-card > span {
+  font-family:
+    'IBM Plex Mono',
+    monospace;
 
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.57rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  font-size: 0.5rem;
 
-  color: rgba(255, 255, 255, 0.5);
+  letter-spacing:
+    0.15em;
+
+  text-transform:
+    uppercase;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.5
+    );
 }
 
-.civic-team-track-end strong {
-  margin-top: 22rem;
+.civic-team-end-card > div {
+  margin-top:
+    auto;
+}
 
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(2.3rem, 4vw, 3.7rem);
+.civic-team-end-card strong {
+  font-family:
+    'Bebas Neue',
+    sans-serif;
+
+  font-size:
+    clamp(
+      2.5rem,
+      4vw,
+      4rem
+    );
+
+  line-height: 0.9;
+
   font-weight: 400;
-  line-height: 0.92;
 
-  color: #fff;
+  color: #ffffff;
 }
 
-.civic-team-track-end strong::after {
-  content: '';
-
+.civic-team-end-card i {
   display: block;
 
-  width: 36px;
-  height: 3px;
+  width: 70px;
+  height: 4px;
 
-  margin-top: 1.25rem;
+  margin-top:
+    1.4rem;
 
-  background: var(--red);
+  background:
+    linear-gradient(
+      90deg,
+      #8c1639,
+      #fdbd28,
+      #06524f,
+      #1e4f7a
+    );
 }
 
-/* =========================
+/* =========================================
+   COMMITTEE LEGEND
+========================================= */
+
+.civic-team-legend {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  align-items: center;
+
+  gap:
+    1rem
+    2rem;
+
+  margin-top:
+    0.6rem;
+
+  padding:
+    1rem 0;
+
+  border-top:
+    1px solid var(--line);
+}
+
+.civic-team-legend > div {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.5rem;
+}
+
+.civic-team-legend i {
+  width: 18px;
+  height: 3px;
+}
+
+.legend-maroon {
+  background:
+    #8c1639;
+}
+
+.legend-gold {
+  background:
+    #c58a12;
+}
+
+.legend-teal {
+  background:
+    #06524f;
+}
+
+.legend-blue {
+  background:
+    #1e4f7a;
+}
+
+.civic-team-legend span {
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size: 0.44rem;
+
+  letter-spacing:
+    0.1em;
+
+  text-transform:
+    uppercase;
+
+  color:
+    var(--muted);
+}
+
+/* =========================================
    BOTTOM RULE
-========================= */
+========================================= */
 
 .civic-team-bottom-rule {
   display: grid;
+
   grid-template-columns:
     auto 1fr auto;
+
   align-items: center;
+
   gap: 1rem;
 
-  margin-top: 1rem;
+  padding-top:
+    0.5rem;
 }
 
 .civic-team-bottom-rule span {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.52rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-family:
+    'IBM Plex Mono',
+    monospace;
 
-  color: var(--muted);
+  font-size: 0.48rem;
+
+  letter-spacing:
+    0.13em;
+
+  text-transform:
+    uppercase;
+
+  color:
+    var(--muted);
 }
 
-.civic-team-bottom-rule div {
+.civic-team-bottom-rule i {
   height: 1px;
-  background: var(--line);
+
+  background:
+    var(--line);
 }
 
-/* =========================
+/* =========================================
    MODAL BACKDROP
-========================= */
+========================================= */
 
 .civic-team-modal-backdrop {
   position: fixed;
+
   inset: 0;
 
   z-index: 9999;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
-  padding: clamp(
-    16px,
-    4vw,
-    48px
-  );
+  padding:
+    clamp(
+      16px,
+      4vw,
+      48px
+    );
 
   background:
-    rgba(14, 14, 14, 0.78);
+    rgba(
+      10,
+      11,
+      11,
+      0.82
+    );
 
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter:
+    blur(9px);
+
+  -webkit-backdrop-filter:
+    blur(9px);
 
   animation:
     civicTeamBackdropIn
     220ms ease both;
 }
 
-/* =========================
+/* =========================================
    MODAL
-========================= */
+========================================= */
 
 .civic-team-modal {
+  --modal-accent:
+    #8c1639;
+
   position: relative;
 
-  width: min(100%, 1000px);
-  max-height: min(820px, 90vh);
+  width:
+    min(
+      100%,
+      980px
+    );
+
+  max-height:
+    min(
+      820px,
+      90vh
+    );
 
   display: grid;
+
   grid-template-columns:
-    minmax(300px, 0.9fr)
-    minmax(350px, 1.1fr);
+    minmax(
+      300px,
+      0.9fr
+    )
+    minmax(
+      360px,
+      1.1fr
+    );
 
   overflow: hidden;
 
-  background: var(--paper);
+  background:
+    var(--paper);
 
   box-shadow:
-    0 30px 100px
-    rgba(0, 0, 0, 0.35);
+    0 35px 110px
+    rgba(
+      0,
+      0,
+      0,
+      0.4
+    );
 
   animation:
     civicTeamModalIn
-    450ms cubic-bezier(
+    430ms
+    cubic-bezier(
       0.22,
       1,
       0.36,
@@ -573,42 +1171,56 @@
     both;
 }
 
-.civic-team-modal-close {
-  position: absolute;
-  top: 18px;
-  right: 18px;
+/* committee modal colours */
 
-  z-index: 4;
-
-  width: 42px;
-  height: 42px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border: 1px solid
-    rgba(14, 14, 14, 0.22);
-
-  color: var(--ink);
-  background: var(--paper);
-
-  cursor: pointer;
-
-  transition:
-    background 180ms ease,
-    color 180ms ease;
+.civic-team-modal-leadership {
+  --modal-accent:
+    #8c1639;
 }
 
-.civic-team-modal-close:hover {
-  color: var(--paper);
-  background: var(--ink);
+.civic-team-modal-finance {
+  --modal-accent:
+    #c58a12;
 }
+
+.civic-team-modal-logistics {
+  --modal-accent:
+    #06524f;
+}
+
+.civic-team-modal-media {
+  --modal-accent:
+    #1e4f7a;
+}
+
+/* =========================================
+   MODAL IMAGE
+========================================= */
 
 .civic-team-modal-image {
-  min-height: 620px;
+  position: relative;
 
-  background: var(--accent);
+  min-height: 650px;
+
+  overflow: hidden;
+
+  background:
+    #ded8cf;
+}
+
+.civic-team-modal-image::after {
+  content: '';
+
+  position: absolute;
+
+  top: 0;
+  right: 0;
+
+  width: 5px;
+  height: 100%;
+
+  background:
+    var(--modal-accent);
 }
 
 .civic-team-modal-image img {
@@ -618,115 +1230,300 @@
   display: block;
 
   object-fit: cover;
-  object-position: center top;
+  object-position:
+    center top;
 }
+
+.civic-team-modal-image-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(
+        10,
+        10,
+        10,
+        0
+      )
+        50%,
+      rgba(
+        10,
+        10,
+        10,
+        0.7
+      )
+        100%
+    );
+}
+
+.civic-team-modal-image-label {
+  position: absolute;
+
+  left: 25px;
+  bottom: 25px;
+
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size: 0.52rem;
+
+  letter-spacing:
+    0.15em;
+
+  text-transform:
+    uppercase;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.75
+    );
+}
+
+/* =========================================
+   MODAL CONTENT
+========================================= */
 
 .civic-team-modal-content {
   display: flex;
+
   flex-direction: column;
-  justify-content: space-between;
+  justify-content:
+    space-between;
+
+  overflow-y: auto;
 
   padding:
-    clamp(3rem, 7vw, 6rem)
-    clamp(2rem, 5vw, 4.5rem)
-    clamp(2rem, 4vw, 3rem);
-
-  border-top: 5px solid var(--red);
+    clamp(
+      3rem,
+      6vw,
+      5rem
+    )
+    clamp(
+      2rem,
+      5vw,
+      4rem
+    )
+    2.5rem;
 }
 
-.civic-team-modal-label {
+.civic-team-modal-committee {
   display: block;
 
-  margin-bottom: 1.5rem;
+  margin-bottom:
+    1.3rem;
 
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.6rem;
-  letter-spacing: 0.18em;
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size: 0.53rem;
+
   line-height: 1.5;
-  text-transform: uppercase;
 
-  color: var(--red);
+  letter-spacing:
+    0.16em;
+
+  text-transform:
+    uppercase;
+
+  color:
+    var(--modal-accent);
 }
 
 .civic-team-modal h2 {
-  max-width: 520px;
-
   margin:
-    0 0 1rem;
+    0 0
+    1rem;
 
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(3rem, 6vw, 5.7rem);
+  font-family:
+    'Bebas Neue',
+    sans-serif;
+
+  font-size:
+    clamp(
+      3.2rem,
+      6vw,
+      5.8rem
+    );
+
+  line-height: 0.87;
+
   font-weight: 400;
-  line-height: 0.88;
-  letter-spacing: -0.015em;
 
-  color: var(--ink);
+  color:
+    var(--ink);
 }
 
 .civic-team-modal-role {
-  max-width: 500px;
+  margin: 0;
+
+  font-family:
+    'Cormorant Garamond',
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(
+      1.25rem,
+      2vw,
+      1.6rem
+    );
+
+  font-weight: 600;
+
+  color:
+    var(--modal-accent);
+}
+
+/* =========================================
+   MODAL STATEMENT
+========================================= */
+
+.civic-team-modal-statement {
+  margin:
+    auto 0
+    3rem;
+
+  padding:
+    1.4rem 0;
+
+  border-top:
+    1px solid var(--line);
+
+  border-bottom:
+    1px solid var(--line);
+}
+
+.civic-team-modal-statement span {
+  display: block;
+
+  margin-bottom:
+    0.7rem;
+
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size: 0.45rem;
+
+  letter-spacing:
+    0.12em;
+
+  text-transform:
+    uppercase;
+
+  color:
+    var(--modal-accent);
+}
+
+.civic-team-modal-statement p {
+  max-width: 480px;
 
   margin: 0;
 
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(1.25rem, 2vw, 1.7rem);
-  font-style: italic;
-  font-weight: 300;
-  line-height: 1.45;
+  font-family:
+    'Cormorant Garamond',
+    Georgia,
+    serif;
 
-  color: #4a443d;
+  font-size:
+    1.08rem;
+
+  line-height: 1.6;
+
+  color:
+    #3a3530;
 }
 
-/* =========================
+/* =========================================
    MODAL FOOTER
-========================= */
+========================================= */
 
 .civic-team-modal-footer {
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
+
+  align-items: center;
+  justify-content:
+    space-between;
 
   gap: 2rem;
-
-  padding-top: 2rem;
-
-  border-top: 1px solid var(--line);
-}
-
-.civic-team-modal-footer > div {
-  display: flex;
-  flex-direction: column;
 }
 
 .civic-team-modal-footer span {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.52rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  font-family:
+    'IBM Plex Mono',
+    monospace;
 
-  color: var(--muted);
+  font-size: 0.45rem;
+
+  letter-spacing:
+    0.12em;
+
+  text-transform:
+    uppercase;
+
+  color:
+    var(--muted);
 }
 
-.civic-team-modal-footer strong {
-  margin-top: 0.35rem;
+/* =========================================
+   CLOSE
+========================================= */
 
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 1.1rem;
+.civic-team-modal-close {
+  position: absolute;
 
-  color: var(--ink);
+  z-index: 20;
+
+  top: 18px;
+  right: 18px;
+
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid var(--line);
+
+  background:
+    var(--paper);
+
+  color:
+    var(--ink);
+
+  cursor: pointer;
+
+  transition:
+    color 200ms ease,
+    background 200ms ease,
+    border-color 200ms ease;
 }
 
-.civic-team-modal-number {
-  font-family: 'Bebas Neue', sans-serif !important;
-  font-size: 4rem !important;
-  line-height: 0.8;
+.civic-team-modal-close:hover {
+  background:
+    var(--modal-accent);
 
-  color: var(--accent) !important;
+  border-color:
+    var(--modal-accent);
+
+  color:
+    #ffffff;
 }
 
-/* =========================
+/* =========================================
    ANIMATIONS
-========================= */
+========================================= */
 
 @keyframes civicTeamBackdropIn {
   from {
@@ -741,190 +1538,196 @@
 @keyframes civicTeamModalIn {
   from {
     opacity: 0;
+
     transform:
-      translateY(24px)
+      translateY(20px)
       scale(0.985);
   }
 
   to {
     opacity: 1;
+
     transform:
       translateY(0)
       scale(1);
   }
 }
 
-/* =========================
+/* =========================================
    TABLET
-========================= */
+========================================= */
 
-@media (max-width: 900px) {
-  .civic-team-intro {
-    align-items: flex-start;
+@media (
+  max-width: 900px
+) {
+  .civic-team-filter-wrap {
+    align-items:
+      flex-end;
   }
 
-  .civic-team-card {
-    flex-basis: min(
-      42vw,
-      300px
-    );
-  }
-
-  .civic-team-track-end {
-    flex-basis: min(
-      42vw,
-      300px
-    );
-  }
-
-  .civic-team-modal {
-    grid-template-columns:
-      minmax(260px, 0.9fr)
-      1.1fr;
-  }
-
-  .civic-team-modal-image {
-    min-height: 560px;
+  .civic-team-filters {
+    max-width:
+      calc(
+        100% - 110px
+      );
   }
 }
 
-/* =========================
+/* =========================================
    MOBILE
-========================= */
+========================================= */
 
-@media (max-width: 650px) {
+@media (
+  max-width: 650px
+) {
   .civic-team-intro {
     display: block;
   }
 
-  .civic-team-description {
-    max-width: none;
-  }
-
   .civic-team-counter {
-    align-items: flex-start;
+    align-items:
+      flex-start;
 
     margin-top: 2rem;
   }
 
-  .civic-team-navigation {
-    align-items: flex-end;
+  .civic-team-directory-header {
+    margin-top:
+      0.5rem;
   }
 
-  .civic-team-navigation-copy
-    span:last-child,
-  .civic-team-navigation-line {
-    display: none;
+  .civic-team-filter-wrap {
+    display: block;
   }
 
-  .civic-team-arrow {
-    width: 40px;
-    height: 40px;
+  .civic-team-filters {
+    max-width: none;
+
+    width: 100%;
+
+    margin-bottom:
+      1rem;
   }
 
-  .civic-team-track {
-    gap: 13px;
-
-    overflow-x: auto;
-
-    padding-right: 18vw;
-
-    touch-action: pan-x pan-y;
+  .civic-team-arrows {
+    justify-content:
+      flex-end;
   }
 
-  .civic-team-card {
-    flex-basis: 78vw;
-    max-width: 320px;
+  .civic-team-card,
+  .civic-team-end-card {
+    flex:
+      0 0
+      min(
+        82vw,
+        320px
+      );
   }
 
-  .civic-team-track-end {
-    flex-basis: 78vw;
-    max-width: 320px;
+  .civic-team-card-content {
+    min-height:
+      145px;
   }
 
-  .civic-team-card h3 {
-    font-size: 1.65rem;
+  .civic-team-legend {
+    gap:
+      0.8rem
+      1.25rem;
   }
 
   .civic-team-bottom-rule {
     grid-template-columns:
-      auto 1fr;
+      1fr;
   }
 
-  .civic-team-bottom-rule
-    span:last-child {
-    display: none;
+  .civic-team-bottom-rule i {
+    width: 100%;
   }
-
-  /* modal becomes vertical */
 
   .civic-team-modal-backdrop {
-    align-items: flex-start;
-
-    padding: 14px;
+    align-items:
+      flex-start;
 
     overflow-y: auto;
+
+    padding: 10px;
   }
 
   .civic-team-modal {
-    width: 100%;
-    max-height: none;
+    display: block;
 
-    grid-template-columns: 1fr;
+    max-height: none;
   }
 
   .civic-team-modal-image {
-    min-height: 0;
-    height: min(
-      68vh,
-      530px
-    );
+    min-height:
+      440px;
+  }
+
+  .civic-team-modal-image::after {
+    top: auto;
+    right: auto;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 5px;
   }
 
   .civic-team-modal-content {
-    min-height: 360px;
+    min-height:
+      470px;
 
     padding:
-      2.7rem
+      2.8rem
       1.5rem
-      1.6rem;
-  }
-
-  .civic-team-modal h2 {
-    font-size:
-      clamp(
-        3rem,
-        15vw,
-        4.5rem
-      );
+      2rem;
   }
 
   .civic-team-modal-close {
     position: fixed;
 
-    top: 28px;
-    right: 28px;
+    top: 22px;
+    right: 22px;
   }
 }
 
-/* =========================
+/* =========================================
+   TOUCH
+========================================= */
+
+@media (hover: none) {
+  .civic-team-card-image::before {
+    transform:
+      scaleX(1);
+  }
+
+  .civic-team-card-view {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+}
+
+/* =========================================
    REDUCED MOTION
-========================= */
+========================================= */
 
 @media (
-  prefers-reduced-motion: reduce
+  prefers-reduced-motion:
+    reduce
 ) {
-  .civic-team-card,
-  .civic-team-card-image img,
-  .civic-team-view,
+  .civic-team-card img,
+  .civic-team-card-image::before,
   .civic-team-card-content::before,
+  .civic-team-card-view,
+  .civic-team-card-role svg,
   .civic-team-modal,
   .civic-team-modal-backdrop {
     animation: none !important;
-    transition: none !important;
-  }
 
-  .civic-team-track {
-    scroll-behavior: auto;
+    transition: none !important;
   }
 }

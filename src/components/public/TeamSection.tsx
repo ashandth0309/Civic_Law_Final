@@ -2,13 +2,17 @@ import {
   PointerEvent as ReactPointerEvent,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
 
+import { motion, AnimatePresence } from 'framer-motion';
+
 import {
   ArrowLeft,
   ArrowRight,
+  Users,
   X,
 } from 'lucide-react';
 
@@ -22,37 +26,124 @@ import {
 
 import './TeamSection.css';
 
+type TeamFilter =
+  | 'All'
+  | 'Leadership'
+  | 'Finance'
+  | 'Logistics'
+  | 'PR, Media & Outreach';
+
+const FILTERS: TeamFilter[] = [
+  'All',
+  'Leadership',
+  'Finance',
+  'Logistics',
+  'PR, Media & Outreach',
+];
+
+const getCommitteeClass = (committee: string) => {
+  switch (committee) {
+    case 'Leadership':
+      return 'leadership';
+
+    case 'Finance':
+      return 'finance';
+
+    case 'Logistics':
+      return 'logistics';
+
+    case 'PR, Media & Outreach':
+      return 'media';
+
+    default:
+      return 'default';
+  }
+};
+
 export default function TeamSection() {
-  const trackRef = useRef<HTMLDivElement | null>(null);
+  const trackRef =
+    useRef<HTMLDivElement | null>(null);
 
   const pointerStartX = useRef(0);
-  const initialScrollLeft = useRef(0);
+
+  const initialScrollLeft =
+    useRef(0);
+
   const dragging = useRef(false);
   const dragged = useRef(false);
 
-  const [selectedMember, setSelectedMember] =
-    useState<TeamMember | null>(null);
+  const [
+    activeFilter,
+    setActiveFilter,
+  ] = useState<TeamFilter>('All');
 
-  const [canScrollLeft, setCanScrollLeft] =
-    useState(false);
+  const [
+    selectedMember,
+    setSelectedMember,
+  ] = useState<TeamMember | null>(null);
 
-  const [canScrollRight, setCanScrollRight] =
-    useState(true);
+  const [
+    canScrollLeft,
+    setCanScrollLeft,
+  ] = useState(false);
 
-  const updateScrollControls = useCallback(() => {
+  const [
+    canScrollRight,
+    setCanScrollRight,
+  ] = useState(true);
+
+  const filteredMembers = useMemo(() => {
+    if (activeFilter === 'All') {
+      return teamMembers;
+    }
+
+    return teamMembers.filter(
+      (member) =>
+        member.committee === activeFilter,
+    );
+  }, [activeFilter]);
+
+  const updateScrollControls =
+    useCallback(() => {
+      const track = trackRef.current;
+
+      if (!track) return;
+
+      const maximumScroll =
+        track.scrollWidth -
+        track.clientWidth;
+
+      setCanScrollLeft(
+        track.scrollLeft > 8,
+      );
+
+      setCanScrollRight(
+        track.scrollLeft <
+          maximumScroll - 8,
+      );
+    }, []);
+
+  useEffect(() => {
     const track = trackRef.current;
 
     if (!track) return;
 
-    const maximumScroll =
-      track.scrollWidth - track.clientWidth;
+    const frame =
+      requestAnimationFrame(() => {
+        track.scrollTo({
+          left: 0,
+          behavior: 'auto',
+        });
 
-    setCanScrollLeft(track.scrollLeft > 8);
+        updateScrollControls();
+      });
 
-    setCanScrollRight(
-      track.scrollLeft < maximumScroll - 8,
-    );
-  }, []);
+    return () =>
+      cancelAnimationFrame(frame);
+  }, [
+    activeFilter,
+    updateScrollControls,
+  ]);
 
   useEffect(() => {
     const track = trackRef.current;
@@ -64,7 +155,9 @@ export default function TeamSection() {
     track.addEventListener(
       'scroll',
       updateScrollControls,
-      { passive: true },
+      {
+        passive: true,
+      },
     );
 
     window.addEventListener(
@@ -85,7 +178,9 @@ export default function TeamSection() {
     };
   }, [updateScrollControls]);
 
-  const scrollGallery = (direction: 'left' | 'right') => {
+  const scrollGallery = (
+    direction: 'left' | 'right',
+  ) => {
     const track = trackRef.current;
 
     if (!track) return;
@@ -96,14 +191,15 @@ export default function TeamSection() {
       );
 
     const amount = firstCard
-      ? firstCard.offsetWidth + 18
-      : 340;
+      ? firstCard.offsetWidth + 16
+      : 330;
 
     track.scrollBy({
       left:
         direction === 'right'
           ? amount * 2
           : -amount * 2,
+
       behavior: 'smooth',
     });
   };
@@ -118,11 +214,19 @@ export default function TeamSection() {
     dragging.current = true;
     dragged.current = false;
 
-    pointerStartX.current = event.clientX;
-    initialScrollLeft.current = track.scrollLeft;
+    pointerStartX.current =
+      event.clientX;
 
-    track.setPointerCapture(event.pointerId);
-    track.classList.add('is-dragging');
+    initialScrollLeft.current =
+      track.scrollLeft;
+
+    track.setPointerCapture(
+      event.pointerId,
+    );
+
+    track.classList.add(
+      'is-dragging',
+    );
   };
 
   const handlePointerMove = (
@@ -130,17 +234,26 @@ export default function TeamSection() {
   ) => {
     const track = trackRef.current;
 
-    if (!track || !dragging.current) return;
+    if (
+      !track ||
+      !dragging.current
+    ) {
+      return;
+    }
 
     const distance =
-      event.clientX - pointerStartX.current;
+      event.clientX -
+      pointerStartX.current;
 
-    if (Math.abs(distance) > 5) {
+    if (
+      Math.abs(distance) > 5
+    ) {
       dragged.current = true;
     }
 
     track.scrollLeft =
-      initialScrollLeft.current - distance;
+      initialScrollLeft.current -
+      distance;
   };
 
   const handlePointerEnd = (
@@ -150,20 +263,26 @@ export default function TeamSection() {
 
     dragging.current = false;
 
-    if (track) {
-      track.classList.remove('is-dragging');
+    if (!track) return;
 
-      if (
-        track.hasPointerCapture(event.pointerId)
-      ) {
-        track.releasePointerCapture(
-          event.pointerId,
-        );
-      }
+    track.classList.remove(
+      'is-dragging',
+    );
+
+    if (
+      track.hasPointerCapture(
+        event.pointerId,
+      )
+    ) {
+      track.releasePointerCapture(
+        event.pointerId,
+      );
     }
   };
 
-  const openMember = (member: TeamMember) => {
+  const openMember = (
+    member: TeamMember,
+  ) => {
     if (dragged.current) {
       dragged.current = false;
       return;
@@ -172,9 +291,10 @@ export default function TeamSection() {
     setSelectedMember(member);
   };
 
-  const closeMember = useCallback(() => {
-    setSelectedMember(null);
-  }, []);
+  const closeMember =
+    useCallback(() => {
+      setSelectedMember(null);
+    }, []);
 
   useEffect(() => {
     if (!selectedMember) return;
@@ -182,7 +302,8 @@ export default function TeamSection() {
     const previousOverflow =
       document.body.style.overflow;
 
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow =
+      'hidden';
 
     const handleEscape = (
       event: KeyboardEvent,
@@ -206,7 +327,10 @@ export default function TeamSection() {
         handleEscape,
       );
     };
-  }, [selectedMember, closeMember]);
+  }, [
+    selectedMember,
+    closeMember,
+  ]);
 
   return (
     <>
@@ -218,17 +342,42 @@ export default function TeamSection() {
             title="Team"
           />
 
-          <div className="civic-team-intro">
-            <div>
-              <p className="civic-team-kicker">
+          {/* INTRO */}
+          <motion.div
+            className="civic-team-intro"
+            initial={{
+              opacity: 0,
+              y: 24,
+            }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+            }}
+            viewport={{
+              once: true,
+              amount: 0.3,
+            }}
+            transition={{
+              duration: 0.7,
+              ease: [
+                0.22,
+                1,
+                0.36,
+                1,
+              ],
+            }}
+          >
+            <div className="civic-team-intro-copy">
+              <span>
                 The people behind the initiative
-              </p>
+              </span>
 
-              <p className="civic-team-description">
-                A multidisciplinary team working
-                together to strengthen legal
-                literacy, civic participation and
-                community engagement.
+              <p>
+                A multidisciplinary team united
+                by a shared commitment to legal
+                literacy, civic participation
+                and meaningful community
+                engagement across Sri Lanka.
               </p>
             </div>
 
@@ -236,22 +385,79 @@ export default function TeamSection() {
               <strong>
                 {String(
                   teamMembers.length,
-                ).padStart(2, '0')}
+                ).padStart(
+                  2,
+                  '0',
+                )}
               </strong>
 
-              <span>Team Members</span>
+              <span>
+                People
+              </span>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="civic-team-navigation">
-            <div className="civic-team-navigation-copy">
-              <span>Explore the team</span>
-
-              <span className="civic-team-navigation-line" />
+          {/* DIRECTORY HEADER */}
+          <div className="civic-team-directory-header">
+            <div className="civic-team-directory-title">
+              <Users
+                size={17}
+                strokeWidth={1.5}
+              />
 
               <span>
-                Drag · Swipe · Click
+                Team Directory
               </span>
+            </div>
+
+            <span className="civic-team-directory-count">
+              {String(
+                filteredMembers.length,
+              ).padStart(2, '0')}{' '}
+              shown
+            </span>
+          </div>
+
+          {/* FILTERS */}
+          <div className="civic-team-filter-wrap">
+            <div className="civic-team-filters">
+              {FILTERS.map(
+                (filter) => (
+                  <button
+                    key={filter}
+                    type="button"
+                    className={`civic-team-filter ${
+                      activeFilter ===
+                      filter
+                        ? 'is-active'
+                        : ''
+                    }`}
+                    onClick={() =>
+                      setActiveFilter(
+                        filter,
+                      )
+                    }
+                  >
+                    <span>
+                      {filter}
+                    </span>
+
+                    <small>
+                      {filter ===
+                      'All'
+                        ? teamMembers.length
+                        : teamMembers.filter(
+                            (
+                              member,
+                            ) =>
+                              member.committee ===
+                              filter,
+                          )
+                            .length}
+                    </small>
+                  </button>
+                ),
+              )}
             </div>
 
             <div className="civic-team-arrows">
@@ -259,126 +465,258 @@ export default function TeamSection() {
                 type="button"
                 className="civic-team-arrow"
                 onClick={() =>
-                  scrollGallery('left')
+                  scrollGallery(
+                    'left',
+                  )
                 }
-                disabled={!canScrollLeft}
+                disabled={
+                  !canScrollLeft
+                }
                 aria-label="Previous team members"
               >
-                <ArrowLeft size={18} />
+                <ArrowLeft
+                  size={18}
+                />
               </button>
 
               <button
                 type="button"
                 className="civic-team-arrow"
                 onClick={() =>
-                  scrollGallery('right')
+                  scrollGallery(
+                    'right',
+                  )
                 }
-                disabled={!canScrollRight}
+                disabled={
+                  !canScrollRight
+                }
                 aria-label="Next team members"
               >
-                <ArrowRight size={18} />
+                <ArrowRight
+                  size={18}
+                />
               </button>
             </div>
           </div>
 
+          {/* TEAM */}
           <div
             ref={trackRef}
             className="civic-team-track"
-            onPointerDown={handlePointerDown}
-            onPointerMove={handlePointerMove}
-            onPointerUp={handlePointerEnd}
-            onPointerCancel={handlePointerEnd}
+            onPointerDown={
+              handlePointerDown
+            }
+            onPointerMove={
+              handlePointerMove
+            }
+            onPointerUp={
+              handlePointerEnd
+            }
+            onPointerCancel={
+              handlePointerEnd
+            }
           >
-            {teamMembers.map(
-              (member, index) => (
-                <button
-                  type="button"
-                  key={member.id}
-                  className="civic-team-card"
-                  onClick={() =>
-                    openMember(member)
-                  }
-                  aria-label={`View ${member.name}, ${member.position}`}
-                >
-                  <div className="civic-team-card-image">
-                    <img
-                      src={member.image}
-                      alt={`Portrait of ${member.name}`}
-                      draggable={false}
-                    />
+            <AnimatePresence mode="popLayout">
+              {filteredMembers.map(
+                (
+                  member,
+                  index,
+                ) => {
+                  const tone =
+                    getCommitteeClass(
+                      member.committee,
+                    );
 
-                    <div className="civic-team-image-overlay" />
+                  const isLeader =
+                    member.position !==
+                    'Volunteer';
 
-                    <span className="civic-team-card-index">
-                      {String(
-                        index + 1,
-                      ).padStart(2, '0')}
-                    </span>
+                  return (
+                    <motion.button
+                      layout
+                      type="button"
+                      key={member.id}
+                      className={`civic-team-card civic-team-card-${tone} ${
+                        isLeader
+                          ? 'is-lead'
+                          : ''
+                      }`}
+                      onClick={() =>
+                        openMember(
+                          member,
+                        )
+                      }
+                      aria-label={`View ${member.name}, ${member.position}`}
+                      initial={{
+                        opacity: 0,
+                        y: 20,
+                      }}
+                      animate={{
+                        opacity: 1,
+                        y: 0,
+                      }}
+                      exit={{
+                        opacity: 0,
+                        scale: 0.96,
+                      }}
+                      transition={{
+                        duration: 0.35,
+                        delay:
+                          index *
+                          0.035,
+                      }}
+                    >
+                      <div className="civic-team-card-image">
+                        <img
+                          src={
+                            member.image
+                          }
+                          alt={`Portrait of ${member.name}`}
+                          draggable={
+                            false
+                          }
+                        />
 
-                    <span className="civic-team-view">
-                      View profile
-                      <ArrowRight
-                        size={14}
-                      />
-                    </span>
-                  </div>
+                        <div className="civic-team-image-shade" />
 
-                  <div className="civic-team-card-content">
-                    <div className="civic-team-committee">
-                      {member.committee}
-                    </div>
+                        <div className="civic-team-card-top">
+                          <span>
+                            {String(
+                              index +
+                                1,
+                            ).padStart(
+                              2,
+                              '0',
+                            )}
+                          </span>
 
-                    <h3>
-                      {member.name}
-                    </h3>
+                          {isLeader && (
+                            <strong>
+                              Lead
+                            </strong>
+                          )}
+                        </div>
 
-                    <p>
-                      {member.position}
-                    </p>
-                  </div>
-                </button>
-              ),
-            )}
+                        <div className="civic-team-card-view">
+                          <span>
+                            View Profile
+                          </span>
+
+                          <ArrowRight
+                            size={15}
+                          />
+                        </div>
+                      </div>
+
+                      <div className="civic-team-card-content">
+                        <span className="civic-team-card-committee">
+                          {
+                            member.committee
+                          }
+                        </span>
+
+                        <h3>
+                          {
+                            member.name
+                          }
+                        </h3>
+
+                        <div className="civic-team-card-role">
+                          <span>
+                            {
+                              member.position
+                            }
+                          </span>
+
+                          <ArrowRight
+                            size={14}
+                          />
+                        </div>
+                      </div>
+                    </motion.button>
+                  );
+                },
+              )}
+            </AnimatePresence>
 
             <div
-              className="civic-team-track-end"
+              className="civic-team-end-card"
               aria-hidden="true"
             >
               <span>
-                Civic Law
+                Civic Law Initiative
               </span>
 
-              <strong>
-                One Team.
-                <br />
-                Shared Purpose.
-              </strong>
+              <div>
+                <strong>
+                  One Team.
+                  <br />
+                  Shared Purpose.
+                </strong>
+
+                <i />
+              </div>
+            </div>
+          </div>
+
+          {/* LEGEND */}
+          <div className="civic-team-legend">
+            <div>
+              <i className="legend-maroon" />
+              <span>
+                Leadership
+              </span>
+            </div>
+
+            <div>
+              <i className="legend-gold" />
+              <span>
+                Finance
+              </span>
+            </div>
+
+            <div>
+              <i className="legend-teal" />
+              <span>
+                Logistics
+              </span>
+            </div>
+
+            <div>
+              <i className="legend-blue" />
+              <span>
+                PR, Media & Outreach
+              </span>
             </div>
           </div>
 
           <div className="civic-team-bottom-rule">
             <span>
-              {String(teamMembers.length).padStart(
+              {String(
+                teamMembers.length,
+              ).padStart(
                 2,
                 '0',
               )}{' '}
               people
             </span>
 
-            <div />
+            <i />
 
             <span>
-              Civic Law Initiative
+              One shared purpose
             </span>
           </div>
         </div>
       </SectionWrapper>
 
+      {/* PROFILE MODAL */}
       {selectedMember && (
         <div
           className="civic-team-modal-backdrop"
-          role="presentation"
-          onMouseDown={(event) => {
+          onMouseDown={(
+            event,
+          ) => {
             if (
               event.target ===
               event.currentTarget
@@ -388,7 +726,9 @@ export default function TeamSection() {
           }}
         >
           <article
-            className="civic-team-modal"
+            className={`civic-team-modal civic-team-modal-${getCommitteeClass(
+              selectedMember.committee,
+            )}`}
             role="dialog"
             aria-modal="true"
             aria-labelledby="team-member-name"
@@ -396,7 +736,9 @@ export default function TeamSection() {
             <button
               type="button"
               className="civic-team-modal-close"
-              onClick={closeMember}
+              onClick={
+                closeMember
+              }
               aria-label="Close team member profile"
             >
               <X size={20} />
@@ -404,41 +746,59 @@ export default function TeamSection() {
 
             <div className="civic-team-modal-image">
               <img
-                src={selectedMember.image}
+                src={
+                  selectedMember.image
+                }
                 alt={`Portrait of ${selectedMember.name}`}
               />
+
+              <div className="civic-team-modal-image-overlay" />
+
+              <span className="civic-team-modal-image-label">
+                Our People
+              </span>
             </div>
 
             <div className="civic-team-modal-content">
               <div>
-                <span className="civic-team-modal-label">
-                  {selectedMember.committee}
+                <span className="civic-team-modal-committee">
+                  {
+                    selectedMember.committee
+                  }
                 </span>
 
                 <h2 id="team-member-name">
-                  {selectedMember.name}
+                  {
+                    selectedMember.name
+                  }
                 </h2>
 
                 <p className="civic-team-modal-role">
-                  {selectedMember.position}
+                  {
+                    selectedMember.position
+                  }
+                </p>
+              </div>
+
+              <div className="civic-team-modal-statement">
+                <span>
+                  Law · Liberty · Civic Responsibility
+                </span>
+
+                <p>
+                  Working together to strengthen
+                  civic awareness, legal literacy
+                  and meaningful participation.
                 </p>
               </div>
 
               <div className="civic-team-modal-footer">
-                <div>
-                  <span>
-                    Civic Law
-                  </span>
+                <span>
+                  Civic Law Initiative
+                </span>
 
-                  <strong>
-                    Team Member
-                  </strong>
-                </div>
-
-                <span className="civic-team-modal-number">
-                  {String(
-                    selectedMember.id,
-                  ).padStart(2, '0')}
+                <span>
+                  Team Member
                 </span>
               </div>
             </div>

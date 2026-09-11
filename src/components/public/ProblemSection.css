@@ -1,0 +1,995 @@
+/* =========================================
+   PROBLEM SECTION
+========================================= */
+
+.problem-section {
+  position: relative;
+  overflow: hidden;
+}
+
+/* =========================================
+   LARGE BACKGROUND YEAR
+========================================= */
+
+.problem-year {
+  position: absolute;
+
+  top: 2rem;
+  right: -0.02em;
+
+  z-index: 0;
+
+  pointer-events: none;
+  user-select: none;
+
+  font-family:
+    'Bebas Neue',
+    sans-serif;
+
+  font-size:
+    clamp(8rem, 21vw, 20rem);
+
+  line-height: 0.75;
+
+  letter-spacing:
+    -0.04em;
+
+  color:
+    rgba(140, 22, 57, 0.035);
+}
+
+.problem-header {
+  position: relative;
+  z-index: 2;
+}
+
+/* =========================================
+   MAIN GRID
+========================================= */
+
+.problem-main-grid {
+  position: relative;
+  z-index: 2;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.15fr)
+    minmax(360px, 0.85fr);
+
+  gap:
+    clamp(3rem, 7vw, 7rem);
+
+  align-items: stretch;
+}
+
+/* =========================================
+   STORY
+========================================= */
+
+.problem-story {
+  max-width: 760px;
+}
+
+.problem-story-kicker {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+
+  margin-bottom: 2rem;
+}
+
+.problem-story-kicker > span {
+  width: 34px;
+  height: 2px;
+
+  flex-shrink: 0;
+
+  background: #fdbd28;
+}
+
+.problem-story-kicker p {
+  margin: 0;
+
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size:
+    clamp(0.54rem, 0.9vw, 0.66rem);
+
+  letter-spacing:
+    0.16em;
+
+  text-transform:
+    uppercase;
+
+  color:
+    #8c1639;
+}
+
+/* =========================================
+   LEAD PARAGRAPH
+========================================= */
+
+.problem-lead {
+  display: flex;
+  align-items: flex-start;
+
+  margin-bottom: 1.5rem;
+}
+
+.problem-lead p {
+  margin: 0;
+}
+
+.problem-dropcap {
+  float: left;
+
+  margin-right:
+    0.12em;
+
+  margin-top:
+    0.03em;
+
+  font-family:
+    'Bebas Neue',
+    sans-serif;
+
+  font-size:
+    clamp(4.6rem, 7vw, 7rem);
+
+  line-height: 0.72;
+
+  color:
+    #8c1639;
+}
+
+/* =========================================
+   STORY TYPOGRAPHY
+========================================= */
+
+.problem-story > p,
+.problem-lead p {
+  font-family:
+    'Cormorant Garamond',
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(1.07rem, 1.55vw, 1.28rem);
+
+  font-weight: 300;
+
+  line-height: 1.9;
+
+  color:
+    #2c2723;
+}
+
+.problem-story > p {
+  margin:
+    0 0 1.35rem;
+}
+
+/* =========================================
+   EDITORIAL FOOTNOTE LINE
+========================================= */
+
+.problem-editorial-line {
+  display: flex;
+  align-items: center;
+
+  gap: 0.9rem;
+
+  margin-top: 2.2rem;
+}
+
+.problem-editorial-line span {
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size:
+    0.52rem;
+
+  letter-spacing:
+    0.13em;
+
+  text-transform:
+    uppercase;
+
+  white-space:
+    nowrap;
+
+  color:
+    var(--muted);
+}
+
+.problem-editorial-line div {
+  flex: 1;
+
+  height: 1px;
+
+  background:
+    var(--line);
+}
+
+/* =========================================
+   STATEMENT PANEL
+========================================= */
+
+.problem-statement-panel {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  min-height: 520px;
+
+  padding:
+    clamp(2rem, 4vw, 3.5rem);
+
+  overflow: hidden;
+
+  background:
+    #8c1639;
+
+  color:
+    #ffffff;
+}
+
+.problem-statement-panel::before {
+  content: '“';
+
+  position: absolute;
+
+  right: -0.02em;
+  top: -0.15em;
+
+  font-family:
+    'Cormorant Garamond',
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(11rem, 18vw, 18rem);
+
+  line-height: 1;
+
+  color:
+    rgba(255,255,255,0.055);
+
+  pointer-events: none;
+}
+
+/* =========================================
+   PANEL TOP
+========================================= */
+
+.problem-panel-top {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 1rem;
+}
+
+.problem-panel-top span {
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size:
+    0.54rem;
+
+  letter-spacing:
+    0.15em;
+
+  text-transform:
+    uppercase;
+
+  color:
+    rgba(255,255,255,0.6);
+}
+
+.problem-panel-top svg {
+  color:
+    #fdbd28;
+}
+
+/* =========================================
+   QUOTE
+========================================= */
+
+.problem-statement-panel blockquote {
+  position: relative;
+  z-index: 2;
+
+  margin:
+    auto 0 0;
+
+  font-family:
+    'Cormorant Garamond',
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(1.6rem, 3vw, 2.7rem);
+
+  font-style: italic;
+
+  font-weight: 300;
+
+  line-height: 1.25;
+
+  color:
+    #ffffff;
+}
+
+/* =========================================
+   PANEL DIVIDER
+========================================= */
+
+.problem-panel-divider {
+  position: relative;
+  z-index: 2;
+
+  width: 48px;
+  height: 3px;
+
+  margin:
+    2rem 0;
+
+  background:
+    #fdbd28;
+}
+
+/* =========================================
+   PANEL SUPPORTING TEXT
+========================================= */
+
+.problem-statement-panel > p {
+  position: relative;
+  z-index: 2;
+
+  max-width: 470px;
+
+  margin: 0;
+
+  font-family:
+    'Cormorant Garamond',
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(0.98rem, 1.4vw, 1.12rem);
+
+  line-height: 1.7;
+
+  color:
+    rgba(255,255,255,0.72);
+}
+
+/* =========================================
+   PANEL INDEX
+========================================= */
+
+.problem-panel-index {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+
+  gap: 0.8rem;
+
+  margin-top: 2.2rem;
+
+  padding-top: 1.25rem;
+
+  border-top:
+    1px solid
+    rgba(255,255,255,0.2);
+}
+
+.problem-panel-index span:first-child {
+  font-family:
+    'Bebas Neue',
+    sans-serif;
+
+  font-size: 1.4rem;
+
+  color:
+    #fdbd28;
+}
+
+.problem-panel-index span:last-child {
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size: 0.5rem;
+
+  letter-spacing:
+    0.14em;
+
+  text-transform:
+    uppercase;
+
+  color:
+    rgba(255,255,255,0.55);
+}
+
+/* =========================================
+   CHALLENGES SECTION
+========================================= */
+
+.problem-challenges {
+  position: relative;
+  z-index: 2;
+
+  margin-top:
+    clamp(4rem, 8vw, 7rem);
+}
+
+.problem-challenges-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 2rem;
+
+  margin-bottom: 1.5rem;
+}
+
+.problem-challenges-heading > span {
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size: 0.58rem;
+
+  letter-spacing:
+    0.17em;
+
+  text-transform:
+    uppercase;
+
+  color:
+    #8c1639;
+}
+
+.problem-challenges-heading p {
+  max-width: 540px;
+
+  margin: 0;
+
+  text-align: right;
+
+  font-family:
+    'Cormorant Garamond',
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(1.15rem, 2vw, 1.45rem);
+
+  color:
+    #2a2520;
+}
+
+/* =========================================
+   CHALLENGE GRID
+========================================= */
+
+.problem-challenge-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  align-items: stretch;
+
+  border-top:
+    1px solid
+    var(--ink);
+
+  border-bottom:
+    1px solid
+    var(--ink);
+}
+
+/* =========================================
+   CHALLENGE CARD
+========================================= */
+
+.problem-challenge-card {
+  position: relative;
+
+  min-height: 350px;
+
+  display: grid;
+
+  /*
+    Keeps every card aligned:
+    1 = number/icon
+    2 = heading
+    3 = paragraph
+    4 = gold line
+  */
+  grid-template-rows:
+    90px
+    72px
+    120px
+    1fr;
+
+  padding:
+    clamp(1.5rem, 3vw, 2.4rem);
+
+  overflow: hidden;
+
+  border-right:
+    1px solid
+    var(--ink);
+
+  background:
+    transparent;
+
+  isolation: isolate;
+}
+
+.problem-challenge-card:last-child {
+  border-right: 0;
+}
+
+/* =========================================
+   CARD HOVER BACKGROUND
+========================================= */
+
+.problem-challenge-card::before {
+  content: '';
+
+  position: absolute;
+  inset: 0;
+
+  z-index: -1;
+
+  transform:
+    translateY(101%);
+
+  background:
+    #06524f;
+
+  transition:
+    transform
+    480ms
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    );
+}
+
+.problem-challenge-card:hover::before {
+  transform:
+    translateY(0);
+}
+
+/* =========================================
+   NUMBER + ICON
+========================================= */
+
+.problem-challenge-top {
+  grid-row: 1;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 1rem;
+}
+
+.problem-challenge-top span {
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size:
+    0.55rem;
+
+  letter-spacing:
+    0.15em;
+
+  color:
+    #8c1639;
+
+  transition:
+    color 350ms ease;
+}
+
+.problem-challenge-top svg {
+  color:
+    #8c1639;
+
+  transition:
+    color 350ms ease,
+    transform 350ms ease;
+}
+
+/* =========================================
+   ALLOW TITLE + PARAGRAPH
+   TO USE THE CARD GRID
+========================================= */
+
+.problem-challenge-content {
+  display: contents;
+}
+
+/* =========================================
+   CHALLENGE TITLE
+   SAME TOP LINE FOR ALL CARDS
+========================================= */
+
+.problem-challenge-content h3 {
+  grid-row: 2;
+
+  align-self: start;
+
+  margin: 0;
+
+  max-width: 360px;
+
+  font-family:
+    'Bebas Neue',
+    sans-serif;
+
+  font-size:
+    clamp(2rem, 3.2vw, 3rem);
+
+  font-weight: 400;
+
+  line-height: 0.95;
+
+  color:
+    var(--ink);
+
+  transition:
+    color 350ms ease;
+}
+
+/* =========================================
+   CHALLENGE PARAGRAPH
+   SAME TOP LINE FOR ALL CARDS
+========================================= */
+
+.problem-challenge-content p {
+  grid-row: 3;
+
+  align-self: start;
+
+  max-width: 360px;
+
+  margin:
+    1.15rem 0 0;
+
+  font-family:
+    'Cormorant Garamond',
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(0.95rem, 1.3vw, 1.08rem);
+
+  line-height: 1.65;
+
+  color:
+    #514942;
+
+  transition:
+    color 350ms ease;
+}
+
+/* =========================================
+   GOLD LINE
+   SAME BOTTOM POSITION
+========================================= */
+
+.problem-card-line {
+  grid-row: 4;
+
+  align-self: end;
+
+  display: block;
+
+  width: 28px;
+  height: 3px;
+
+  margin: 0;
+
+  background:
+    #fdbd28;
+
+  transition:
+    width 400ms ease;
+}
+
+.problem-challenge-card:hover
+  .problem-card-line {
+  width: 80px;
+}
+
+/* =========================================
+   HOVER COLORS
+========================================= */
+
+.problem-challenge-card:hover
+  .problem-challenge-content h3,
+.problem-challenge-card:hover
+  .problem-challenge-content p,
+.problem-challenge-card:hover
+  .problem-challenge-top span,
+.problem-challenge-card:hover
+  .problem-challenge-top svg {
+  color:
+    #ffffff;
+}
+
+.problem-challenge-card:hover
+  .problem-challenge-top svg {
+  transform:
+    rotate(-8deg)
+    scale(1.08);
+}
+
+/* =========================================
+   NEXT SECTION TRANSITION
+========================================= */
+
+.problem-next {
+  display: flex;
+  align-items: center;
+
+  gap: 1rem;
+
+  margin-top: 2rem;
+}
+
+.problem-next span {
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size:
+    0.5rem;
+
+  letter-spacing:
+    0.13em;
+
+  text-transform:
+    uppercase;
+
+  color:
+    var(--muted);
+}
+
+.problem-next span:first-child {
+  color:
+    #8c1639;
+}
+
+.problem-next div {
+  flex: 1;
+
+  height: 1px;
+
+  background:
+    var(--line);
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 950px) {
+  .problem-main-grid {
+    grid-template-columns:
+      1fr;
+
+    gap: 3rem;
+  }
+
+  .problem-statement-panel {
+    min-height: 470px;
+  }
+
+  .problem-year {
+    top: 1rem;
+  }
+
+  .problem-challenge-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+  .problem-challenge-card {
+    min-height: 320px;
+
+    border-right: 0;
+
+    border-bottom:
+      1px solid
+      var(--ink);
+  }
+
+  .problem-challenge-card:last-child {
+    border-bottom: 0;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+  .problem-year {
+    right: -0.05em;
+    top: 1rem;
+
+    font-size: 9rem;
+  }
+
+  .problem-story-kicker {
+    align-items:
+      flex-start;
+  }
+
+  .problem-story-kicker > span {
+    margin-top:
+      0.45rem;
+  }
+
+  .problem-lead {
+    display: block;
+  }
+
+  .problem-dropcap {
+    float: left;
+  }
+
+  .problem-statement-panel {
+    min-height: 500px;
+
+    padding:
+      1.7rem;
+  }
+
+  .problem-challenges-heading {
+    display: block;
+  }
+
+  .problem-challenges-heading p {
+    margin-top:
+      0.7rem;
+
+    text-align:
+      left;
+  }
+
+  /* swipe cards */
+
+  .problem-challenge-grid {
+    display: flex;
+
+    gap: 14px;
+
+    overflow-x: auto;
+
+    margin-right:
+      calc(-1 * 1.5rem);
+
+    padding-right:
+      18vw;
+
+    padding-bottom:
+      1rem;
+
+    border: 0;
+
+    scroll-snap-type:
+      x mandatory;
+
+    scrollbar-width:
+      none;
+
+    -webkit-overflow-scrolling:
+      touch;
+  }
+
+  .problem-challenge-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .problem-challenge-card {
+    flex:
+      0 0
+      min(82vw, 340px);
+
+    min-height:
+      360px;
+
+    display: grid;
+
+    grid-template-rows:
+      78px
+      68px
+      135px
+      1fr;
+
+    border:
+      1px solid
+      var(--ink);
+
+    scroll-snap-align:
+      start;
+  }
+
+  .problem-challenge-card:last-child {
+    border:
+      1px solid
+      var(--ink);
+  }
+
+  .problem-challenge-content p {
+    margin-top:
+      1rem;
+  }
+
+  .problem-next {
+    align-items:
+      flex-start;
+  }
+
+  .problem-next div {
+    margin-top:
+      0.45rem;
+  }
+
+  .problem-next span:last-child {
+    max-width:
+      210px;
+  }
+}
+
+/* =========================================
+   TOUCH DEVICES
+========================================= */
+
+@media (hover: none) {
+  .problem-challenge-card::before {
+    transform:
+      translateY(
+        calc(100% - 4px)
+      );
+  }
+}
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (
+  prefers-reduced-motion:
+    reduce
+) {
+  .problem-challenge-card::before,
+  .problem-card-line,
+  .problem-challenge-top svg {
+    transition:
+      none;
+  }
+}

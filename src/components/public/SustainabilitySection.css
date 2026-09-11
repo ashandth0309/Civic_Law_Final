@@ -1,0 +1,842 @@
+/* =========================================
+   SUSTAINABILITY SECTION
+========================================= */
+
+.sustainability-section {
+  position: relative;
+}
+
+/* =========================================
+   INTRO
+========================================= */
+
+.sustainability-intro {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 3rem;
+
+  margin-bottom:
+    clamp(3rem, 6vw, 5rem);
+}
+
+.sustainability-intro > div:first-child {
+  max-width: 780px;
+}
+
+.sustainability-intro > div:first-child > span {
+  display: block;
+
+  margin-bottom: 0.8rem;
+
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size: 0.56rem;
+
+  letter-spacing:
+    0.16em;
+
+  text-transform: uppercase;
+
+  color: #8c1639;
+}
+
+.sustainability-intro p {
+  margin: 0;
+
+  font-family:
+    'Cormorant Garamond',
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(1.15rem, 2vw, 1.5rem);
+
+  line-height: 1.65;
+
+  font-weight: 300;
+
+  color: #2b2622;
+}
+
+/* =========================================
+   INTRO MARK
+========================================= */
+
+.sustainability-mark {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  flex-shrink: 0;
+}
+
+.sustainability-mark strong {
+  font-family:
+    'Bebas Neue',
+    sans-serif;
+
+  font-size:
+    clamp(4.5rem, 8vw, 7rem);
+
+  line-height: 0.75;
+
+  font-weight: 400;
+
+  color: #fdbd28;
+}
+
+.sustainability-mark span {
+  margin-top: 0.7rem;
+
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size: 0.5rem;
+
+  letter-spacing:
+    0.15em;
+
+  text-transform: uppercase;
+
+  color: var(--muted);
+}
+
+/* =========================================
+   MAIN PANELS
+========================================= */
+
+.sustainability-panels {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  border-top:
+    1px solid var(--ink);
+
+  border-bottom:
+    1px solid var(--ink);
+}
+
+/* =========================================
+   PANEL
+========================================= */
+
+.sustainability-panel {
+  position: relative;
+
+  min-height: 610px;
+
+  display: grid;
+
+  grid-template-rows:
+    80px
+    1fr
+    50px;
+
+  padding:
+    clamp(2rem, 4vw, 3.5rem);
+
+  overflow: hidden;
+
+  isolation: isolate;
+
+  border-right:
+    1px solid var(--ink);
+
+  background:
+    var(--paper);
+}
+
+.sustainability-panel:last-child {
+  border-right: 0;
+}
+
+/* =========================================
+   HOVER BACKGROUND
+========================================= */
+
+.sustainability-panel::before {
+  content: '';
+
+  position: absolute;
+  inset: 0;
+
+  z-index: -1;
+
+  transform:
+    translateY(101%);
+
+  transition:
+    transform
+    560ms
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    );
+}
+
+.sustainability-panel-maroon::before {
+  background: #8c1639;
+}
+
+.sustainability-panel-teal::before {
+  background: #06524f;
+}
+
+.sustainability-panel:hover::before {
+  transform:
+    translateY(0);
+}
+
+/* =========================================
+   PANEL TOP
+========================================= */
+
+.sustainability-panel-top {
+  grid-row: 1;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 1rem;
+}
+
+.sustainability-panel-top span {
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size: 0.55rem;
+
+  letter-spacing:
+    0.15em;
+
+  color: #8c1639;
+
+  transition:
+    color 350ms ease;
+}
+
+.sustainability-panel-top svg {
+  color: #8c1639;
+
+  transition:
+    color 350ms ease,
+    transform 350ms ease;
+}
+
+/* =========================================
+   PANEL CONTENT
+========================================= */
+
+.sustainability-panel-content {
+  grid-row: 2;
+
+  align-self: end;
+}
+
+.sustainability-panel-label {
+  display: block;
+
+  margin-bottom: 0.85rem;
+
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size: 0.54rem;
+
+  letter-spacing:
+    0.16em;
+
+  text-transform: uppercase;
+
+  color: #8c1639;
+
+  transition:
+    color 350ms ease;
+}
+
+.sustainability-panel h3 {
+  max-width: 600px;
+
+  margin:
+    0 0 1.6rem;
+
+  font-family:
+    'Bebas Neue',
+    sans-serif;
+
+  font-size:
+    clamp(3rem, 5vw, 5rem);
+
+  line-height: 0.92;
+
+  font-weight: 400;
+
+  color: var(--ink);
+
+  transition:
+    color 350ms ease;
+}
+
+.sustainability-panel-content p {
+  max-width: 650px;
+
+  margin:
+    0 0 1.1rem;
+
+  font-family:
+    'Cormorant Garamond',
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(1rem, 1.5vw, 1.18rem);
+
+  line-height: 1.75;
+
+  color: #4b443e;
+
+  transition:
+    color 350ms ease;
+}
+
+.sustainability-panel-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* =========================================
+   PANEL FOOTER
+========================================= */
+
+.sustainability-panel-footer {
+  grid-row: 3;
+
+  align-self: end;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 1rem;
+}
+
+.sustainability-panel-footer span {
+  width: 42px;
+  height: 3px;
+
+  background: #fdbd28;
+
+  transition:
+    width 400ms ease;
+}
+
+.sustainability-panel-footer svg {
+  color: var(--ink);
+
+  transition:
+    color 350ms ease,
+    transform 350ms ease;
+}
+
+/* =========================================
+   PANEL HOVER
+========================================= */
+
+.sustainability-panel:hover
+  .sustainability-panel-top span,
+.sustainability-panel:hover
+  .sustainability-panel-top svg,
+.sustainability-panel:hover
+  .sustainability-panel-label,
+.sustainability-panel:hover
+  h3,
+.sustainability-panel:hover
+  .sustainability-panel-footer svg {
+  color: #ffffff;
+}
+
+.sustainability-panel:hover
+  .sustainability-panel-content p {
+  color:
+    rgba(255,255,255,0.75);
+}
+
+.sustainability-panel:hover
+  .sustainability-panel-footer span {
+  width: 110px;
+}
+
+.sustainability-panel:hover
+  .sustainability-panel-top svg {
+  transform:
+    rotate(-8deg)
+    scale(1.08);
+}
+
+.sustainability-panel:hover
+  .sustainability-panel-footer svg {
+  transform:
+    translate(4px, -4px);
+}
+
+/* =========================================
+   CONTINUATION PATH
+========================================= */
+
+.sustainability-path {
+  margin-top:
+    clamp(4rem, 8vw, 7rem);
+}
+
+/* =========================================
+   PATH HEADING
+========================================= */
+
+.sustainability-path-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 2rem;
+
+  margin-bottom: 1.5rem;
+}
+
+.sustainability-path-heading > span {
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size: 0.56rem;
+
+  letter-spacing:
+    0.16em;
+
+  text-transform: uppercase;
+
+  color: #8c1639;
+}
+
+.sustainability-path-heading p {
+  max-width: 560px;
+
+  margin: 0;
+
+  text-align: right;
+
+  font-family:
+    'Cormorant Garamond',
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(1.1rem, 1.8vw, 1.4rem);
+
+  color: #2b2622;
+}
+
+/* =========================================
+   PATH GRID
+========================================= */
+
+.sustainability-path-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  border-top:
+    1px solid var(--ink);
+
+  border-bottom:
+    1px solid var(--ink);
+}
+
+/* =========================================
+   PATH CARD
+========================================= */
+
+.sustainability-path-card {
+  min-height: 330px;
+
+  display: grid;
+
+  grid-template-rows:
+    75px
+    1fr
+    40px;
+
+  padding:
+    clamp(1.5rem, 2.5vw, 2rem);
+
+  border-right:
+    1px solid var(--ink);
+
+  background:
+    transparent;
+
+  transition:
+    background-color 350ms ease;
+}
+
+.sustainability-path-card:last-child {
+  border-right: 0;
+}
+
+/* =========================================
+   PATH CARD TOP
+========================================= */
+
+.sustainability-path-top {
+  grid-row: 1;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 1rem;
+}
+
+.sustainability-path-top span {
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size: 0.52rem;
+
+  letter-spacing:
+    0.15em;
+
+  color: #8c1639;
+}
+
+.sustainability-path-top svg {
+  color: #8c1639;
+
+  transition:
+    transform 350ms ease,
+    color 350ms ease;
+}
+
+/* =========================================
+   PATH CONTENT
+========================================= */
+
+.sustainability-path-content {
+  grid-row: 2;
+
+  align-self: end;
+}
+
+.sustainability-path-content h4 {
+  margin:
+    0 0 0.9rem;
+
+  font-family:
+    'Bebas Neue',
+    sans-serif;
+
+  font-size:
+    clamp(2rem, 3vw, 2.8rem);
+
+  line-height: 0.95;
+
+  font-weight: 400;
+
+  color: var(--ink);
+}
+
+.sustainability-path-content p {
+  margin: 0;
+
+  font-family:
+    'Cormorant Garamond',
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(0.95rem, 1.2vw, 1.08rem);
+
+  line-height: 1.65;
+
+  color: #514942;
+}
+
+/* =========================================
+   PATH GOLD LINE
+========================================= */
+
+.sustainability-path-line {
+  grid-row: 3;
+
+  align-self: end;
+
+  width: 30px;
+  height: 3px;
+
+  background: #fdbd28;
+
+  transition:
+    width 400ms ease;
+}
+
+.sustainability-path-card:hover {
+  background:
+    rgba(6, 82, 79, 0.055);
+}
+
+.sustainability-path-card:hover
+  .sustainability-path-line {
+  width: 72px;
+}
+
+.sustainability-path-card:hover
+  .sustainability-path-top svg {
+  transform:
+    rotate(-6deg)
+    scale(1.08);
+
+  color: #06524f;
+}
+
+/* =========================================
+   CLOSING STRIP
+========================================= */
+
+.sustainability-closing {
+  display: flex;
+  align-items: center;
+
+  gap: 1rem;
+
+  margin-top: 1.6rem;
+
+  padding:
+    1rem 0;
+
+  border-top:
+    1px solid var(--line);
+
+  border-bottom:
+    1px solid var(--line);
+}
+
+.sustainability-closing > div {
+  display: flex;
+  align-items: center;
+
+  gap: 0.55rem;
+
+  flex-shrink: 0;
+
+  color: #8c1639;
+}
+
+.sustainability-closing > div span {
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size: 0.52rem;
+
+  letter-spacing:
+    0.13em;
+
+  text-transform: uppercase;
+}
+
+.sustainability-closing i {
+  flex: 1;
+
+  height: 1px;
+
+  background:
+    var(--line);
+}
+
+.sustainability-closing > span {
+  font-family:
+    'Cormorant Garamond',
+    Georgia,
+    serif;
+
+  font-size: 1rem;
+
+  font-style: italic;
+
+  color: var(--muted);
+
+  white-space: nowrap;
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 980px) {
+  .sustainability-panels {
+    grid-template-columns:
+      1fr;
+  }
+
+  .sustainability-panel {
+    border-right: 0;
+
+    border-bottom:
+      1px solid var(--ink);
+  }
+
+  .sustainability-panel:last-child {
+    border-bottom: 0;
+  }
+
+  .sustainability-path-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .sustainability-path-card {
+    border-bottom:
+      1px solid var(--ink);
+  }
+
+  .sustainability-path-card:nth-child(2n) {
+    border-right: 0;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+  .sustainability-intro {
+    display: block;
+  }
+
+  .sustainability-mark {
+    align-items: flex-start;
+
+    margin-top: 2rem;
+  }
+
+  .sustainability-panel {
+    min-height: 540px;
+
+    padding:
+      1.8rem;
+  }
+
+  .sustainability-panel h3 {
+    font-size:
+      clamp(2.8rem, 12vw, 4.4rem);
+  }
+
+  .sustainability-path-heading {
+    display: block;
+  }
+
+  .sustainability-path-heading p {
+    margin-top: 0.8rem;
+
+    text-align: left;
+  }
+
+  /* mobile swipe */
+  .sustainability-path-grid {
+    display: flex;
+
+    gap: 14px;
+
+    overflow-x: auto;
+
+    padding:
+      0 18vw
+      16px 0;
+
+    border: 0;
+
+    scroll-snap-type:
+      x mandatory;
+
+    scrollbar-width:
+      none;
+
+    -webkit-overflow-scrolling:
+      touch;
+  }
+
+  .sustainability-path-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sustainability-path-card {
+    flex:
+      0 0
+      min(82vw, 340px);
+
+    min-height: 330px;
+
+    border:
+      1px solid var(--ink);
+
+    scroll-snap-align:
+      start;
+  }
+
+  .sustainability-closing {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .sustainability-closing i {
+    width: 100%;
+    flex: none;
+  }
+
+  .sustainability-closing > span {
+    white-space: normal;
+  }
+}
+
+/* =========================================
+   TOUCH
+========================================= */
+
+@media (hover: none) {
+  .sustainability-panel::before {
+    transform:
+      translateY(
+        calc(100% - 4px)
+      );
+  }
+}
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (
+  prefers-reduced-motion:
+    reduce
+) {
+  .sustainability-panel::before,
+  .sustainability-panel-top svg,
+  .sustainability-panel-footer svg,
+  .sustainability-panel-footer span,
+  .sustainability-path-line {
+    transition: none;
+  }
+}

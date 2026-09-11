@@ -1,0 +1,912 @@
+/* =========================================
+   CIVIC LAW — FOOTER
+========================================= */
+
+.civic-footer {
+  position: relative;
+
+  overflow: hidden;
+
+  background:
+    #68102a;
+
+  color:
+    #ffffff;
+}
+
+/* =========================================
+   BACKGROUND TYPOGRAPHY
+========================================= */
+
+.civic-footer-background-word {
+  position: absolute;
+
+  right: -0.03em;
+  bottom: -0.08em;
+
+  font-family:
+    'Bebas Neue',
+    sans-serif;
+
+  font-size:
+    clamp(
+      15rem,
+      34vw,
+      38rem
+    );
+
+  line-height: 0.7;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.025
+    );
+
+  pointer-events: none;
+
+  user-select: none;
+}
+
+/* =========================================
+   INNER
+========================================= */
+
+.civic-footer-inner {
+  position: relative;
+
+  z-index: 2;
+
+  padding:
+    clamp(
+      4rem,
+      8vw,
+      7rem
+    )
+    clamp(
+      1.5rem,
+      5vw,
+      5rem
+    )
+    1.7rem;
+}
+
+/* =========================================
+   MAIN GRID
+========================================= */
+
+.civic-footer-main {
+  display: grid;
+
+  grid-template-columns:
+    minmax(
+      0,
+      1.05fr
+    )
+    minmax(
+      360px,
+      0.95fr
+    );
+
+  gap:
+    clamp(
+      4rem,
+      9vw,
+      9rem
+    );
+
+  padding-bottom:
+    clamp(
+      4rem,
+      7vw,
+      6rem
+    );
+}
+
+/* =========================================
+   LEFT / IDENTITY
+========================================= */
+
+.civic-footer-identity {
+  max-width:
+    720px;
+}
+
+.civic-footer-kicker {
+  display: block;
+
+  margin-bottom:
+    1.5rem;
+
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size:
+    0.5rem;
+
+  letter-spacing:
+    0.17em;
+
+  text-transform:
+    uppercase;
+
+  color:
+    #fdbd28;
+}
+
+.civic-footer-identity h2 {
+  margin:
+    0 0
+    2rem;
+
+  font-family:
+    'Bebas Neue',
+    sans-serif;
+
+  font-size:
+    clamp(
+      4.5rem,
+      9vw,
+      8.5rem
+    );
+
+  line-height:
+    0.79;
+
+  font-weight:
+    400;
+
+  letter-spacing:
+    0.005em;
+
+  color:
+    #ffffff;
+}
+
+.civic-footer-identity
+  h2 span {
+  color:
+    #fdbd28;
+}
+
+.civic-footer-identity p {
+  max-width:
+    570px;
+
+  margin: 0;
+
+  font-family:
+    'Cormorant Garamond',
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(
+      1.05rem,
+      1.6vw,
+      1.28rem
+    );
+
+  line-height:
+    1.75;
+
+  font-weight:
+    300;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.7
+    );
+}
+
+/* =========================================
+   ORIGIN
+========================================= */
+
+.civic-footer-origin {
+  display: flex;
+
+  align-items: center;
+
+  gap:
+    0.8rem;
+
+  margin-top:
+    2rem;
+
+  padding-top:
+    1.3rem;
+
+  border-top:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.13
+    );
+}
+
+.civic-footer-origin span {
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size:
+    0.46rem;
+
+  letter-spacing:
+    0.13em;
+
+  text-transform:
+    uppercase;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.45
+    );
+}
+
+.civic-footer-origin i {
+  flex: 1;
+
+  max-width:
+    70px;
+
+  height: 2px;
+
+  background:
+    #fdbd28;
+}
+
+/* =========================================
+   RIGHT
+========================================= */
+
+.civic-footer-right {
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content:
+    space-between;
+
+  gap:
+    4rem;
+
+  padding-top:
+    0.2rem;
+}
+
+.civic-footer-label {
+  display: block;
+
+  margin-bottom:
+    1.2rem;
+
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size:
+    0.5rem;
+
+  letter-spacing:
+    0.17em;
+
+  text-transform:
+    uppercase;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.42
+    );
+}
+
+/* =========================================
+   EMAIL
+========================================= */
+
+.civic-footer-email {
+  display: flex;
+
+  align-items: center;
+
+  gap:
+    1rem;
+
+  width:
+    fit-content;
+
+  color:
+    #ffffff;
+
+  text-decoration:
+    none;
+}
+
+.civic-footer-email-icon {
+  width:
+    50px;
+
+  height:
+    50px;
+
+  display: flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  flex-shrink: 0;
+
+  border:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.22
+    );
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.07
+    );
+
+  transition:
+    color
+      250ms ease,
+    background
+      250ms ease,
+    border-color
+      250ms ease,
+    transform
+      250ms ease;
+}
+
+.civic-footer-email:hover
+  .civic-footer-email-icon {
+  transform:
+    translateY(-3px);
+
+  background:
+    #fdbd28;
+
+  border-color:
+    #fdbd28;
+
+  color:
+    #111111;
+}
+
+.civic-footer-email
+  > div:last-child {
+  display: flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    0.3rem;
+}
+
+.civic-footer-email
+  > div:last-child
+  span {
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size:
+    0.45rem;
+
+  letter-spacing:
+    0.12em;
+
+  text-transform:
+    uppercase;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.42
+    );
+}
+
+.civic-footer-email strong {
+  font-family:
+    'Cormorant Garamond',
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(
+      1.05rem,
+      2vw,
+      1.35rem
+    );
+
+  font-weight:
+    500;
+
+  line-height:
+    1.3;
+
+  color:
+    #ffffff;
+
+  overflow-wrap:
+    anywhere;
+}
+
+/* =========================================
+   LOGOS
+========================================= */
+
+.civic-footer-partners {
+  padding-top:
+    2rem;
+
+  border-top:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.13
+    );
+}
+
+.civic-footer-logos {
+  display: flex;
+
+  align-items: center;
+
+  justify-content:
+    space-between;
+
+  gap:
+    clamp(
+      1rem,
+      2.5vw,
+      2.4rem
+    );
+
+  width:
+    100%;
+}
+
+.civic-footer-logo {
+  flex:
+    1 1 0;
+
+  min-width: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.civic-footer-logo img {
+  display: block;
+
+  width: auto;
+  max-width: 100%;
+  height: auto;
+
+  max-height: 68px;
+
+  object-fit: contain;
+
+  opacity: 1;
+
+  filter: none;
+
+  transition:
+    transform 300ms
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    );
+}
+
+.civic-footer-logo:hover img {
+  transform:
+    scale(1.07);
+}
+
+/* =========================================
+   VALUES BAR
+========================================= */
+
+.civic-footer-values {
+  display: grid;
+
+  grid-template-columns:
+    auto 1fr
+    auto 1fr
+    auto 1fr
+    auto;
+
+  align-items:
+    center;
+
+  gap:
+    1rem;
+
+  padding:
+    1.35rem 0;
+
+  border-top:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.16
+    );
+
+  border-bottom:
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.16
+    );
+}
+
+.civic-footer-values span {
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size:
+    0.48rem;
+
+  letter-spacing:
+    0.12em;
+
+  text-transform:
+    uppercase;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.58
+    );
+
+  white-space:
+    nowrap;
+}
+
+.civic-footer-values
+  span:nth-of-type(2) {
+  color:
+    #fdbd28;
+}
+
+.civic-footer-values
+  span:nth-of-type(3) {
+  color:
+    #ffffff;
+}
+
+.civic-footer-values i {
+  height:
+    1px;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.16
+    );
+}
+
+/* =========================================
+   BOTTOM
+========================================= */
+
+.civic-footer-bottom {
+  display: flex;
+
+  align-items:
+    flex-end;
+
+  justify-content:
+    space-between;
+
+  gap:
+    3rem;
+
+  padding-top:
+    1.6rem;
+}
+
+.civic-footer-bottom-left,
+.civic-footer-bottom-right {
+  display: flex;
+
+  flex-direction:
+    column;
+
+  gap:
+    0.55rem;
+}
+
+.civic-footer-bottom-right {
+  align-items:
+    flex-end;
+}
+
+.civic-footer-bottom-left
+  span,
+.civic-footer-credit {
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size:
+    0.43rem;
+
+  line-height:
+    1.6;
+
+  letter-spacing:
+    0.1em;
+
+  text-transform:
+    uppercase;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.34
+    );
+}
+
+/* =========================================
+   DEVELOPER CREDIT
+========================================= */
+
+.civic-footer-credit strong {
+  font-weight:
+    500;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.62
+    );
+}
+
+/* =========================================
+   BACK TO TOP
+========================================= */
+
+.civic-footer-top-button {
+  display: flex;
+
+  align-items: center;
+
+  gap:
+    0.6rem;
+
+  margin-top:
+    0.4rem;
+
+  padding: 0;
+
+  border: 0;
+
+  background:
+    transparent;
+
+  color:
+    #fdbd28;
+
+  cursor:
+    pointer;
+}
+
+.civic-footer-top-button span {
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size:
+    0.45rem;
+
+  letter-spacing:
+    0.11em;
+
+  text-transform:
+    uppercase;
+}
+
+.civic-footer-top-button svg {
+  transition:
+    transform
+      250ms ease;
+}
+
+.civic-footer-top-button:hover
+  svg {
+  transform:
+    translateY(-4px);
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (
+  max-width: 900px
+) {
+  .civic-footer-main {
+    grid-template-columns:
+      1fr;
+
+    gap:
+      4rem;
+  }
+
+  .civic-footer-right {
+    gap:
+      3rem;
+  }
+
+  .civic-footer-values {
+    grid-template-columns:
+      1fr 1fr;
+
+    gap:
+      0.9rem 2rem;
+  }
+
+  .civic-footer-values i {
+    display:
+      none;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (
+  max-width: 600px
+) {
+  .civic-footer-inner {
+    padding:
+      3.8rem
+      1.4rem
+      1.4rem;
+  }
+
+  .civic-footer-identity h2 {
+    font-size:
+      clamp(
+        4rem,
+        20vw,
+        6rem
+      );
+  }
+
+  .civic-footer-main {
+    gap:
+      3rem;
+
+    padding-bottom:
+      3rem;
+  }
+
+  .civic-footer-origin {
+    align-items:
+      flex-start;
+
+    flex-direction:
+      column;
+  }
+
+  .civic-footer-origin i {
+    width:
+      55px;
+
+    flex:
+      none;
+  }
+
+  .civic-footer-email {
+    align-items:
+      flex-start;
+  }
+
+  /* keep all four logos
+     on the same line */
+  .civic-footer-logos {
+    gap:
+      0.65rem;
+  }
+
+  .civic-footer-logo img {
+    max-height:
+      42px;
+  }
+
+  .civic-footer-values {
+    grid-template-columns:
+      1fr;
+
+    gap:
+      0.8rem;
+  }
+
+  .civic-footer-bottom {
+    align-items:
+      flex-start;
+
+    flex-direction:
+      column;
+
+    gap:
+      1.5rem;
+  }
+
+  .civic-footer-bottom-right {
+    align-items:
+      flex-start;
+  }
+
+  .civic-footer-background-word {
+    font-size:
+      17rem;
+  }
+}
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (
+  prefers-reduced-motion:
+    reduce
+) {
+  .civic-footer-logo img,
+  .civic-footer-email-icon,
+  .civic-footer-top-button svg {
+    transition:
+      none !important;
+  }
+}

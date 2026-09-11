@@ -1,0 +1,724 @@
+/* =========================================
+   06 — MISSION & VISION
+========================================= */
+
+.mission-vision-section {
+  position: relative;
+}
+
+/* =========================================
+   INTRO
+========================================= */
+
+.mission-vision-intro {
+  max-width: 860px;
+
+  margin-bottom:
+    clamp(3rem, 6vw, 5rem);
+}
+
+.mission-vision-intro > span {
+  display: block;
+
+  margin-bottom: 0.8rem;
+
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size: 0.52rem;
+
+  letter-spacing: 0.16em;
+
+  text-transform: uppercase;
+
+  color: #8c1639;
+}
+
+.mission-vision-intro p {
+  margin: 0;
+
+  font-family:
+    'Cormorant Garamond',
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(1.15rem, 2vw, 1.5rem);
+
+  line-height: 1.7;
+
+  font-weight: 300;
+
+  color: #2c2723;
+}
+
+/* =========================================
+   MAIN GRID
+========================================= */
+
+.mission-vision-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  border-top:
+    1px solid var(--ink);
+
+  border-bottom:
+    1px solid var(--ink);
+}
+
+/* =========================================
+   SHARED PANEL
+========================================= */
+
+.purpose-panel {
+  position: relative;
+
+  min-height: 650px;
+
+  display: grid;
+
+  grid-template-rows:
+    90px
+    1fr
+    65px;
+
+  padding:
+    clamp(2rem, 4vw, 3.5rem);
+
+  overflow: hidden;
+
+  isolation: isolate;
+}
+
+/* =========================================
+   MISSION
+========================================= */
+
+.purpose-panel-mission {
+  background:
+    #06524f;
+
+  color:
+    #ffffff;
+}
+
+/* =========================================
+   VISION
+========================================= */
+
+.purpose-panel-vision {
+  border-left:
+    1px solid var(--ink);
+
+  background:
+    #f7f4ef;
+
+  color:
+    var(--ink);
+}
+
+/* =========================================
+   HUGE BACKGROUND WORD
+========================================= */
+
+.purpose-background-word {
+  position: absolute;
+
+  right: -0.04em;
+  bottom: -0.1em;
+
+  z-index: -1;
+
+  font-family:
+    'Bebas Neue',
+    sans-serif;
+
+  font-size:
+    clamp(8rem, 17vw, 17rem);
+
+  line-height: 0.75;
+
+  text-transform: uppercase;
+
+  pointer-events: none;
+
+  user-select: none;
+}
+
+.purpose-panel-mission
+  .purpose-background-word {
+  color:
+    rgba(255, 255, 255, 0.045);
+}
+
+.purpose-panel-vision
+  .purpose-background-word {
+  color:
+    rgba(140, 22, 57, 0.045);
+}
+
+/* =========================================
+   TOP
+========================================= */
+
+.purpose-panel-top {
+  grid-row: 1;
+
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 1rem;
+}
+
+.purpose-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 46px;
+  height: 46px;
+
+  flex-shrink: 0;
+}
+
+/* mission icon */
+
+.purpose-panel-mission
+  .purpose-icon {
+  background:
+    #fdbd28;
+
+  color:
+    #111111;
+}
+
+/* vision icon */
+
+.purpose-panel-vision
+  .purpose-icon {
+  background:
+    #8c1639;
+
+  color:
+    #ffffff;
+}
+
+.purpose-index {
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size: 0.5rem;
+
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+}
+
+.purpose-panel-mission
+  .purpose-index {
+  color:
+    rgba(255, 255, 255, 0.55);
+}
+
+.purpose-panel-vision
+  .purpose-index {
+  color:
+    #8c1639;
+}
+
+/* =========================================
+   CONTENT
+========================================= */
+
+.purpose-panel-content {
+  grid-row: 2;
+
+  align-self: center;
+
+  max-width: 620px;
+}
+
+.purpose-kicker {
+  display: block;
+
+  margin-bottom: 1rem;
+
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size: 0.51rem;
+
+  letter-spacing: 0.16em;
+
+  text-transform: uppercase;
+}
+
+.purpose-panel-mission
+  .purpose-kicker {
+  color: #fdbd28;
+}
+
+.purpose-panel-vision
+  .purpose-kicker {
+  color: #06524f;
+}
+
+/* =========================================
+   STATEMENT HEADING
+========================================= */
+
+.purpose-panel-content h3 {
+  margin:
+    0 0
+    clamp(2rem, 4vw, 3rem);
+
+  font-family:
+    'Bebas Neue',
+    sans-serif;
+
+  font-size:
+    clamp(4rem, 7vw, 7rem);
+
+  line-height: 0.82;
+
+  font-weight: 400;
+
+  letter-spacing: 0.01em;
+}
+
+.purpose-panel-mission
+  .purpose-panel-content h3 {
+  color: #ffffff;
+}
+
+.purpose-panel-vision
+  .purpose-panel-content h3 {
+  color: #8c1639;
+}
+
+/* =========================================
+   BODY
+========================================= */
+
+.purpose-panel-content p {
+  max-width: 580px;
+
+  margin: 0;
+
+  font-family:
+    'Cormorant Garamond',
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(1.05rem, 1.5vw, 1.2rem);
+
+  line-height: 1.78;
+
+  font-weight: 300;
+}
+
+.purpose-panel-mission
+  .purpose-panel-content p {
+  color:
+    rgba(255, 255, 255, 0.82);
+}
+
+.purpose-panel-vision
+  .purpose-panel-content p {
+  color:
+    #39332e;
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.purpose-panel-footer {
+  grid-row: 3;
+
+  align-self: end;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 1rem;
+}
+
+.purpose-line {
+  width: 42px;
+  height: 3px;
+
+  transition:
+    width 450ms
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    );
+}
+
+.purpose-panel-mission
+  .purpose-line {
+  background:
+    #fdbd28;
+}
+
+.purpose-panel-vision
+  .purpose-line {
+  background:
+    #06524f;
+}
+
+.purpose-panel:hover
+  .purpose-line {
+  width: 110px;
+}
+
+.purpose-panel-footer svg {
+  transition:
+    transform 350ms ease;
+}
+
+.purpose-panel:hover
+  .purpose-panel-footer svg {
+  transform:
+    translate(
+      5px,
+      -5px
+    );
+}
+
+/* =========================================
+   MISSION HOVER
+========================================= */
+
+.purpose-panel-mission::before {
+  content: '';
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: -2;
+
+  transform:
+    translateY(101%);
+
+  background:
+    #043e3b;
+
+  transition:
+    transform
+    600ms
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    );
+}
+
+.purpose-panel-mission:hover::before {
+  transform:
+    translateY(0);
+}
+
+/* =========================================
+   VISION HOVER
+========================================= */
+
+.purpose-panel-vision::before {
+  content: '';
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: -2;
+
+  transform:
+    translateY(101%);
+
+  background:
+    #8c1639;
+
+  transition:
+    transform
+    600ms
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    );
+}
+
+/* change vision text on hover */
+
+.purpose-panel-vision:hover::before {
+  transform:
+    translateY(0);
+}
+
+.purpose-panel-vision:hover {
+  color:
+    #ffffff;
+}
+
+.purpose-panel-vision:hover
+  .purpose-index,
+.purpose-panel-vision:hover
+  .purpose-kicker {
+  color:
+    #fdbd28;
+}
+
+.purpose-panel-vision:hover
+  .purpose-panel-content h3 {
+  color:
+    #ffffff;
+}
+
+.purpose-panel-vision:hover
+  .purpose-panel-content p {
+  color:
+    rgba(255, 255, 255, 0.82);
+}
+
+.purpose-panel-vision:hover
+  .purpose-line {
+  background:
+    #fdbd28;
+}
+
+.purpose-panel-vision:hover
+  .purpose-icon {
+  background:
+    #fdbd28;
+
+  color:
+    #111111;
+}
+
+.purpose-panel-vision:hover
+  .purpose-background-word {
+  color:
+    rgba(255, 255, 255, 0.05);
+}
+
+/* transitions */
+
+.purpose-panel-vision
+  .purpose-index,
+.purpose-panel-vision
+  .purpose-kicker,
+.purpose-panel-vision
+  .purpose-panel-content h3,
+.purpose-panel-vision
+  .purpose-panel-content p,
+.purpose-panel-vision
+  .purpose-icon,
+.purpose-panel-vision
+  .purpose-background-word {
+  transition:
+    color 350ms ease,
+    background 350ms ease;
+}
+
+/* =========================================
+   BRIDGE
+========================================= */
+
+.mission-vision-bridge {
+  display: grid;
+
+  grid-template-columns:
+    minmax(220px, 0.35fr)
+    minmax(0, 0.65fr);
+
+  gap:
+    clamp(2rem, 7vw, 7rem);
+
+  padding:
+    clamp(2rem, 4vw, 3rem)
+    0;
+
+  border-bottom:
+    1px solid var(--line);
+}
+
+.mission-vision-bridge-label {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.9rem;
+}
+
+.mission-vision-bridge-label
+  span {
+  font-family:
+    'IBM Plex Mono',
+    monospace;
+
+  font-size: 0.5rem;
+
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+
+  color: #8c1639;
+}
+
+.mission-vision-bridge-label i {
+  flex: 1;
+
+  height: 2px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #06524f,
+      #fdbd28,
+      #8c1639
+    );
+}
+
+.mission-vision-bridge p {
+  max-width: 700px;
+
+  margin: 0;
+
+  font-family:
+    'Cormorant Garamond',
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(1.1rem, 1.8vw, 1.4rem);
+
+  line-height: 1.65;
+
+  font-style: italic;
+
+  color: #3b3530;
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+  .mission-vision-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+  .purpose-panel {
+    min-height: 590px;
+  }
+
+  .purpose-panel-vision {
+    border-left: 0;
+
+    border-top:
+      1px solid var(--ink);
+  }
+
+  .mission-vision-bridge {
+    grid-template-columns:
+      1fr;
+
+    gap: 1.5rem;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+  .mission-vision-intro {
+    margin-bottom: 2.5rem;
+  }
+
+  .purpose-panel {
+    min-height: 560px;
+
+    grid-template-rows:
+      75px
+      1fr
+      55px;
+
+    padding:
+      1.6rem 1.4rem;
+  }
+
+  .purpose-panel-content h3 {
+    font-size:
+      clamp(3.7rem, 17vw, 5rem);
+  }
+
+  .purpose-panel-content p {
+    font-size: 1.03rem;
+  }
+
+  .purpose-background-word {
+    font-size:
+      clamp(7rem, 34vw, 10rem);
+  }
+
+  .mission-vision-bridge {
+    padding:
+      2rem 0;
+  }
+}
+
+/* =========================================
+   TOUCH DEVICES
+========================================= */
+
+@media (hover: none) {
+  .purpose-panel-mission::before,
+  .purpose-panel-vision::before {
+    display: none;
+  }
+
+  .purpose-panel-vision {
+    border-top:
+      4px solid #8c1639;
+  }
+
+  .purpose-panel-mission {
+    border-top:
+      4px solid #fdbd28;
+  }
+}
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (
+  prefers-reduced-motion:
+    reduce
+) {
+  .purpose-panel::before,
+  .purpose-line,
+  .purpose-panel-footer svg {
+    transition:
+      none !important;
+  }
+}

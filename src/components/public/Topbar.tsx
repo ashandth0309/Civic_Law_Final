@@ -1,47 +1,65 @@
 import { Link } from 'react-router-dom';
+import { ArrowUpRight } from 'lucide-react';
+
+import './Topbar.css';
 
 export default function Topbar() {
   return (
-    <div
-      className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-4 sm:px-6 border-b-2 border-[var(--ink)] bg-[var(--paper)]"
-      style={{ height: 52 }}
-    >
-      {/* Left — hidden on mobile */}
-      <span
-        className="hidden sm:block text-[var(--muted)] uppercase tracking-widest"
-        style={{
-          fontFamily: "'IBM Plex Mono', monospace",
-          fontSize: 'clamp(0.62rem, 1.1vw, 0.74rem)',
-          letterSpacing: '0.18em',
-        }}
-      >
-        SUSI Rule of Law Alumni · Sri Lanka
-      </span>
+    <div className="civic-topbar">
+      <div className="civic-topbar-inner">
+        {/* LEFT */}
+        <div className="civic-topbar-left">
+          <span className="civic-topbar-dot" />
 
-      {/* Centre — brand */}
-      <Link
-        to="/"
-        className="font-bold tracking-wider text-[var(--ink)] whitespace-nowrap no-underline"
-        style={{
-          fontFamily: "'Bebas Neue', sans-serif",
-          fontSize: 'clamp(1.1rem, 2.2vw, 1.4rem)',
-          letterSpacing: '0.08em',
-        }}
-      >
-        Civic Law Initiative
-      </Link>
+          <span className="civic-topbar-meta">
+            SUSI Rule of Law Alumni
+          </span>
 
-      {/* Right */}
-      <span
-        className="text-[var(--muted)] uppercase"
-        style={{
-          fontFamily: "'IBM Plex Mono', monospace",
-          fontSize: 'clamp(0.62rem, 1.1vw, 0.74rem)',
-          letterSpacing: '0.18em',
-        }}
-      >
-        Sri Lanka · 2026
-      </span>
+          <span className="civic-topbar-divider">
+            /
+          </span>
+
+          <span className="civic-topbar-country">
+            Sri Lanka
+          </span>
+        </div>
+
+        {/* CENTRE */}
+        <Link
+          to="/"
+          className="civic-topbar-brand"
+          aria-label="Civic Law Initiative home"
+        >
+          <span>
+            Civic Law Initiative
+          </span>
+
+          <i />
+        </Link>
+
+        {/* RIGHT */}
+        <div className="civic-topbar-right">
+          <span className="civic-topbar-year">
+            2026
+          </span>
+
+          <span className="civic-topbar-divider">
+            /
+          </span>
+
+          <Link
+            to="/#contact"
+            className="civic-topbar-contact"
+          >
+            Contact
+
+            <ArrowUpRight
+              size={13}
+              strokeWidth={1.5}
+            />
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }
